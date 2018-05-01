@@ -15,7 +15,8 @@ import {
   Right,
   ListItem,
   Icon,
-  Button
+  Button,
+  Thumbnail
 } from 'native-base'
 
 import styles from './styles'
@@ -54,10 +55,11 @@ export default class SideBar extends React.Component {
         </View> */}
 
         <Content>
+          <Thumbnail style="padding: 10" source={{uri: 'https://lh4.googleusercontent.com/PZJZcXaLXAKQt6JD4KRbaMMX-HY7jvp8UI4uqNzJoS1qZ4rt15QkJ-ymhtDNeD5Bo5x_PWLLpCz1hhxKcHXz=w1920-h974-rw'}} />
           <List>
             <ListItem icon>
               <Left>
-                <Icon name="wifi" />
+                <Icon name="person" type="MaterialIcons"/>
               </Left>
               <Body>
                 <Text>Mi Perfil</Text>
@@ -66,7 +68,7 @@ export default class SideBar extends React.Component {
 
             <ListItem icon>
               <Left>
-                <Icon name="bluetooth" />
+              <Icon name="label" type="MaterialIcons" />
               </Left>
               <Body>
                 <Text>Mi Finca</Text>
@@ -75,7 +77,7 @@ export default class SideBar extends React.Component {
 
             <ListItem icon>
               <Left>
-                <Icon name="bluetooth" />
+              <Icon name="grid-on" type="MaterialIcons" />
               </Left>
               <Body>
                 <Text>Lotes</Text>
@@ -84,7 +86,7 @@ export default class SideBar extends React.Component {
             
             <ListItem icon>
               <Left>
-                <Icon android="md-local-florist" />
+                <Icon name="local-florist" type="MaterialIcons" />
               </Left>
               <Body>
                 <Text>Floracion</Text>
