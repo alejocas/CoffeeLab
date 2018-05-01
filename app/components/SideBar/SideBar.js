@@ -8,6 +8,12 @@ import {
 } from 'react-native'
 import {
   Container,
+  Content,
+  List,
+  Body,
+  Left,
+  Right,
+  ListItem,
   Icon,
   Button
 } from 'native-base'
@@ -18,13 +24,18 @@ export default class SideBar extends React.Component {
   render () {
     return (
       <Container style={{backgroundColor: 'white'}}>
-        <View style={styles.sideNavWrap}>
+        {/* <View style={styles.sideNavWrap}>
           <View style={styles.noteSelectorWrap}>
             <Text style={styles.appName}>Boostnote Mobile</Text>
-            <Button style={Platform.OS === 'android' ? {marginBottom: 20, backgroundColor: 'rgba(255, 255, 255, 0.05)', width: '96%', height: 35, paddingTop: 6, paddingLeft: 7} : {backgroundColor: 'transparent', paddingLeft: 0}}
+            <Button style={Platform.OS === 'android' ? 
+                              {marginBottom: 20, 
+                                backgroundColor: 'rgba(255, 255, 255, 0.05)', 
+                                width: '96%', 
+                                height: 35, 
+                                paddingTop: 6, 
+                                paddingLeft: 7} : {backgroundColor: 'transparent', paddingLeft: 0}}
               onPress={() => {
-                this.props.changeMode(0)
-                this.props.onClose()
+
               }}
             >
               <Text style={Platform.OS === 'android' ? styles.noteSelectorAndroid : styles.noteSelector}><Icon name='md-archive' style={{color: '#FDC134', fontSize: 14, backgroundColor: 'transparent'}} /> All Notes</Text>
@@ -34,20 +45,73 @@ export default class SideBar extends React.Component {
           <View style={styles.noteSelectorWrap}>
             <Button style={Platform.OS === 'android' ? {marginBottom: 20, backgroundColor: 'rgba(255, 255, 255, 0.05)', width: '96%', height: 35, paddingTop: 6, paddingLeft: 7} : {backgroundColor: 'transparent', paddingLeft: 0}}
               onPress={() => {
-                this.props.changeMode(1)
-                this.props.onClose()
+
               }}
             >
               <Text style={Platform.OS === 'android' ? styles.noteSelectorAndroid : styles.noteSelector}><Icon name='logo-dropbox' style={{color: '#2BA6FA', fontSize: 18, backgroundColor: 'transparent'}} /> Dropbox</Text>
             </Button>
           </View>
+        </View> */}
 
-          {/* <View style={styles.hariboteWrap}>
-                            <Text style={styles.noteHaribote}>Folders</Text>
-                            <Text style={styles.hariboteDesc}>Under development.</Text>
-                        </View> */}
+        <Content>
+          <List>
+            <ListItem icon>
+              <Left>
+                <Icon name="wifi" />
+              </Left>
+              <Body>
+                <Text>Mi Perfil</Text>
+              </Body>
+            </ListItem>
 
-        </View>
+            <ListItem icon>
+              <Left>
+                <Icon name="bluetooth" />
+              </Left>
+              <Body>
+                <Text>Mi Finca</Text>
+              </Body>
+            </ListItem>
+
+            <ListItem icon>
+              <Left>
+                <Icon name="bluetooth" />
+              </Left>
+              <Body>
+                <Text>Lotes</Text>
+              </Body>
+            </ListItem>
+            
+            <ListItem icon>
+              <Left>
+                <Icon android="md-local-florist" />
+              </Left>
+              <Body>
+                <Text>Floracion</Text>
+              </Body>
+            </ListItem>
+            
+            <ListItem icon>
+              <Left>
+                <Icon name="bluetooth" />
+              </Left>
+              <Body>
+                <Text>Abono</Text>
+              </Body>
+            </ListItem>
+            
+            <ListItem icon>
+              <Left>
+                <Icon name="bluetooth" />
+              </Left>
+              <Body>
+                <Text>Riego</Text>
+              </Body>
+            </ListItem>
+          </List>
+
+          
+        </Content>
 
         <View style={styles.bottomLink}>
           <Text onPress={() => Linking.openURL('https://boostnote.io/#subscribe')} style={styles.bottomLinkWord}>

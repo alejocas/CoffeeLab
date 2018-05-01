@@ -29,10 +29,12 @@ import {
   Body,
   Icon,
   Drawer
-} from 'native-base'
+} from 'native-base';
 
 
 import SideBar from './components/SideBar';
+
+import styles from './styles';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -87,7 +89,7 @@ export default class App extends Component<Props> {
             <Left>
               <Button transparent
                 onPress={this.openDrawer}>
-                <Icon name='arrow-back' />
+                <Icon ios='ios-menu' android="md-menu" style={{fontSize: 20, color: 'red'}}/>
               </Button>
             </Left>
             <Body>
@@ -102,7 +104,7 @@ export default class App extends Component<Props> {
         </Container>
 
         <View>
-          <Text> holaa</Text>
+          <Text></Text>
         </View>
       </Drawer>
 
@@ -158,7 +160,7 @@ export default class App extends Component<Props> {
     );
   }
 }
-
+/*
 const styles = StyleSheet.create({
   // container: {
   //   flex: 1,
@@ -185,7 +187,7 @@ const styles = StyleSheet.create({
      fontSize: 18,
      height: 44,
    },*/
-   container: {
+   /*container: {
     flex: 1,
     paddingTop: 22
    },
@@ -203,4 +205,4 @@ const styles = StyleSheet.create({
      fontSize: 18,
      height: 44,
    },
-});
+});*/
