@@ -28,7 +28,11 @@ import {
   Right,
   Body,
   Icon,
-  Drawer
+  Drawer,
+  Card,
+  CardItem,
+  Thumbnail
+
 } from 'native-base';
 
 
@@ -89,23 +93,79 @@ export default class App extends Component<Props> {
             <Left>
               <Button transparent
                 onPress={this.openDrawer}>
-                <Icon ios='ios-menu' android="md-menu" style={{fontSize: 20, color: 'red'}}/>
+                <Icon ios='ios-menu' android="md-menu" style={{fontSize: 20, color: 'white'}}/>
               </Button>
             </Left>
             <Body>
-              <Title>Header</Title>
+              <Title>Coffee Lab</Title>
             </Body>
-            <Right>
-              <Button transparent>
-                <Icon name='menu' />
-              </Button>
-            </Right>
           </Header>
+          <Content>
+            <Card>
+                <CardItem>
+                  <Left>
+                    <Thumbnail source={{uri: 'https://lh6.googleusercontent.com/jAh9JKCs7m0gKCbrwKLwkDnNL6J8zB2fpsIU9mkPbkTL1BfFilm3GUWwzfvw5hekehcsnCZd_i-g2wSkkVTq=w1920-h974-rw'}} />
+                    <Body>
+                      <Text>Finca Pepito Pérez</Text>
+                      <Text note>GeekyAnts</Text>
+                    </Body>
+                  </Left>
+                </CardItem>
+                <CardItem cardBody>
+                  <Image source={{uri: 'https://lh6.googleusercontent.com/jAh9JKCs7m0gKCbrwKLwkDnNL6J8zB2fpsIU9mkPbkTL1BfFilm3GUWwzfvw5hekehcsnCZd_i-g2wSkkVTq=w1920-h974-rw'}} style={{height: 200, width: null, flex: 1}}/>
+                </CardItem>
+                <CardItem>
+                  <Left>
+                    <Button transparent>
+                      <Icon active name="thumbs-up" />
+                      <Text>100 Likes</Text>
+                    </Button>
+                  </Left>
+                  <Body>
+                    <Button transparent>
+                      <Icon active name="chatbubbles" />
+                      <Text>30 Comments</Text>
+                    </Button>
+                  </Body>
+                  <Right>
+                    <Text>11 day ago</Text>
+                  </Right>
+                </CardItem>
+              </Card>
+              <Card>
+                <CardItem>
+                  <Left>
+                    <Thumbnail source={{uri: 'https://lh4.googleusercontent.com/PZJZcXaLXAKQt6JD4KRbaMMX-HY7jvp8UI4uqNzJoS1qZ4rt15QkJ-ymhtDNeD5Bo5x_PWLLpCz1hhxKcHXz=w1920-h974-rw'}} />
+                    <Body>
+                      <Text>NativeBase</Text>
+                      <Text note>GeekyAnts</Text>
+                    </Body>
+                  </Left>
+                </CardItem>
+                <CardItem cardBody>
+                  <Image source={{uri: 'https://lh4.googleusercontent.com/PZJZcXaLXAKQt6JD4KRbaMMX-HY7jvp8UI4uqNzJoS1qZ4rt15QkJ-ymhtDNeD5Bo5x_PWLLpCz1hhxKcHXz=w1920-h974-rw'}} style={{height: 200, width: null, flex: 1}}/>
+                </CardItem>
+                <CardItem>
+                  <Left>
+                    <Button transparent>
+                      <Icon active name="thumbs-up" />
+                      <Text>12 Likes</Text>
+                    </Button>
+                  </Left>
+                  <Body>
+                    <Button transparent>
+                      <Icon active name="chatbubbles" />
+                      <Text>4 Comments</Text>
+                    </Button>
+                  </Body>
+                  <Right>
+                    <Text>11h ago</Text>
+                  </Right>
+                </CardItem>
+              </Card>
+            </Content>
         </Container>
-
-        <View>
-          <Text></Text>
-        </View>
+        
       </Drawer>
 
       // <View style={styles.container}>
