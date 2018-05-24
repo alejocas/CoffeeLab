@@ -41,11 +41,11 @@ export class LoginPage {
   }
 
   register(){
-    this.navCtrl.push(HomePage)
+    this.navCtrl.push(RegisterPage);
   }
 
   reset(){
-
+    this.navCtrl.push(ResetPage);
   }
 
 }

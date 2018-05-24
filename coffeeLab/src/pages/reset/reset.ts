@@ -22,4 +22,8 @@ export class ResetPage {
     console.log('ionViewDidLoad ResetPage');
   }
 
+  reset(){
+    
+  }
+
 }

@@ -7,12 +7,23 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>reset</ion-title>
+    <ion-title>Restablecer Contraseña</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+    <ion-grid>  
+        <ion-row justify-content-center>
+            <ion-item>
+                <ion-label stacked>Nombre de Usuario o correo</ion-label>
+                <ion-input type="text" [(ngModel)]="username"></ion-input>
+            </ion-item>
+        </ion-row>
+        <ion-row justify-content-center>
+            <button ion-button color="secondary" outline navPop>Cancelar</button>
+            <button ion-button (click)="reset()">Restablecer</button>
+        </ion-row>
+    </ion-grid>
 </ion-content>
