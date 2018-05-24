@@ -7,12 +7,52 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>register</ion-title>
+    <ion-title>Formulario de registro</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <ion-list>
 
+    <ion-item>
+      <ion-label>Nombre</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Apellidos</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-list radio-group>
+
+      <ion-list-header>
+          <h2>Tipo de documento</h2>
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label>Cédula de ciudadania</ion-label>
+        <ion-radio ></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Cédula de extranjería</ion-label>
+        <ion-radio></ion-radio>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-item>
+      <ion-label>Usuario</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Contraseña</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+
+  </ion-list>
 </ion-content>
