@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Input } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -18,7 +18,7 @@ import { /* paginas de inicio de sesion*/
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
+  
   rootPage: any = LoginPage;
 
   pages: Array<{title: string, component: any, icon: string}>;
@@ -28,9 +28,9 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Perfil', component: ProfilePage, icon: "a" },
-      { title: 'Mis Fincas', component: LandsPage, icon: "a" },
-      { title: 'Mis Lotes', component: PortionsPage, icon: "a" },
+      { title: 'Perfil', component: ProfilePage, icon: "person" },
+      { title: 'Mis Fincas', component: LandsPage, icon: "cube" },
+      { title: 'Mis Lotes', component: PortionsPage, icon: "rose" },
       { title: 'Configuración', component: ConfigPage, icon: "cog" },
     ];
 
