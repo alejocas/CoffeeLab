@@ -2,7 +2,16 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { HomePage, LoginPage } from '../pages/index';
+import { /* paginas de inicio de sesion*/
+  LoginPage, RegisterPage, ResetPage,  
+  /* pagina principal y configuracion*/
+  HomePage, ConfigPage,
+  /* perfil */
+  ProfilePage,
+  /* fincas */
+  LandsPage, LandPage,
+  /* lotes */
+  PortionsPage } from '../pages/index';
 
 @Component({
   templateUrl: 'app.html'
@@ -12,15 +21,17 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any, icon: string}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Login', component: LoginPage },
-      
+      { title: 'Perfil', component: ProfilePage, icon: "a" },
+      { title: 'Mis Fincas', component: LandsPage, icon: "a" },
+      { title: 'Mis Lotes', component: PortionsPage, icon: "a" },
+      { title: 'Configuración', component: ConfigPage, icon: "cog" },
     ];
 
   }
@@ -37,6 +48,6 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    this.nav.push(page.component);
   }
 }

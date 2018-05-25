@@ -3,7 +3,18 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
-import { HomePage, LoginPage, RegisterPage, ResetPage } from '../pages/index';
+import { 
+  /* paginas de inicio de sesion*/
+  LoginPage, RegisterPage, ResetPage,  
+  /* pagina principal*/
+  HomePage, ConfigPage,
+  /* perfil */
+  ProfilePage,
+  /* fincas */
+  LandsPage, LandPage,
+  /* lotes */
+  PortionsPage
+} from '../pages/index';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -12,10 +23,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    LoginPage,
-    RegisterPage,
-    ResetPage
+    LoginPage, RegisterPage, ResetPage,
+    HomePage, ConfigPage,
+    ProfilePage,
+    LandsPage, LandPage,
+    PortionsPage
   ],
   imports: [
     BrowserModule,
@@ -24,10 +36,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    LoginPage,
-    RegisterPage,
-    ResetPage
+    LoginPage, RegisterPage, ResetPage,
+    HomePage, ConfigPage,
+    ProfilePage,
+    LandsPage, LandPage,
+    PortionsPage
   ],
   providers: [
     StatusBar,
