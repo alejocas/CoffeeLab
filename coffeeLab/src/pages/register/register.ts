@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HomePage, LoginPage, ResetPage } from '../index';
+import { MenuController } from 'ionic-angular';
+
 
 /**
  * Generated class for the RegisterPage page.
@@ -15,11 +18,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RegisterPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl:MenuController) {
+    menuCtrl.enable(false, "menu");
   }
-
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterPage');
+  }
+
+  login(){
+    this.navCtrl.push(LoginPage);
   }
 
 }
