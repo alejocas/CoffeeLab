@@ -1,0 +1,12 @@
+export { TipoDocumento } from './TipoDocumento/tipoDocumento';
+export { TipoUsuario } from "./TipoUsuario/tipoUsuario";
+export { Pais } from "./Pais/pais";
+export { Departamento } from "./Departamento/departamento";
+export { Municipio } from "./Municipio/municipio";
+export { Usuario } from "./Usuario/usuario";
+import { UsuarioxFinca } from "./UsuarioxFinca/UsuarioxFinca";
+import { TipoClima } from "./TipoClima/TipoClima";
+import {  } from "module";
+import {  } from "module";
+import {  } from "module";
+import {  } from "module";
