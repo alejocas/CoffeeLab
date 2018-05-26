@@ -1,7 +1,10 @@
+
+
 export class TipoAbono {
     public codigo:number;
     public nombre:string;
     public descripcion:string;
+    /*private db:Sqlite;*/
 
     constructor(codigo:number, nombre:string, descripcion:string = ""){
         this.codigo = codigo;
@@ -15,9 +18,12 @@ export class TipoAbono {
         VALUES (${this.codigo}, '${this.nombre}', '${this.descripcion}');`
         console.log(sql);
 
-        keys.forEach(key => {
-            console.log(this[key].typeOf);
-        });
+       /* this.db.executeSQL(`CREATE TABLE IF NOT EXISTS ${TipoAbono.name} (
+            ${keys[0]} integer PRIMARY KEY AUTOINCREMENT,
+            ${keys[1]} text NOT NULL,
+            ${keys[2]} text
+           );`);*/
+
     }
 }
 
