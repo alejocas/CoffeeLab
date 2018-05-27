@@ -1,55 +1,66 @@
 import { Describer } from "../../utils/Describer";
-import { Sqlite } from '../../providers/sqlite/sqlite'
+import { Sqlite } from "../../providers/sqlite/sqlite";
+import { Inject } from "@angular/core";
 
 export class TipoAbono {
-    public codigo:number;
-    public nombre:string;
-    public descripcion:string;
+    private codigo:number;
+    private nombre:string;
+    private descripcion:string;
+    private db:Sqlite;
 
-    constructor(codigo:number, nombre:string, descripcion:string = ""){
+    constructor(codigo:number, nombre:string, descripcion:string = "",  @Inject(Sqlite) db){
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
-
+        this.db = db;
     }
 
     save(){
-    
-        // let sql = `INSERT INTO ${TipoAbono.name} [(${this.keys.toString()})]  
-        // VALUES (${this.codigo}, '${this.nombre}', '${this.descripcion}');`
-        //console.log(this.insert);
-
-       /* this.db.executeSQL(`CREATE TABLE IF NOT EXISTS ${TipoAbono.name} (
-            ${keys[0]} integer PRIMARY KEY AUTOINCREMENT,
-            ${keys[1]} text NOT NULL,
-            ${keys[2]} text
-           );`);*/
+        
+        this.db.getAll(TipoAbono.findByIdSql(this.codigo))
+        .then(data1 => {
+            if(data1.length == 0){
+                this.db.create(`INSERT INTO TipoAbono(codigo,nombre,descripcion) VALUES (${this.codigo},'${this.nombre}','${this.descripcion}');`,{})
+                .then(data=>{
+                    console.log('insert: ',data);
+                });
+            }
+            else{
+                
+                this.db.create(`UPDATE TipoAbono SET nombre = '${this.nombre}', descripcion = '${this.descripcion}' WHERE codigo = ${this.codigo};`,{})
+                .then(data=>{
+                    console.log('update: ',data);
+                });
+            }
+            console.log('find: ',data1)
+        });
 
     }
-    
-    toArray(){
-        return [this.codigo, this.nombre, this.descripcion];
+
+    delete(){
+        this.db.delete(`DELETE FROM TipoAbono WHERE codigo = ${this.codigo};`)
+        .then(data => {
+            console.log('delete: ',data);
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
+    static findByIdSql(codigo:number){
+        return `SELECT * FROM TipoAbono WHERE codigo = ${codigo};`;
+    }
+
+    /* sentencia sql para crear la tabla de este modelo
+    para crear una tabla hay que declarar la cadena en el 
+    providers/sqlite.ts en la funcion createTables() */
     static getSqlCreteTable(){
         return `CREATE TABLE IF NOT EXISTS TipoAbono (
             codigo integer PRIMARY KEY AUTOINCREMENT,
             nombre text NOT NULL,
             descripcion text
-            );`;
+           );`;
     }
-
-    getSqlInsert(){
-        return "INSERT INTO `TipoAbono`(`codigo`,`nombre`,`descripcion`) VALUES ("+ 
-            this.codigo +",'"+this.nombre+"','"+this.descripcion +"');";
-    }
-
-    static getSqlSelectAll(){
-        return "SELECT * FROM `TipoAbono`;"
-    }
-
-
 }
-
 
 

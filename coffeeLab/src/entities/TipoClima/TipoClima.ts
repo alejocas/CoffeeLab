@@ -16,6 +16,7 @@ export class TipoClima {
     }
 
     save(){
+        
         this.db.getAll(TipoClima.findByIdSql(this.codigo))
         .then(data1 => {
             if(data1.length == 0){
