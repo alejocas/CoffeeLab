@@ -12,4 +12,12 @@ export class TipoUsuario {
     save(){
         //TODO: hacer funcion para guardar pero creo que se puede hacer un servicio
     }
+
+    static getSqlCreteTable(){
+        return `CREATE TABLE IF NOT EXISTS TipoUsuario (
+            codigo integer PRIMARY KEY AUTOINCREMENT,
+            nombre text NOT NULL,
+            descripcion text
+           );`;
+    }
 }

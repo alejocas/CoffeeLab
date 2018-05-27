@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { TipoAbono } from '../../entities/index'
-import {Sqlite} from '../../providers/sqlite/sqlite';
+import { TipoAbono, TipoClima } from '../../entities/index'
+import { Sqlite } from '../../providers/sqlite/sqlite';
 /**
  * Generated class for the ConfigPage page.
  *
@@ -21,13 +21,19 @@ export class ConfigPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ConfigPage');
-    this.db.create( `CREATE TABLE IF NOT EXISTS TipoAbono (
-      codigo integer PRIMARY KEY AUTOINCREMENT,
-      nombre text NOT NULL,
-      descripcion text
-     );`);
-    let tipoAbono = new TipoAbono(1,"Organico");
-    tipoAbono.save();
+    let organico = new TipoAbono(null,"asdf");
+    /*this.db.create(organico.getSqlInsert(),{}).then(data=>{
+      console.log('insertado: ',data);
+      this.db.getAll(TipoAbono.getSqlSelectAll()).then(data=>{
+        console.log(data);
+      })
+    });*/
+
+    let clima = new TipoClima(2,'templado','es un clima muy bueno',this.db);
+    clima.save();
+
+    clima = new TipoClima(1,"asdf","Adsf",this.db);
+    clima.delete();
   }
 
 }
