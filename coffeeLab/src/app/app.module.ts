@@ -11,7 +11,7 @@ import {
   /* perfil */
   ProfilePage,
   /* fincas */
-  LandsPage, LandPage,
+  LandsPage, LandPage, AddlandPage,
   /* lotes */
   PortionsPage
 } from '../pages/index';
@@ -27,7 +27,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage, ConfigPage,
     ProfilePage,
     LandsPage, LandPage,
-    PortionsPage
+    PortionsPage,
+    AddlandPage
   ],
   imports: [
     BrowserModule,
@@ -40,7 +41,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage, ConfigPage,
     ProfilePage,
     LandsPage, LandPage,
-    PortionsPage
+    PortionsPage,
+    AddlandPage
   ],
   providers: [
     StatusBar,

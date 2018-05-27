@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { Finca } from '../../entities';
+import { AddlandPage } from '../index';
 
 /**
  * Generated class for the LandsPage page.
@@ -15,11 +17,24 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class LandsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, private menuCtrl:MenuController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LandsPage');
+  }
+
+  addLand(){
+    this.navCtrl.push(AddlandPage);
+  };
+
+  deleteLand(){};
+
+  viewLand(){};
+
+  itemSelected(item:Finca){
+
   }
 
 }
