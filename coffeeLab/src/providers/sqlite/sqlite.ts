@@ -1,8 +1,6 @@
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Injectable } from '@angular/core';
 import { TipoAbono, TipoClima, TipoDocumento, TipoUsuario } from '../../entities/index';
-import { resolve } from 'path';
-import { rejects } from 'assert';
 
 
 @Injectable()

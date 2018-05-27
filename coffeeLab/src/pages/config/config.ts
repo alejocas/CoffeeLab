@@ -21,7 +21,7 @@ export class ConfigPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ConfigPage');
-    let organico = new TipoAbono(null,"asdf");
+   /* let organico = new TipoAbono(null,"asdf");
     /*this.db.create(organico.getSqlInsert(),{}).then(data=>{
       console.log('insertado: ',data);
       this.db.getAll(TipoAbono.getSqlSelectAll()).then(data=>{
@@ -29,11 +29,14 @@ export class ConfigPage {
       })
     });*/
 
-    let clima = new TipoClima(2,'templado','es un clima muy bueno',this.db);
+    let clima = new TipoClima(null,'templado','es un clima muy bueno',this.db);
     clima.save();
 
-    clima = new TipoClima(1,"asdf","Adsf",this.db);
-    clima.delete();
+    //clima = new TipoClima(1,"asdf","Adsf",this.db);
+    //clima.delete();
+    this.db.create("SELECT * FROM TipoClima",{}).then(data=>{
+      console.log(data);
+    })
   }
 
 }
