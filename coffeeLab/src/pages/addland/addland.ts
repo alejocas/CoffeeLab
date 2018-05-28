@@ -16,7 +16,7 @@ import { Finca, Pais, Municipio, Departamento, TipoClima } from '../../entities'
 })
 export class AddlandPage {
 
-  public edit:boolean = false;
+  public edit:boolean;
   private finca:Finca;
   private paises: Array<Pais>;
   private codigoPaisSeleccionado:number;

@@ -42,7 +42,8 @@ export class LandsPage {
   }
 
   addLand(){
-    this.navCtrl.push(AddlandPage);
+    let edit: boolean = true;
+    this.navCtrl.push(ViewlandPage,edit);;
   };
 
 
@@ -57,7 +58,8 @@ export class LandsPage {
   landSelected(land){
     //this.codeLand=codigoFinca;
     //en el push, falta mandar el codigo de la finca
-    this.navCtrl.push(ViewlandPage,{finca :land});
+    let edit: boolean = false;
+    this.navCtrl.push(ViewlandPage, {finca :land, edit});
   };
 
 }
