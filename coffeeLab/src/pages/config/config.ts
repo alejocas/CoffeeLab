@@ -34,9 +34,9 @@ export class ConfigPage {
 
     //clima = new TipoClima(1,"asdf","Adsf",this.db);
     //clima.delete();
-    this.db.create("SELECT * FROM TipoClima",{}).then(data=>{
-      console.log(data);
-    })
+    this.db.findAll(TipoClima).then(data=>{
+      console.log('findAll:',data);
+    });
   }
 
 }

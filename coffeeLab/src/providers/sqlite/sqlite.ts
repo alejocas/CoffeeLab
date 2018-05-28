@@ -18,7 +18,71 @@ export class Sqlite {
     }
   }
 
-  create(sql:string, params:any){
+  create(object:any){
+    let promise = new Promise((resolve,reject)=>{
+      this.findByPk(object)
+      .then(data =>{
+        let data1 = new Array(data)
+        if(data1.length == 0){
+          this.insert(object)
+          .then(data => resolve(data))
+          .catch(error => reject(error))
+        }
+        else{
+          this.update(object)
+          .then(data => resolve(data))
+          .catch(error => reject(error))
+        }
+      })
+    });
+    return promise;
+  }
+  /*create(sql:string, params:any){
+    let promise = new Promise((resolve,reject)=>{
+      this.executeSQL(sql,params)
+      .then(data=>resolve(data))
+      .catch(error=>reject(error));
+    });
+    return promise;
+  }*/
+
+  findAll(entity:any){
+    let promise = new Promise((resolve,reject)=>{
+      this.executeSQL(entity.findAllQuery(),{})
+      .then(data=>resolve(data))
+      .catch(error=>reject(error));
+    });
+    return promise;
+  }
+
+  findByPk(object:any){
+    let promise = new Promise((resolve,reject)=>{
+      this.executeSQL(object.deleteQuery(),{})
+      .then(data=>resolve(data))
+      .catch(error=>reject(error));
+    });
+    return promise;
+  }
+
+  insert(object:any){
+    let promise = new Promise((resolve,reject)=>{
+      this.executeSQL(object.deleteQuery(),{})
+      .then(data=>resolve(data))
+      .catch(error=>reject(error));
+    });
+    return promise;
+  }
+
+  update(object:any){
+    let promise = new Promise((resolve,reject)=>{
+      this.executeSQL(object.deleteQuery(),{})
+      .then(data=>resolve(data))
+      .catch(error=>reject(error));
+    });
+    return promise;
+  }
+
+  executeSQL(sql:string, params:any){
     let promise = new Promise((resolve,reject)=>{
       this.sqlite.create({
         name: 'data.db',
@@ -43,6 +107,31 @@ export class Sqlite {
     return promise;
   }
 
+  /*create(sql:string, params:any){
+    let promise = new Promise((resolve,reject)=>{
+      this.sqlite.create({
+        name: 'data.db',
+        location: 'default' // the location field is required
+      })
+      .then((db) => {
+        this.db.executeSql(sql, params).then(data=>{
+          let tasks = [];
+          for (let index = 0; index < data.rows.length; index++) {
+            tasks.push( data.rows.item(index) );
+          }
+          resolve( tasks );
+        })
+        .catch(error=>{
+          reject(error);
+        });
+      })
+      .catch(error =>{
+        reject(error);
+      });
+    })
+    return promise;
+  }*/
+
   createTables(){
     let promise = new Promise((resolve, reject)=>{
       this.db.executeSql(TipoAbono.getSqlCreteTable(),{}).then(data=>{
@@ -66,7 +155,7 @@ export class Sqlite {
     return promise;
   }
 
-  delete(sql:string){
+  /*delete(sql:string){
     return this.db.executeSql(sql, {});
   }
 
@@ -86,7 +175,7 @@ export class Sqlite {
   update(task: any){
     let sql = 'UPDATE tasks SET title=?, completed=? WHERE id=?';
     return this.db.executeSql(sql, [task.title, task.completed, task.id]);
-  }
+  }*/
 
 }
 

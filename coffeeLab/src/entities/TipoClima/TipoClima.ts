@@ -1,4 +1,3 @@
-import { Describer } from "../../utils/Describer";
 import { Sqlite } from "../../providers/sqlite/sqlite";
 import { Inject } from "@angular/core";
 
@@ -16,35 +15,58 @@ export class TipoClima {
     }
 
     save(){
-        
-        this.db.getAll(TipoClima.findByIdSql(this.codigo))
+        this.db.create(this)
+        .then(data => console.log('creado:', data))
+        .catch(error => console.log(error));
+        /*this.db.getAll(TipoClima.findByIdSql(this.codigo))
         .then(data1 => {
             if(data1.length == 0){
                 this.db.create(`INSERT INTO TipoClima(codigo,nombre,descripcion) VALUES (${this.codigo},'${this.nombre}','${this.descripcion}');`,{})
                 .then(data=>{
-                    console.log('insert: ',data);
+                    
+                    console.log('inserted: ',data);
                 });
             }
             else{
                 
                 this.db.create(`UPDATE TipoClima SET nombre = '${this.nombre}', descripcion = '${this.descripcion}' WHERE codigo = ${this.codigo};`,{})
                 .then(data=>{
-                    console.log('update: ',data);
+                    console.log('updated: ',data);
                 });
             }
-            console.log('find: ',data1)
-        });
+            
+            //console.log('find: ',data1)
+        });*/
 
     }
 
     delete(){
-        this.db.delete(`DELETE FROM TipoClima WHERE codigo = ${this.codigo};`)
+        /*this.db.delete(`DELETE FROM TipoClima WHERE codigo = ${this.codigo};`)
         .then(data => {
             console.log('delete: ',data);
         })
         .catch(error => {
             console.log(error);
-        })
+        })*/
+    }
+
+    deleteQuery(){
+        return `DELETE FROM TipoClima WHERE codigo = ${this.codigo};`;
+    }
+
+    insertQuery(){
+        return `INSERT INTO TipoClima(codigo,nombre,descripcion) 
+            VALUES (${this.codigo},'${this.nombre}','${this.descripcion}');`
+    }
+
+    updateQuery(){
+        return `UPDATE TipoClima SET nombre = '
+            ${this.nombre}', descripcion = '
+            ${this.descripcion}' WHERE codigo = ${this.codigo};`
+    }
+
+    static findAllQuery(){
+        return `SELECT * FROM TipoClima;`;
     }
 
     static findByIdSql(codigo:number){

@@ -15,38 +15,7 @@ export class TipoDocumento {
         this.db = db;
     }
 
-    save(){
-        
-        this.db.getAll(TipoDocumento.findByIdSql(this.codigo))
-        .then(data1 => {
-            if(data1.length == 0){
-                this.db.create(`INSERT INTO TipoDocumento(codigo,nombre,descripcion) VALUES (${this.codigo},'${this.nombre}','${this.descripcion}');`,{})
-                .then(data=>{
-                    console.log('insert: ',data);
-                });
-            }
-            else{
-                
-                this.db.create(`UPDATE TipoDocumento SET nombre = '${this.nombre}', descripcion = '${this.descripcion}' WHERE codigo = ${this.codigo};`,{})
-                .then(data=>{
-                    console.log('update: ',data);
-                });
-            }
-            console.log('find: ',data1)
-        });
-
-    }
-
-    delete(){
-        this.db.delete(`DELETE FROM TipoDocumento WHERE codigo = ${this.codigo};`)
-        .then(data => {
-            console.log('delete: ',data);
-        })
-        .catch(error => {
-            console.log(error);
-        })
-    }
-
+   
     static findByIdSql(codigo:number){
         return `SELECT * FROM TipoDocumento WHERE codigo = ${codigo};`;
     }

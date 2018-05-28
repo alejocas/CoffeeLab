@@ -15,37 +15,7 @@ export class TipoAbono {
         this.db = db;
     }
 
-    save(){
-        
-        this.db.getAll(TipoAbono.findByIdSql(this.codigo))
-        .then(data1 => {
-            if(data1.length == 0){
-                this.db.create(`INSERT INTO TipoAbono(codigo,nombre,descripcion) VALUES (${this.codigo},'${this.nombre}','${this.descripcion}');`,{})
-                .then(data=>{
-                    console.log('insert: ',data);
-                });
-            }
-            else{
-                
-                this.db.create(`UPDATE TipoAbono SET nombre = '${this.nombre}', descripcion = '${this.descripcion}' WHERE codigo = ${this.codigo};`,{})
-                .then(data=>{
-                    console.log('update: ',data);
-                });
-            }
-            console.log('find: ',data1)
-        });
-
-    }
-
-    delete(){
-        this.db.delete(`DELETE FROM TipoAbono WHERE codigo = ${this.codigo};`)
-        .then(data => {
-            console.log('delete: ',data);
-        })
-        .catch(error => {
-            console.log(error);
-        })
-    }
+   
 
     static findByIdSql(codigo:number){
         return `SELECT * FROM TipoAbono WHERE codigo = ${codigo};`;
