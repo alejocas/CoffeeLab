@@ -41,6 +41,49 @@
           <ion-label>Tipo de Clima:</ion-label>
           <ion-input type="number"></ion-input>
         </ion-item>
+        <ion-item>
+          <ion-icon name="md-finger-print" item-start></ion-icon>
+          <ion-label>Tipo de documento</ion-label>
+          <ion-select>
+            <ion-option value="0">Cédula de ciudadania</ion-option>
+            <ion-option value="1">Tarjeta de Identidad</ion-option>
+            <ion-option value="2">Cédula de extranjeria</ion-option>
+            <ion-option value="3">Registro Civil</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>País</ion-label>
+          <ion-select [(ngModel)]="pais">
+            <ion-option value="Argentina">NES</ion-option>
+            <ion-option value="Bélgica">Nintendo64</ion-option>
+            <ion-option value="Chile">PlayStation</ion-option>
+            <ion-option value="Dinamarca">Sega Genesis</ion-option>
+            <ion-option value="Estados Unidos">Sega Saturn</ion-option>
+            <ion-option value="Finlandia">SNES</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Gaming</ion-label>
+          <ion-select [(ngModel)]="departamento">
+            <ion-option value="nes">NES</ion-option>
+            <ion-option value="n64">Nintendo64</ion-option>
+            <ion-option value="ps">PlayStation</ion-option>
+            <ion-option value="genesis">Sega Genesis</ion-option>
+            <ion-option value="saturn">Sega Saturn</ion-option>
+            <ion-option value="snes">SNES</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Gaming</ion-label>
+          <ion-select [(ngModel)]="municipio">
+            <ion-option value="nes">NES</ion-option>
+            <ion-option value="n64">Nintendo64</ion-option>
+            <ion-option value="ps">PlayStation</ion-option>
+            <ion-option value="genesis">Sega Genesis</ion-option>
+            <ion-option value="saturn">Sega Saturn</ion-option>
+            <ion-option value="snes">SNES</ion-option>
+          </ion-select>
+        </ion-item>
         <h3>Datos del dueño</h3>
         <ion-item>
             <ion-icon name="md-finger-print" item-start></ion-icon>
@@ -59,10 +102,10 @@
           </ion-item>
             <ion-grid>  
                 <ion-row justify-content-center>
-                    <button ion-button color="secondary" outline>Guardar</button>                
+                    <button ion-button color="secondary" outline >Guardar</button>                
                 </ion-row>
                 <ion-row justify-content-center>
-                    <button ion-button clear>Borrar</button>                
+                    <button ion-button clear >Borrar</button>                
                 </ion-row>
               </ion-grid>
 </ion-content>
