@@ -18,10 +18,12 @@ export class Sqlite {
     }
   }
 
-  create(object:any){
+  save(object:any){
     let promise = new Promise((resolve,reject)=>{
+
       this.findByPk(object)
       .then(data =>{
+        console.log('validar',data)
         let data1 = new Array(data)
         if(data1.length == 0){
           this.insert(object)
@@ -57,7 +59,7 @@ export class Sqlite {
 
   findByPk(object:any){
     let promise = new Promise((resolve,reject)=>{
-      this.executeSQL(object.deleteQuery(),{})
+      this.executeSQL(object.findByIdQuery(),{})
       .then(data=>resolve(data))
       .catch(error=>reject(error));
     });
@@ -66,7 +68,7 @@ export class Sqlite {
 
   insert(object:any){
     let promise = new Promise((resolve,reject)=>{
-      this.executeSQL(object.deleteQuery(),{})
+      this.executeSQL(object.insertQuery(),{})
       .then(data=>resolve(data))
       .catch(error=>reject(error));
     });
@@ -75,7 +77,7 @@ export class Sqlite {
 
   update(object:any){
     let promise = new Promise((resolve,reject)=>{
-      this.executeSQL(object.deleteQuery(),{})
+      this.executeSQL(object.updateQuery(),{})
       .then(data=>resolve(data))
       .catch(error=>reject(error));
     });
@@ -91,6 +93,7 @@ export class Sqlite {
       .then((db) => {
         this.db.executeSql(sql, params).then(data=>{
           let tasks = [];
+          console.log(data,sql);
           for (let index = 0; index < data.rows.length; index++) {
             tasks.push( data.rows.item(index) );
           }

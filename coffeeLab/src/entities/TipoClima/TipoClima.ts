@@ -1,13 +1,10 @@
 import { Sqlite } from "../../providers/sqlite/sqlite";
 import { Inject } from "@angular/core";
-import { SQLite } from "@ionic-native/sqlite";
 
 export class TipoClima {
     private codigo:number;
     private nombre:string;
     private descripcion:string;
-    @Inject(Sqlite) private db;
-    //private db:Sqlite;
 
     constructor(codigo:number, nombre:string, descripcion:string = ""){
         this.codigo = codigo;
@@ -15,49 +12,12 @@ export class TipoClima {
         this.descripcion = descripcion;
     }
 
-    save(){
-        
-        this.db.create(this)
-        .then(data => console.log('creado:', data))
-        .catch(error => console.log(error));
-        /*this.db.getAll(TipoClima.findByIdSql(this.codigo))
-        .then(data1 => {
-            if(data1.length == 0){
-                this.db.create(`INSERT INTO TipoClima(codigo,nombre,descripcion) VALUES (${this.codigo},'${this.nombre}','${this.descripcion}');`,{})
-                .then(data=>{
-                    
-                    console.log('inserted: ',data);
-                });
-            }
-            else{
-                
-                this.db.create(`UPDATE TipoClima SET nombre = '${this.nombre}', descripcion = '${this.descripcion}' WHERE codigo = ${this.codigo};`,{})
-                .then(data=>{
-                    console.log('updated: ',data);
-                });
-            }
-            
-            //console.log('find: ',data1)
-        });*/
-
-    }
-
-    delete(){
-        /*this.db.delete(`DELETE FROM TipoClima WHERE codigo = ${this.codigo};`)
-        .then(data => {
-            console.log('delete: ',data);
-        })
-        .catch(error => {
-            console.log(error);
-        })*/
-    }
-
     deleteQuery(){
         return `DELETE FROM TipoClima WHERE codigo = ${this.codigo};`;
     }
 
     insertQuery(){
-        return `INSERT INTO TipoClima(codigo,nombre,descripcion) 
+        return `INSERT INTO TipoClima (codigo,nombre,descripcion) 
             VALUES (${this.codigo},'${this.nombre}','${this.descripcion}');`
     }
 
@@ -67,6 +27,10 @@ export class TipoClima {
             ${this.descripcion}' WHERE codigo = ${this.codigo};`
     }
 
+    findByIdQuery(){
+        return `SELECT * FROM TipoClima WHERE codigo = ${this.codigo};`;
+    }
+
     static findAllQuery(){
         return `SELECT * FROM TipoClima;`;
     }
@@ -74,6 +38,7 @@ export class TipoClima {
     static findByIdSql(codigo:number){
         return `SELECT * FROM TipoClima WHERE codigo = ${codigo};`;
     }
+
 
     /* sentencia sql para crear la tabla de este modelo
     para crear una tabla hay que declarar la cadena en el 
