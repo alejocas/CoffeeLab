@@ -48,8 +48,8 @@ export class LoginPage {
       console.log('findAll:',data);
     });
       
-    //this.navCtrl.setRoot(HomePage);
-    //this.menuCtrl.enable(true, "menu");
+    this.navCtrl.setRoot(HomePage);
+    this.menuCtrl.enable(true, "menu");
   }
 
   register(){

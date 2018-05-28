@@ -18,7 +18,6 @@ import { AddlandPage, ViewlandPage } from '../index';
 export class LandsPage {
 
   private codeLand:number;
-  
   public fincas:Array<Finca>;
 
   constructor(public navCtrl: NavController, 
@@ -30,7 +29,7 @@ export class LandsPage {
     console.log('ionViewDidLoad LandsPage');
     let testFincas = [];
     for(let i = 0; i< 10; i++){
-      testFincas.push(new Finca(i.toString(),i,i,new Municipio(i,i.toString(), 
+      testFincas.push(new   Finca(i,i.toString(),i,i,new Municipio(i,i.toString(), 
         new Departamento(i, i.toString(), new Pais(i, i.toString()))), new TipoClima(i, i.toString(), 
         i.toString())));
     }
@@ -46,7 +45,12 @@ export class LandsPage {
     this.navCtrl.push(AddlandPage);
   };
 
-  deleteLand(){};
+
+  delete(land){
+    let indice:number;
+    indice = this.fincas.findIndex(x => x === land);
+    this.fincas.splice(indice,1);
+  };
 
   viewLand(){};
 
@@ -54,6 +58,6 @@ export class LandsPage {
     //this.codeLand=codigoFinca;
     //en el push, falta mandar el codigo de la finca
     this.navCtrl.push(ViewlandPage,{finca :land});
-  }
+  };
 
 }
