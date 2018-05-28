@@ -15,7 +15,7 @@
         <ion-item>
           <ion-icon name="image" item-start></ion-icon>
           <ion-label>Nombre de la finca:</ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-input [disabled]="edit" type="text"></ion-input>
         </ion-item>
         
         <ion-item>
@@ -44,8 +44,14 @@
         <ion-item>
           <ion-label>Pais</ion-label>
           <ion-select [(ngModel)]="finca.municipio.departamento.pais">
+<<<<<<< HEAD
             <ion-option *ngFor="pais of paises" [value]="pais.Value" (click)="paisSeleccionado(pais)">
               {{pais.Text}}</ion-option>
+=======
+              
+            <ion-option *ngFor="let pais of paises" [value]="pais.codigo" (click)="paisSeleccionado(pais)">
+              {{pais.nombre}}</ion-option>
+>>>>>>> 54e75abe4fcf9f381af9e1266de48c8d1aa677fc
           </ion-select> 
         </ion-item>
         <!--ion-item>
@@ -97,9 +103,10 @@
               <ion-label>Documento:</ion-label>
               <ion-input type="number" ></ion-input>
           </ion-item>
-            <ion-grid>  
+            <ion-grid>
+              
                 <ion-row justify-content-center>
-                    <button ion-button color="secondary" outline >Guardar</button>                
+                    <button *ngIf="edit" ion-button color="secondary" outline >Guardar</button>                
                 </ion-row>
                 <ion-row justify-content-center>
                     <button ion-button clear >Borrar</button>                
