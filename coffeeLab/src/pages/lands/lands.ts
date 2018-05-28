@@ -18,15 +18,12 @@ import { AddlandPage, ViewlandPage } from '../index';
 export class LandsPage {
 
   private codeLand:number;
-  private finca:Finca;
-  private fincas:Array<Finca>;
+  
+  public fincas:Array<Finca>;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, private menuCtrl:MenuController) {
-      this.finca = new Finca("El uberrimo", 20, 1000, 
-      new Municipio(1,"Copacabana", new Departamento(1,"Antioquia",new Pais(1,"Colombia"))), 
-      new TipoClima(1,"frio",""));
-
+     
   }
 
   ionViewDidLoad() {
@@ -37,11 +34,12 @@ export class LandsPage {
         new Departamento(i, i.toString(), new Pais(i, i.toString()))), new TipoClima(i, i.toString(), 
         i.toString())));
     }
+    console.log(testFincas);
     this.fincas = testFincas;
     //testFincas.push(new Finca("El platanal", 30, 1200, 
     //new Municipio(1,"Copacabana", new Departamento(1,"Antioquia",new Pais(1,"Colombia"))), 
     //new TipoClima(1,"Caliente","")));
-    this.fincas = testFincas;
+    //this.fincas = testFincas;
   }
 
   addLand(){
@@ -52,10 +50,10 @@ export class LandsPage {
 
   viewLand(){};
 
-  landSelected(codigoFinca){
+  landSelected(land){
     //this.codeLand=codigoFinca;
     //en el push, falta mandar el codigo de la finca
-    this.navCtrl.push(ViewlandPage);
+    this.navCtrl.push(ViewlandPage,{finca :land});
   }
 
 }

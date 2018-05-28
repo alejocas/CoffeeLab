@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Finca } from '../../entities';
 
 /**
  * Generated class for the ViewlandPage page.
@@ -15,7 +16,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ViewlandPage {
 
+  private finca:Finca;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.finca = navParams.get('finca');
+    console.log(this.finca);
   }
 
   ionViewDidLoad() {
