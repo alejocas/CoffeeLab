@@ -19,8 +19,13 @@ export class AddlandPage {
   public edit:boolean = false;
   private finca:Finca;
   private paises: Array<Pais>;
+  private codigoPaisSeleccionado:number;
+  private codigoDepartamentoSeleccionado:number;
+  private codigoMunicipioSeleccionado: number;
+  private departamentos: Array<Departamento>;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.finca = new Finca('asdf',12,1900,new Municipio(1, 'medellin', new Departamento(1,"antioquia",new Pais(1,"colombia"))),new TipoClima(1,"templado",""));
+    this.finca = new Finca('asdf',12,1900,new Municipio(1, 'medellin', new Departamento
+    (1,"antioquia",new Pais(1,"colombia"))),new TipoClima(1,"templado",""));
   }
 
   ionViewDidLoad() {
@@ -31,6 +36,9 @@ export class AddlandPage {
       pais.push(new Pais(i,i.toString()));
     }
     this.paises = pais;
+    /*TODO: obtener los departamentos a través del código del país*/ 
+    //this.departamentos = getAllDepartamentos(codigoPais);
+    //this.municipios = getAllMunicipios(codigoMunicipio);
   }
 
   getAllPaises(){
@@ -40,9 +48,16 @@ export class AddlandPage {
 
   }
 
-  paisSeleccionado(pais){
-    let seleccionPais= pais;
+  /*paisSeleccionado(codigoPais){
+    this.codigoPaisSeleccionado= codigoPais;
   }
 
+  departamentoSeleccionado(codigoDepartamento){
+    this.codigoDepartamentoSeleccionado= codigoDepartamento;
+  }
 
+  municipioSeleccionado(codigoMunicipio){
+    this.codigoMunicipioSeleccionado= codigoMunicipio;
+  }
+*/
 }

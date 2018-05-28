@@ -31,12 +31,6 @@
         </ion-item>
     
         <ion-item>
-          <ion-icon name="leaf" item-start></ion-icon>
-          <ion-label>Codigo del Municipio:</ion-label>
-          <ion-input type="number"></ion-input>
-        </ion-item>
-    
-        <ion-item>
           <ion-icon name="cloudy" item-start></ion-icon>
           <ion-label>Tipo de Clima:</ion-label>
           <ion-input type="number"></ion-input>
@@ -45,43 +39,26 @@
           <ion-label>Pais</ion-label>
           <ion-select [(ngModel)]="finca.municipio.departamento.pais">
               
-            <ion-option *ngFor="let pais of paises" [value]="pais.codigo" (click)="paisSeleccionado(pais)">
+            <ion-option *ngFor="let pais of paises" [value]="pais.codigo" (click)="paisSeleccionado(pais.codigo)">
               {{pais.nombre}}</ion-option>
           </ion-select> 
         </ion-item>
-        <!--ion-item>
-          <ion-label>País</ion-label>
-          <ion-select [(ngModel)]="pais">
-            <ion-option value="Argentina">NES</ion-option>
-            <ion-option value="Bélgica">Nintendo64</ion-option>
-            <ion-option value="Chile">PlayStation</ion-option>
-            <ion-option value="Dinamarca">Sega Genesis</ion-option>
-            <ion-option value="Estados Unidos">Sega Saturn</ion-option>
-            <ion-option value="Finlandia">SNES</ion-option>
-          </ion-select>
-        </ion-item>
         <ion-item>
-          <ion-label>Departamento</ion-label>
-          <ion-select [(ngModel)]="departamento">
-            <ion-option value="nes">NES</ion-option>
-            <ion-option value="n64">Nintendo64</ion-option>
-            <ion-option value="ps">PlayStation</ion-option>
-            <ion-option value="genesis">Sega Genesis</ion-option>
-            <ion-option value="saturn">Sega Saturn</ion-option>
-            <ion-option value="snes">SNES</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label>Municipio</ion-label>
-          <ion-select [(ngModel)]="municipio">
-            <ion-option value="nes">NES</ion-option>
-            <ion-option value="n64">Nintendo64</ion-option>
-            <ion-option value="ps">PlayStation</ion-option>
-            <ion-option value="genesis">Sega Genesis</ion-option>
-            <ion-option value="saturn">Sega Saturn</ion-option>
-            <ion-option value="snes">SNES</ion-option>
-          </ion-select>
-        </ion-item-->
+            <ion-label>Departamento</ion-label>
+            <ion-select [(ngModel)]="finca.municipio.departamento">
+              <ion-option *ngFor="let departamento of departamentos" [value]="departamento.codigo" 
+              (click)="departamentoSeleccionado(departamento.codigo)">
+                {{departamento.nombre}}</ion-option>
+            </ion-select> 
+          </ion-item>
+          <ion-item>
+              <ion-label>Municipio</ion-label>
+              <ion-select [(ngModel)]="finca.municipio">
+                <ion-option *ngFor="let municipio of municipio" [value]="municipio.codigo" 
+                (click)="municipioSeleccionado(municipio.codigo)">
+                  {{municipio.nombre}}</ion-option>
+              </ion-select> 
+            </ion-item>
         <h3>Datos del dueño</h3>
         <ion-item>
             <ion-icon name="md-finger-print" item-start></ion-icon>
@@ -98,13 +75,7 @@
               <ion-label>Documento:</ion-label>
               <ion-input type="number" ></ion-input>
           </ion-item>
-            <ion-grid>
-              
                 <ion-row justify-content-center>
-                    <button *ngIf="edit" ion-button color="secondary" outline >Guardar</button>                
+                    <button *ngIf="!edit" ion-button color="secondary" outline (click)=save()>Guardar</button>                
                 </ion-row>
-                <ion-row justify-content-center>
-                    <button ion-button clear >Borrar</button>                
-                </ion-row>
-              </ion-grid>
 </ion-content>
