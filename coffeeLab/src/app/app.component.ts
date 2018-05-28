@@ -9,7 +9,7 @@ import { /* paginas de inicio de sesion*/
   /* perfil */
   ProfilePage,
   /* fincas */
-  LandsPage, LandPage, AddlandPage,
+  LandsPage, LandPage, AddlandPage, ViewlandPage,
   /* lotes */
   PortionsPage } from '../pages/index';
 

@@ -1,32 +1,20 @@
-
 <ion-header>
 
-  <ion-navbar color="primary">
-    <ion-title>lands</ion-title>
-  </ion-navbar>
+    <ion-navbar color="primary">
+        <ion-title>lands</ion-title>
+    </ion-navbar>
 
 </ion-header>
 <ion-content padding>
     <ion-list>
-        <ion-item>  
-          <h2>Mi finca 1</h2>
-          <p>Bello • Antioquia</p>
-          <button ion-button clear item-end (click)="viewLand()">Ver</button>
-        </ion-item>
-        <ion-item>  
-            <h2>Mi finca 2</h2>
-            <p>Copacabana • Antioquia</p>
-            <button ion-button clear item-end (click)="viewLand()">Ver</button>
-          </ion-item>
-          <ion-item>  
-              <h2>Mi finca 3</h2>
-              <p>Taraza • Antioquia</p>
-              <button ion-button clear item-end (click)="viewLand()">Ver</button>
-          </ion-item>
-      </ion-list>
-      <ion-row justify-content-center>
-          <button ion-button color="secondary" outline (click)="addLand()">Agregar Finca</button>
-          <button ion-button (click)="deleteLand()">Eliminar Finca</button>
-      </ion-row>
+        <button ion-item *ngFor="let finca of fincas" (click)="landSelected(finca)">
+            {{item.nombre}}
+        </button>
+    </ion-list>
+
+    <ion-row justify-content-center>
+        <button ion-button color="secondary" outline (click)="addLand()">Agregar Finca</button>
+        <button ion-button (click)="deleteLand()">Eliminar Finca</button>
+    </ion-row>
 
 </ion-content>
