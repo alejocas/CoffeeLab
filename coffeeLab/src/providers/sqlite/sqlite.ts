@@ -1,6 +1,6 @@
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Injectable } from '@angular/core';
-import { TipoAbono, TipoClima, TipoDocumento, TipoUsuario } from '../../entities/index';
+import { TipoAbono, TipoClima, TipoDocumento, TipoUsuario, Pais, Departamento, Municipio, Usuario, Finca, RegistroAbono } from '../../entities/index';
 
 
 @Injectable()
@@ -114,7 +114,25 @@ export class Sqlite {
             console.log('TipoDocumento: ',data);
             this.db.executeSql(TipoUsuario.getSqlCreteTable(),{}).then(data=>{
               console.log('TipoUsuario: ',data);
-              resolve(data);
+              this.db.executeSql(Pais.getSqlCreteTable(),{}).then(data=>{
+                console.log('Pais: ',data);
+                this.db.executeSql(Departamento.getSqlCreteTable(),{}).then(data=>{
+                  console.log('Departamento: ',data);
+                  this.db.executeSql(Municipio.getSqlCreteTable(),{}).then(data=>{
+                    console.log('Municipio: ',data);
+                    this.db.executeSql(Usuario.getSqlCreteTable(),{}).then(data=>{
+                      console.log('Usuario: ',data);
+                      this.db.executeSql(Finca.getSqlCreteTable(),{}).then(data=>{
+                        console.log('Finca: ',data);
+                        this.db.executeSql(RegistroAbono.getSqlCreteTable(),{}).then(data=>{
+                          console.log('RegistroAbono: ',data);
+                          resolve(data);
+                        });
+                      });
+                    });
+                  });
+                });
+              });
             });
           });
         });

@@ -1,6 +1,3 @@
-import { Sqlite } from "../../providers/sqlite/sqlite";
-import { Inject } from "@angular/core";
-
 export class TipoClima {
     private codigo:number;
     private nombre:string;
@@ -35,7 +32,7 @@ export class TipoClima {
         return `SELECT * FROM TipoClima;`;
     }
 
-    static findByIdSql(codigo:number){
+    static findByIdQuery(codigo:number){
         return `SELECT * FROM TipoClima WHERE codigo = ${codigo};`;
     }
 
