@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Finca, Pais } from '../../entities';
 
 /**
  * Generated class for the AddlandPage page.
@@ -15,11 +16,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AddlandPage {
 
+  private finca:Finca;
+  private paises: Array<Pais>;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddlandPage');
   }
+
+  getAllPaises(){
+    /*TODO: obtener los paises a través de consulta*/ 
+    //this.paises = getAll(pais);
+    return this.paises;
+
+  }
+
+  paisSeleccionado(pais){
+    let seleccionPais= pais;
+  }
+
 
 }
