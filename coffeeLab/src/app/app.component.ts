@@ -12,6 +12,9 @@ import { /* paginas de inicio de sesion*/
   LandsPage, LandPage, AddlandPage, ViewlandPage,
   /* lotes */
   PortionsPage } from '../pages/index';
+import { Sqlite } from '../providers/sqlite/sqlite';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { TipoAbono } from "../entities/index";
 
 @Component({
   templateUrl: 'app.html'
@@ -23,7 +26,8 @@ export class MyApp {
 
   pages: Array<{title: string, component: any, icon: string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, 
+      public splashScreen: SplashScreen, public sqlite:SQLite, public dbService:Sqlite) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -42,6 +46,9 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.createDataBase();
+      
+      //this.createDataBase();
     });
   }
 
@@ -49,5 +56,22 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.push(page.component);
+  }
+
+  createDataBase(){
+    this.sqlite.create({
+      name: 'data.db',
+      location: 'default' // the location field is required
+    })
+    .then((db) => {
+      this.dbService.setDatabase(db);
+      return this.dbService.createTables()
+      .then((data)=>{
+        console.log('tablas creadas', data);
+      });
+    })
+    .catch(error =>{
+      console.error(error);
+    });
   }
 }
