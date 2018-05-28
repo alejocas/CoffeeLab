@@ -44,14 +44,9 @@
         <ion-item>
           <ion-label>Pais</ion-label>
           <ion-select [(ngModel)]="finca.municipio.departamento.pais">
-<<<<<<< HEAD
-            <ion-option *ngFor="pais of paises" [value]="pais.Value" (click)="paisSeleccionado(pais)">
-              {{pais.Text}}</ion-option>
-=======
               
             <ion-option *ngFor="let pais of paises" [value]="pais.codigo" (click)="paisSeleccionado(pais)">
               {{pais.nombre}}</ion-option>
->>>>>>> 54e75abe4fcf9f381af9e1266de48c8d1aa677fc
           </ion-select> 
         </ion-item>
         <!--ion-item>
