@@ -1,20 +1,22 @@
 import { Sqlite } from "../../providers/sqlite/sqlite";
 import { Inject } from "@angular/core";
+import { SQLite } from "@ionic-native/sqlite";
 
 export class TipoClima {
     private codigo:number;
     private nombre:string;
     private descripcion:string;
-    private db:Sqlite;
+    @Inject(Sqlite) private db;
+    //private db:Sqlite;
 
-    constructor(codigo:number, nombre:string, descripcion:string = "",  @Inject(Sqlite) db){
+    constructor(codigo:number, nombre:string, descripcion:string = ""){
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.db = db;
     }
 
     save(){
+        
         this.db.create(this)
         .then(data => console.log('creado:', data))
         .catch(error => console.log(error));

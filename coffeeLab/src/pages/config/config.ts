@@ -29,7 +29,7 @@ export class ConfigPage {
       })
     });*/
 
-    let clima = new TipoClima(null,'templado','es un clima muy bueno',this.db);
+    let clima = new TipoClima(null,'templado','es un clima muy bueno');
     clima.save();
 
     //clima = new TipoClima(1,"asdf","Adsf",this.db);
