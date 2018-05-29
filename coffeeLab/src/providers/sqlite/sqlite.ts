@@ -1,6 +1,6 @@
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Injectable } from '@angular/core';
-import { TipoAbono, TipoClima, TipoDocumento, TipoUsuario, Pais, Departamento, Municipio, Usuario, Finca, RegistroAbono, Abono, Lote, UsuarioxFinca, TipoSemilla, Siembra } from '../../entities/index';
+import { TipoAbono, TipoClima, TipoDocumento, TipoUsuario, Pais, Departamento, Municipio, Usuario, Finca, RegistroAbono, Abono, Lote, UsuarioxFinca, TipoSemilla, Siembra, RegistroRiego } from '../../entities/index';
 import { RegistroForacion } from '../../entities/RegistroForacion/RegistroForacion';
 import { RegistroControlPlaga } from '../../entities/RegistroControlPlaga/RegistroControlPlaga';
 
@@ -142,7 +142,10 @@ export class Sqlite {
                                       console.log('RegistroForacion: ',data);
                                       this.db.executeSql(RegistroControlPlaga.getSqlCreteTable(),{}).then(data=>{
                                         console.log('RegistroControlPlaga: ',data);
-                                        resolve(data);
+                                        this.db.executeSql(RegistroRiego.getSqlCreteTable(),{}).then(data=>{
+                                          console.log('RegistroRiego: ',data);
+                                          resolve(data);
+                                        });
                                       });
                                     });
                                   });

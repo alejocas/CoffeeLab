@@ -47,12 +47,14 @@ export class RegistroForacion{
     providers/sqlite.ts en la funcion createTables() */
     static getSqlCreteTable(){
         return `CREATE TABLE IF NOT EXISTS RegistroForacion (
-            lote integer NOT NULL REFERENCES Siembra,
-            fechaSiembra text NOT NULL REFERENCES Siembra,
+            lote integer NOT NULL,
+            fechaSiembra text NOT NULL,
             fechaInicio text NOT NULL,
             clasificacion text NOT NULL,
             fechaFinal text,
-            PRIMARY KEY(lote, fechaInicio)
+            PRIMARY KEY(lote, fechaInicio),
+            FOREIGN KEY(lote) REFERENCES Siembra(lote),
+            FOREIGN KEY(fechaSiembra) REFERENCES Siembra(fecha)
            );`;
     }
 }

@@ -13,4 +13,8 @@ export { Abono } from "./Abono/Abono";
 export { RegistroAbono } from "./RegistroAbono/RegistroAbono";
 export { TipoSemilla } from "./TipoSemilla/TipoSemilla";
 export { Siembra } from "./Siembra/Siembra";
-export {  } from "./Abono/Abono";
+export { RegistroForacion } from "./RegistroForacion/RegistroForacion";
+export { RegistroControlPlaga } from "./RegistroControlPlaga/RegistroControlPlaga";
+export { RegistroRiego } from "./RegistroRiego/RegistroRiego";
+export {  } from ".";
+
