@@ -39,17 +39,17 @@ export class LoginPage {
     /*TODO: hacer el servicio para login*/ 
     //this.navCtrl.push(HomePage)
     //this.myApp.rootPage = HomePage;
-    let clima = new TipoClima(null,'templado','es un clima muy bueno');
-    this.db.save(clima);
+    // let clima = new TipoClima(null,'templado','es un clima muy bueno');
+    // this.db.save(clima);
 
-    //clima = new TipoClima(1,"asdf","Adsf",this.db);
-    //clima.delete();
-    this.db.findAll(TipoClima).then(data=>{
-      console.log('findAll:',data);
-    });
+    // //clima = new TipoClima(1,"asdf","Adsf",this.db);
+    // //clima.delete();
+    // this.db.findAll(TipoClima).then(data=>{
+    //   console.log('findAll:',data);
+    // });
       
-    //this.navCtrl.setRoot(HomePage);
-    //this.menuCtrl.enable(true, "menu");
+    this.navCtrl.setRoot(HomePage);
+    this.menuCtrl.enable(true, "menu");
   }
 
   register(){

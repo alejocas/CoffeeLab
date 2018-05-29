@@ -11,7 +11,7 @@ import {
   /* perfil */
   ProfilePage,
   /* fincas */
-  LandsPage, LandPage,
+  LandsPage, LandPage, AddlandPage, ViewlandPage,
   /* lotes */
   PortionsPage
 } from '../pages/index';
@@ -29,7 +29,8 @@ import { SQLite } from '@ionic-native/sqlite';
     HomePage, ConfigPage,
     ProfilePage,
     LandsPage, LandPage,
-    PortionsPage
+    PortionsPage,
+    AddlandPage, ViewlandPage
   ],
   imports: [
     BrowserModule,
@@ -42,7 +43,8 @@ import { SQLite } from '@ionic-native/sqlite';
     HomePage, ConfigPage,
     ProfilePage,
     LandsPage, LandPage,
-    PortionsPage
+    PortionsPage,
+    AddlandPage, ViewlandPage
   ],
   providers: [
     StatusBar,
