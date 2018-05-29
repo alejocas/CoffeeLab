@@ -1,21 +1,53 @@
 import { Pais } from '../index';
 
 export class Departamento {
-    private codigo:number;
-    private nombre:string;
-    private pais:Pais;
+    public codigo:number;
+    public nombre:string;
+    public pais:Pais;
 
-    constructor(codigo:number, nombre:string, pais:Pais){
+    constructor(codigo:number=null, nombre:string='', pais:Pais=new Pais()){
         this.codigo = codigo;
         this.nombre = nombre;
         this.pais = pais;
     }
 
-    save(){
-        //TODO: hacer funcion para guardar pero creo que se puede hacer un servicio
+    deleteQuery(){
+        return `DELETE FROM Departamento WHERE codigo = ${this.codigo};`;
     }
 
-    findAll(){
-        
+    insertQuery(){
+        return `INSERT INTO Departamento (codigo,nombre,pais) 
+            VALUES (${this.codigo},'${this.nombre}','${this.pais.codigo}');`
+    }
+
+    updateQuery(){
+        return `UPDATE Departamento SET 
+            nombre = '${this.nombre}', 
+            pais = '${this.pais.codigo}' 
+            WHERE codigo = ${this.codigo};`;
+    }
+
+    findByIdQuery(){
+        return `SELECT * FROM Departamento WHERE codigo = ${this.codigo};`;
+    }
+
+    static findAllQuery(){
+        return `SELECT * FROM Departamento;`;
+    }
+
+    static findByIdQuery(codigo:number){
+        return `SELECT * FROM Departamento WHERE codigo = ${codigo};`;
+    }
+
+
+    /* sentencia sql para crear la tabla de este modelo
+    para crear una tabla hay que declarar la cadena en el 
+    providers/sqlite.ts en la funcion createTables() */
+    static getSqlCreteTable(){
+        return `CREATE TABLE IF NOT EXISTS Departamento (
+            codigo integer PRIMARY KEY AUTOINCREMENT,
+            nombre text NOT NULL,
+            pais integer NOT NULL REFERENCES Pais
+           );`;
     }
 }

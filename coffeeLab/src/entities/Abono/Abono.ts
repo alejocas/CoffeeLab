@@ -13,11 +13,46 @@ export class Abono {
         this.tipoAbono=tipoAbono;
     }
 
-    save(){
-
+    deleteQuery(){
+        return `DELETE FROM Abono WHERE tipoDocumento = ${this.codigo};`;
     }
 
-    findAll(){
+    insertQuery(){
+        return `INSERT INTO Abono (codigo,nombre,descripcion,tipoAbono) 
+            VALUES (${this.codigo},'${this.nombre}',${this.descripcion},${this.tipoAbono.codigo});`
+    }
 
+    updateQuery(){
+        return `UPDATE Abono SET 
+        codigo = ${this.codigo},
+        nombre = '${this.nombre}',
+        descripcion = ${this.descripcion},
+        tipoAbono = ${this.tipoAbono}
+        WHERE tipoDocumento = ${this.codigo};`
+    }
+
+    findByIdQuery(){
+        return `SELECT * FROM Abono WHERE tipoDocumento = ${this.codigo};`;
+    }
+
+    static findAllQuery(){
+        return `SELECT * FROM Abono;`;
+    }
+
+    static findByIdQuery(codigo:number){
+        return `SELECT * FROM Abono WHERE tipoDocumento = ${codigo};`;
+    }
+
+
+    /* sentencia sql para crear la tabla de este modelo
+    para crear una tabla hay que declarar la cadena en el 
+    providers/sqlite.ts en la funcion createTables() */
+    static getSqlCreteTable(){
+        return `CREATE TABLE IF NOT EXISTS Abono (
+            codigo integer PRIMARY KEY AUTOINCREMENT,
+            nombre text NOT NULL,
+            descripcion text,
+            tipoAbono integer not null references TipoAbono
+        );`;
     }
 }

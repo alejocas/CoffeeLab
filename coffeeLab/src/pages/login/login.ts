@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage, RegisterPage, ResetPage } from '../index';
 import { MenuController } from 'ionic-angular';
+import { TipoAbono, TipoClima } from '../../entities/index'
+import { Sqlite } from '../../providers/sqlite/sqlite';
 
 
 /**
@@ -24,7 +26,8 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
-    private menuCtrl:MenuController) {
+    private menuCtrl:MenuController,
+    private db:Sqlite) {
       menuCtrl.enable(false, "menu");
   }
 
@@ -36,6 +39,15 @@ export class LoginPage {
     /*TODO: hacer el servicio para login*/ 
     //this.navCtrl.push(HomePage)
     //this.myApp.rootPage = HomePage;
+    // let clima = new TipoClima(null,'templado','es un clima muy bueno');
+    // this.db.save(clima);
+
+    // //clima = new TipoClima(1,"asdf","Adsf",this.db);
+    // //clima.delete();
+    // this.db.findAll(TipoClima).then(data=>{
+    //   console.log('findAll:',data);
+    // });
+      
     this.navCtrl.setRoot(HomePage);
     this.menuCtrl.enable(true, "menu");
   }

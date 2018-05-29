@@ -1,13 +1,33 @@
-
 <ion-header>
 
-  <ion-navbar color="primary">
-    <ion-title>lands</ion-title>
-  </ion-navbar>
+    <ion-navbar color="primary">
+        <ion-title>lands</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="addLand()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
 
 </ion-header>
-
-
 <ion-content padding>
+    <ion-list>
+        <ion-item-sliding *ngFor="let finca of fincas">
+            <ion-item >
+                <button ion-item (click)="landSelected(finca)">
+                    <h2>{{finca.nombre}}</h2>
+                    <p>{{finca.municipio.nombre}} • {{finca.municipio.departamento.nombre}}</p></button>
+            </ion-item>
+            <ion-item-options>
+                <button ion-button expandable name="trash" (click)="delete(finca)">Eliminar</button>                
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+
+    <!-- 
+    <ion-row justify-content-center>
+        <button ion-button color="secondary" outline (click)="addLand()">Agregar Finca</button>
+        <button ion-button (click)="deleteLand()">Eliminar Finca</button>
+    </ion-row> -->
 
 </ion-content>
