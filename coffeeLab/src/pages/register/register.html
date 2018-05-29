@@ -7,12 +7,77 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>register</ion-title>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>Formulario de registro</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
+  <form [formGroup]="registerPag">
 
+    <ion-item>
+      <ion-icon name="logo-octocat" item-start></ion-icon>
+      <ion-label>Usuario</ion-label>
+      <ion-input type="text" formControlName="usuario"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="key" item-start></ion-icon>
+      <ion-label>Contraseña</ion-label>
+      <ion-input type="password" formControlName="contrasena"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="person" item-start></ion-icon>
+      <ion-label>Nombre:</ion-label>
+      <ion-input type="text" formControlName="nombre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="happy" item-start></ion-icon>
+      <ion-label>Apellidos:</ion-label>
+      <ion-input type="text" formControlName="apellidos"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="mail" item-start></ion-icon>
+      <ion-label>Correo electronico:</ion-label>
+      <ion-input type="text" formControlName="correo"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-icon name="md-finger-print" item-start></ion-icon>
+        <ion-label>Tipo de documento</ion-label>
+        <ion-select>
+          <ion-option value="0">Cédula de ciudadania</ion-option>
+          <ion-option value="1">Cédula de extranjeria</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+          <ion-icon name="contact" item-start></ion-icon>
+          <ion-label>Documento:</ion-label>
+          <ion-input type="number" formControlName="numDocumento"></ion-input>
+        </ion-item>number
+      <ion-item>
+          <ion-icon name="contacts" item-start></ion-icon>
+          <ion-label>Tipo de usuario</ion-label>
+          <ion-select>
+            <ion-option value="admin">Administrador</ion-option>
+            <ion-option value="invitado">Invitado</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-grid>  
+            <ion-row justify-content-center>
+                <button ion-button color="secondary" outline (click)="login()">Guardar</button>                
+            </ion-row>
+            <ion-row justify-content-center>
+                <button ion-button clear (click)="reset()">Borrar</button>                
+            </ion-row>
+        </ion-grid>
+    
+          
+       
+  </form>
 </ion-content>
