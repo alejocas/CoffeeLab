@@ -1,4 +1,4 @@
-import { Municipio, TipoClima } from '../index';
+import { Municipio, TipoClima, Usuario } from '../index';
 
 export class Finca {
     
@@ -8,9 +8,10 @@ export class Finca {
     public altitud:number;
     public municipio:Municipio;
     public tipoClima:TipoClima;
+    public usuario: Usuario;
 
     constructor(codigo:number, nombre:string, tempPromedio:number,
-         altitud:number, municipio:Municipio, tipoClima:TipoClima){
+         altitud:number, municipio:Municipio, tipoClima:TipoClima, usuario:Usuario){
 
             this.codigo=codigo
             this.nombre=nombre;
@@ -18,6 +19,7 @@ export class Finca {
             this.altitud=altitud;
             this.municipio=municipio;
             this.tipoClima=tipoClima;
+            this.usuario=usuario;
     }
 
     deleteQuery(){
