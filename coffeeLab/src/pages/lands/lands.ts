@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
-import { Finca, Municipio, Departamento, Pais, TipoClima } from '../../entities';
+import { Finca, Municipio, Departamento, Pais, TipoClima, Usuario, TipoDocumento, TipoUsuario } from '../../entities';
 import { AddlandPage, ViewlandPage } from '../index';
 
 /**
@@ -29,9 +29,10 @@ export class LandsPage {
     console.log('ionViewDidLoad LandsPage');
     let testFincas = [];
     for(let i = 0; i< 10; i++){
-      testFincas.push(new   Finca(i,i.toString(),i,i,new Municipio(i,i.toString(), 
+      testFincas.push(new  Finca(i,i.toString(),i,i,new Municipio(i,i.toString(), 
         new Departamento(i, i.toString(), new Pais(i, i.toString()))), new TipoClima(i, i.toString(), 
-        i.toString())));
+        i.toString()), new Usuario(new TipoDocumento(10,"cedula",""),1012,"",new TipoUsuario(1,"Admin","")
+        ,"cualquier cosa","1234","Adonai","por que te casaste")));
     }
     console.log(testFincas);
     this.fincas = testFincas;

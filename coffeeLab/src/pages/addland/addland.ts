@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Finca, Pais, Municipio, Departamento, TipoClima } from '../../entities';
+import { Finca, Pais, Municipio, Departamento, TipoClima, Usuario, TipoDocumento, TipoUsuario } from '../../entities';
 
 /**
  * Generated class for the AddlandPage page.
@@ -25,7 +25,8 @@ export class AddlandPage {
   private departamentos: Array<Departamento>;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.finca = new Finca(1,'asdf',12,1900,new Municipio(1, 'medellin', new Departamento
-    (1,"antioquia",new Pais(1,"colombia"))),new TipoClima(1,"templado",""));
+    (1,"antioquia",new Pais(1,"colombia"))),new TipoClima(1,"templado",""),
+    new Usuario(new TipoDocumento(10,"cedula",""),1012,"",new TipoUsuario(1,"Admin",""),"cualquier cosa","1234","Adonai","por que te casaste"));
   }
 
   ionViewDidLoad() {

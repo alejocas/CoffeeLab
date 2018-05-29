@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Finca, Departamento, Pais, Municipio, TipoClima } from '../../entities';
+import { Finca, Departamento, Pais, Municipio, TipoClima, Usuario, TipoDocumento, TipoUsuario } from '../../entities';
 
 /**
  * Generated class for the ViewlandPage page.
@@ -31,7 +31,9 @@ export class ViewlandPage {
       console.log(this.finca);
     } else {
       this.finca = new Finca(1, 'asdf', 12, 1900, new Municipio(1, 'medellin', new Departamento
-        (1, "antioquia", new Pais(1, "colombia"))), new TipoClima(1, "templado", ""));
+        (1, "antioquia", new Pais(1, "colombia"))), new TipoClima(1, "templado", ""),
+        new Usuario(new TipoDocumento(10,"cedula",""),1012,"",new TipoUsuario(1,"Admin","")
+        ,"cualquier cosa","1234","Adonai","por que te casaste"));
     }
   }
 
