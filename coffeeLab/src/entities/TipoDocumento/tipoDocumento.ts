@@ -3,7 +3,7 @@ export class TipoDocumento {
     public nombre:string;
     public descripcion:string;
 
-    constructor(codigo:number, nombre:string, descripcion:string = ""){
+    constructor(codigo:number = null, nombre:string = '', descripcion:string = ""){
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;

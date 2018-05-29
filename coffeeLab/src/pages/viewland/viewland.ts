@@ -32,6 +32,7 @@ export class ViewlandPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
     this.edit = navParams.get('edit');
+    this.finca = new Finca();
     console.log(this.edit);
     if (this.edit == false) {
       this.finca = navParams.get('finca');

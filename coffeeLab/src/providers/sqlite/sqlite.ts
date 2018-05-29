@@ -39,6 +39,8 @@ export class Sqlite {
           .catch(error => reject(error))
         }
       })
+      .catch(err=>reject(err)
+      )
     });
     return promise;
   }

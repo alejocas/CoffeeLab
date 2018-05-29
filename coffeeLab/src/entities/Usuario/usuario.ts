@@ -10,9 +10,9 @@ export class Usuario {
     public nombres:string;
     public apellidos:string;
 
-    constructor(tipoDocumento:TipoDocumento, numeroDocumento:number,
-         correo:string, tipoUsuario:TipoUsuario, usuario:string,
-         contrasena:string, nombres:string, apellidos:string){
+    constructor(tipoDocumento:TipoDocumento = new TipoDocumento(), numeroDocumento:number = null,
+         correo:string = '', tipoUsuario:TipoUsuario = new TipoUsuario(), usuario:string = '',
+         contrasena:string = '', nombres:string = '', apellidos:string = ''){
 
             this.tipoDocumento=tipoDocumento;
             this.numeroDocumento=numeroDocumento;
