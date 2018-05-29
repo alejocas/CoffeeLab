@@ -18,7 +18,8 @@ export class ViewlandPage {
 
   private tipoClimas: Array<TipoClima>;
   private edit:boolean;
-  private finca: Finca;
+  //public finca:Finca = new Finca(null,'',0,0,new Municipio(null,'',new Departamento(null,'',new Pais(null,''))),new TipoClima(null,''));
+  private finca:Finca;
   private fincaNueva: Finca;
   private paises: Array<Pais>;
   private pais: Pais;
@@ -29,15 +30,19 @@ export class ViewlandPage {
   private departamentos: Array<Departamento>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+
     this.edit = navParams.get('edit');
     console.log(this.edit);
     if (this.edit == false) {
       this.finca = navParams.get('finca');
       console.log(this.finca);
     } else {
-      this.finca = new Finca(1, 'asdf', 12, 1900, new Municipio(1, 'medellin', new Departamento
-        (1, "antioquia", new Pais(1, "colombia"))), new TipoClima(1, "templado", ""));
+      
     }
+  }
+
+  ionViewCanEnter(){
+    this.finca = new Finca();
   }
 
   ionViewDidLoad() {
@@ -56,7 +61,7 @@ export class ViewlandPage {
     } 
   }
 
-    paisSeleccionado(pais){
+  paisSeleccionado(pais){
     this.pais= pais;
   }
 
@@ -69,7 +74,7 @@ export class ViewlandPage {
   }
 
   save(){
-    this.fincaNueva = new Finca();
+    //(this.fincaNueva = new Finca();
     console.log(this.finca);
   }
 

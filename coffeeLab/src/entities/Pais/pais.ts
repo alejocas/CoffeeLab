@@ -2,7 +2,7 @@ export class Pais {
     public codigo:number;
     public nombre:string;
 
-    constructor(codigo:number, nombre:string){
+    constructor(codigo:number = null, nombre:string=''){
         this.codigo = codigo;
         this.nombre = nombre;
     }

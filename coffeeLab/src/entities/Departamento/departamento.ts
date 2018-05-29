@@ -5,7 +5,7 @@ export class Departamento {
     public nombre:string;
     public pais:Pais;
 
-    constructor(codigo:number, nombre:string, pais:Pais){
+    constructor(codigo:number=null, nombre:string='', pais:Pais=new Pais()){
         this.codigo = codigo;
         this.nombre = nombre;
         this.pais = pais;

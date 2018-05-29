@@ -4,88 +4,65 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-
+  <ion-header>
     <ion-navbar color="primary">
       <ion-title *ngIf="edit">Agregar una finca</ion-title>
       <ion-title *ngIf="edit==false">Ver finca "{{finca.nombre}}"</ion-title>
     </ion-navbar>
   </ion-header>
+
   <ion-content padding>
   
-    <ion-item>
-      <ion-icon name="image" item-start></ion-icon>
-      <ion-label>Nombre de la finca:</ion-label>
-      <ion-input [disabled]="edit==false" *ngIf="edit" type="text"></ion-input>
-      <ion-input [disabled]="edit==false" *ngIf="edit==false" type="text" 
-      [(ngModel)]="finca.nombre" name="ion-title">{{finca.nombre}}</ion-input>
-    </ion-item>
-  
-    <ion-item>
-      <ion-icon name="sunny" item-start></ion-icon>
-      <ion-label>Temperatura promedio:</ion-label>
-      <ion-input [disabled]="edit==false" *ngIf="edit "type="number"></ion-input>
-      <ion-input [disabled]="edit==false" *ngIf="edit==false" 
-        type="number" [(ngModel)]="finca.temperatura" 
-        name="ion-title">{{finca.temperatura}}</ion-input>
-    </ion-item>
-  
-    <ion-item>
-      <ion-icon name="trending-up" item-start></ion-icon>
-      <ion-label>Altitud:</ion-label>
-      <ion-input [disabled]="edit==false" *ngIf="edit" type="number"></ion-input>
-      <ion-input [disabled]="edit==false" *ngIf="edit" type="number" [(ngModel)]="finca.altitud" name="ion-title">{{finca.altitud}}</ion-input>
-    </ion-item>
-    <ion-item *ngIf="edit==false">
+      <ion-item>
+        <ion-icon name="image" item-start></ion-icon>
+        <ion-label>Nombre de la finca:</ion-label>
+        <ion-input [disabled]="!edit" type="text" [(ngModel)]="finca.nombre"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="sunny" item-start></ion-icon>
+        <ion-label>Temperatura promedio:</ion-label>
+        <ion-input [disabled]="!edit" type="number" [(ngModel)]="finca.temperatura" name="temperatura"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="trending-up" item-start></ion-icon>
+        <ion-label>Altitud:</ion-label>
+        <ion-input [disabled]="!edit" type="number" [(ngModel)]="finca.altitud" name="altitud"></ion-input>
+      </ion-item>
+
+      <ion-item>
         <ion-label>Tipo de Clima:</ion-label>
-        <ion-select *ngFor="let tipoClima of tipoClimas" [(ngModel)]="finca.tipoClima">
-          <ion-option [value]="tipoClima" (click)="tipoClimaSeleccionado(tipoClima)">
+        <ion-select [disabled]="!edit" [(ngModel)]="finca.tipoClima">
+          <ion-option *ngFor="let tipoClima of tipoClimas" [value]="tipoClima" (click)="tipoClimaSeleccionado(tipoClima)">
             {{tipoClima.nombre}}</ion-option>
         </ion-select>
-    </ion-item>
+      </ion-item>
 
-    <ion-item *ngIf="edit==false">
-      <ion-icon name="cloudy" item-start></ion-icon>
-      <ion-label>Tipo de Clima:</ion-label>
-      <ion-input [disabled]="edit==false"  type="text">{{finca.tipoClima.nombre}}</ion-input>
-    </ion-item>
-    
-    <ion-item *ngIf="edit">
-      <ion-label>Pais:</ion-label>
-      <ion-select [(ngModel)]="finca.municipio.departamento.pais">
-        <ion-option *ngFor="let pais of paises" [value]="pais" (click)="paisSeleccionado(pais)">
-          {{pais.nombre}}</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item *ngIf="edit==false">
-      <ion-icon name="image" item-start></ion-icon>
-      <ion-label>Pais:</ion-label>
-      <ion-input [disabled]="edit==false" type="text">{{finca.municipio.departamento.pais.nombre}}</ion-input>
-    </ion-item>
-    <ion-item *ngIf="edit">
-      <ion-label>Departamento</ion-label>
-      <ion-select [(ngModel)]="finca.municipio.departamento">
-        <ion-option *ngFor="let departamento of departamentos" [value]="departamento" (click)="departamentoSeleccionado(departamento)">
-          {{departamento.nombre}}</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item *ngIf="edit==false">
-      <ion-icon name="image" item-start></ion-icon>
-      <ion-label>Departamento:</ion-label>
-      <ion-input [disabled]="edit==false" type="text">{{finca.municipio.departamento.nombre}}</ion-input>
-    </ion-item>
-    <ion-item *ngIf="edit">
-      <ion-label>Municipio</ion-label>
-      <ion-select [(ngModel)]="finca.municipio">
-        <ion-option *ngFor="let municipio of municipio" [value]="municipio" (click)="municipioSeleccionado(municipio)">
-          {{municipio.nombre}}</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item *ngIf="edit==false">
-      <ion-icon name="image" item-start></ion-icon>
-      <ion-label>Municipio:</ion-label>
-      <ion-input [disabled]="edit==false" type="text">{{finca.municipio.nombre}}</ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label>Pais:</ion-label>
+        <ion-select [disabled]="!edit" [(ngModel)]="pais">
+          <ion-option *ngFor="let pais of paises" [value]="pais" (click)="paisSeleccionado(pais)">
+            {{pais.nombre}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Departamento</ion-label>
+        <ion-select [disabled]="!edit" [(ngModel)]="departamento">
+          <ion-option *ngFor="let departamento of departamentos" [value]="departamento" (click)="departamentoSeleccionado(departamento)">
+            {{departamento.nombre}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Municipio</ion-label>
+        <ion-select [disabled]="!edit" [(ngModel)]="finca.municipio">
+          <ion-option *ngFor="let municipio of municipio" [value]="municipio" (click)="municipioSeleccionado(municipio)">
+            {{municipio.nombre}}</ion-option>
+        </ion-select>
+      </ion-item>
+
     <ion-row justify-content-center>
       <button *ngIf="edit" ion-button color="secondary" outline (click)="save()">Guardar</button>
     </ion-row>

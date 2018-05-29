@@ -5,7 +5,7 @@ export class Municipio {
     public nombre:string;
     public departamento:Departamento;
 
-    constructor(codigo:number, nombre:string, departamento:Departamento){
+    constructor(codigo:number = null, nombre:string = '', departamento:Departamento = new Departamento()){
         this.codigo = codigo;
         this.nombre = nombre;
         this. departamento = departamento;

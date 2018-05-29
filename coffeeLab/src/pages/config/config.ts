@@ -30,13 +30,13 @@ export class ConfigPage {
     });*/
 
     let clima = new TipoClima(null,'templado','nuevo registro');
-    this.db.save(clima);
+    //this.db.save(clima);
 
     //clima = new TipoClima(1,"asdf","Adsf",this.db);
     //clima.delete();
-    this.db.findAll(TipoClima).then(data=>{
-      console.log('findAll:',data);
-    });
+    // this.db.findAll(TipoClima).then(data=>{
+    //   console.log('findAll:',data);
+    // });
   }
 
 }
