@@ -8,7 +8,6 @@ export class Finca {
     public altitud:number;
     public municipio:Municipio;
     public tipoClima:TipoClima;
-    public usuario: Usuario;
 
     constructor(codigo:number, nombre:string, tempPromedio:number,
          altitud:number, municipio:Municipio, tipoClima:TipoClima, usuario:Usuario){
@@ -19,7 +18,6 @@ export class Finca {
             this.altitud=altitud;
             this.municipio=municipio;
             this.tipoClima=tipoClima;
-            this.usuario=usuario;
     }
 
     deleteQuery(){
