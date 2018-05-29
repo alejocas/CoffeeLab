@@ -1,6 +1,8 @@
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Injectable } from '@angular/core';
-import { TipoAbono, TipoClima, TipoDocumento, TipoUsuario, Pais, Departamento, Municipio, Usuario, Finca, RegistroAbono, Abono, Lote, UsuarioxFinca } from '../../entities/index';
+import { TipoAbono, TipoClima, TipoDocumento, TipoUsuario, Pais, Departamento, Municipio, Usuario, Finca, RegistroAbono, Abono, Lote, UsuarioxFinca, TipoSemilla, Siembra } from '../../entities/index';
+import { RegistroForacion } from '../../entities/RegistroForacion/RegistroForacion';
+import { RegistroControlPlaga } from '../../entities/RegistroControlPlaga/RegistroControlPlaga';
 
 
 @Injectable()
@@ -132,7 +134,19 @@ export class Sqlite {
                               console.log('RegistroAbono: ',data);
                               this.db.executeSql(UsuarioxFinca.getSqlCreteTable(),{}).then(data=>{
                                 console.log('UsuarioxFinca: ',data);
-                                resolve(data);
+                                this.db.executeSql(TipoSemilla.getSqlCreteTable(),{}).then(data=>{
+                                  console.log('TipoSemilla: ',data);
+                                  this.db.executeSql(Siembra.getSqlCreteTable(),{}).then(data=>{
+                                    console.log('Siembra: ',data);
+                                    this.db.executeSql(RegistroForacion.getSqlCreteTable(),{}).then(data=>{
+                                      console.log('RegistroForacion: ',data);
+                                      this.db.executeSql(RegistroControlPlaga.getSqlCreteTable(),{}).then(data=>{
+                                        console.log('RegistroControlPlaga: ',data);
+                                        resolve(data);
+                                      });
+                                    });
+                                  });
+                                });
                               });
                             });
                           });

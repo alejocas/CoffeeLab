@@ -1,46 +1,46 @@
-import { TipoAbono } from "../index";
+import { Lote, TipoSemilla } from "../index";
 
-export class Abono {
-    public codigo:number;
-    public nombre:string;
-    public descripcion:string;
-    public tipoAbono:TipoAbono;
+export class Siembra {
+    public lote:Lote;
+    public tipoSemilla:TipoSemilla;
+    public numeroSemilla:number;
+    public fecha:string;
 
-    constructor(codigo:number,nombre:string,descripcion:string,tipoAbono:TipoAbono){
-        this.codigo=codigo;
-        this.nombre=nombre;
-        this.descripcion=descripcion;
-        this.tipoAbono=tipoAbono;
+    constructor(lote:Lote,tipoSemilla:TipoSemilla,numeroSemilla:number,fecha:string){
+        this.lote = lote;
+        this.tipoSemilla = tipoSemilla;
+        this.numeroSemilla = numeroSemilla;
+        this.fecha = fecha;
     }
 
     deleteQuery(){
-        return `DELETE FROM Abono WHERE tipoDocumento = ${this.codigo};`;
+        return `DELETE FROM Siembra WHERE lote = ${this.lote.codigo} AND fecha = ${this.fecha};`;
     }
 
     insertQuery(){
-        return `INSERT INTO Abono (codigo,nombre,descripcion,tipoAbono) 
-            VALUES (${this.codigo},'${this.nombre}',${this.descripcion},${this.tipoAbono.codigo});`
+        return `INSERT INTO Siembra (lote,tipoSemilla,numeroSemilla,fecha) 
+            VALUES (${this.lote.codigo},'${this.tipoSemilla.codigo}',${this.numeroSemilla},${this.fecha});`
     }
 
     updateQuery(){
-        return `UPDATE Abono SET 
-        codigo = ${this.codigo},
-        nombre = '${this.nombre}',
-        descripcion = ${this.descripcion},
-        tipoAbono = ${this.tipoAbono}
-        WHERE tipoDocumento = ${this.codigo};`
+        return `UPDATE Siembra SET 
+        lote = ${this.lote.codigo},
+        tipoSemilla = '${this.tipoSemilla.codigo}',
+        numeroSemilla = ${this.numeroSemilla},
+        fecha = ${this.fecha}
+        WHERE lote = ${this.lote.codigo} AND fecha = ${this.fecha};`;
     }
 
     findByIdQuery(){
-        return `SELECT * FROM Abono WHERE tipoDocumento = ${this.codigo};`;
+        return `SELECT * FROM Siembra WHERE lote = ${this.lote.codigo} AND fecha = ${this.fecha};`;
     }
 
     static findAllQuery(){
-        return `SELECT * FROM Abono;`;
+        return `SELECT * FROM Siembra;`;
     }
 
-    static findByIdQuery(codigo:number){
-        return `SELECT * FROM Abono WHERE tipoDocumento = ${codigo};`;
+    static findByIdQuery(lote:Lote,fecha:Date){
+        return `SELECT * FROM Siembra WHERE lote = ${lote.codigo} AND fecha = ${fecha};`;
     }
 
 
@@ -48,11 +48,12 @@ export class Abono {
     para crear una tabla hay que declarar la cadena en el 
     providers/sqlite.ts en la funcion createTables() */
     static getSqlCreteTable(){
-        return `CREATE TABLE IF NOT EXISTS Abono (
-            codigo integer PRIMARY KEY AUTOINCREMENT,
-            nombre text NOT NULL,
-            descripcion text,
-            tipoAbono integer not null references TipoAbono
+        return `CREATE TABLE IF NOT EXISTS Siembra (
+            lote integer NOT NULL references Lote,
+            tipoSemilla integer NOT NULL references TipoSemila,
+            numeroSemilla integer,
+            fecha text NOT NULL,
+            PRIMARY KEY(lote, fecha)
         );`;
     }
 }

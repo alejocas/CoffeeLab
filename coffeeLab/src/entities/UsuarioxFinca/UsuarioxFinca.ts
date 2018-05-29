@@ -33,7 +33,7 @@ export class UsuarioxFinca {
     findByIdQuery(){
         return `SELECT * FROM UsuarioxFinca WHERE tipoDocumento = ${this.usuario.tipoDocumento.codigo}
             AND numeroDocumento = ${this.usuario.numeroDocumento}
-            AND finca = ${this.finca.codigo};`;
+            OR finca = ${this.finca.codigo};`;
     }
 
     static findAllQuery(){
@@ -43,7 +43,7 @@ export class UsuarioxFinca {
     static findByIdQuery(usuario:Usuario,finca:Finca){
         return `SELECT * FROM UsuarioxFinca WHERE tipoDocumento = ${usuario.tipoDocumento.codigo}
             AND numeroDocumento = ${usuario.numeroDocumento}
-            AND finca = ${finca.codigo};`;
+            OR finca = ${finca.codigo};`;
     }
 
 

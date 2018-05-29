@@ -11,6 +11,6 @@ export { Lote } from "./Lote/Lote";
 export { TipoAbono } from "./TipoAbono/TiipoAbono";
 export { Abono } from "./Abono/Abono";
 export { RegistroAbono } from "./RegistroAbono/RegistroAbono";
-export {  } from "./Abono/Abono";
-export {  } from "./Abono/Abono";
+export { TipoSemilla } from "./TipoSemilla/TipoSemilla";
+export { Siembra } from "./Siembra/Siembra";
 export {  } from "./Abono/Abono";

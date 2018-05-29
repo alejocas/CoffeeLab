@@ -45,7 +45,7 @@ export class RegistroAbono{
         return `CREATE TABLE IF NOT EXISTS RegistroAbono (
             lote integer NOT NULL REFERENCES Lote,
             abono integer NOT NULL REFERENCES Abono,
-            fecha integer NOT NULL,
+            fecha text NOT NULL,
             PRIMARY KEY(lote, abono, fecha)
            );`;
     }
