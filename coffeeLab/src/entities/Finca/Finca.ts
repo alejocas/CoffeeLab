@@ -10,7 +10,7 @@ export class Finca {
     public tipoClima:TipoClima;
 
     constructor(codigo:number, nombre:string, tempPromedio:number,
-         altitud:number, municipio:Municipio, tipoClima:TipoClima, usuario:Usuario){
+         altitud:number, municipio:Municipio, tipoClima:TipoClima){
 
             this.codigo=codigo
             this.nombre=nombre;

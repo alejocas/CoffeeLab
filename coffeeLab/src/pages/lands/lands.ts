@@ -31,8 +31,7 @@ export class LandsPage {
     for(let i = 0; i< 10; i++){
       testFincas.push(new  Finca(i,i.toString(),i,i,new Municipio(i,i.toString(), 
         new Departamento(i, i.toString(), new Pais(i, i.toString()))), new TipoClima(i, i.toString(), 
-        i.toString()), new Usuario(new TipoDocumento(10,"cedula",""),1012,"",new TipoUsuario(1,"Admin","")
-        ,"cualquier cosa","1234","Adonai","por que te casaste")));
+        i.toString())));
     }
     console.log(testFincas);
     this.fincas = testFincas;
@@ -44,7 +43,7 @@ export class LandsPage {
 
   addLand(){
     let edit: boolean = true;
-    this.navCtrl.push(ViewlandPage,edit);;
+    this.navCtrl.push(ViewlandPage,{edit});;
   };
 
 

@@ -17,28 +17,29 @@
       <ion-icon name="image" item-start></ion-icon>
       <ion-label>Nombre de la finca:</ion-label>
       <ion-input [disabled]="edit==false" *ngIf="edit" type="text"></ion-input>
-      <ion-input [disabled]="edit==false" *ngIf="edit==false" type="text">{{finca.nombre}}</ion-input>
+      <ion-input [disabled]="edit==false" *ngIf="edit==false" type="text" 
+      [(ngModel)]="finca.nombre" name="ion-title">{{finca.nombre}}</ion-input>
     </ion-item>
   
     <ion-item>
       <ion-icon name="sunny" item-start></ion-icon>
       <ion-label>Temperatura promedio:</ion-label>
       <ion-input [disabled]="edit==false" *ngIf="edit "type="number"></ion-input>
-      <ion-input [disabled]="edit==false" *ngIf="edit==false" type="number">{{finca.temperatura}}</ion-input>
+      <ion-input [disabled]="edit==false" *ngIf="edit==false" 
+        type="number" [(ngModel)]="finca.temperatura" 
+        name="ion-title">{{finca.temperatura}}</ion-input>
     </ion-item>
   
     <ion-item>
       <ion-icon name="trending-up" item-start></ion-icon>
       <ion-label>Altitud:</ion-label>
       <ion-input [disabled]="edit==false" *ngIf="edit" type="number"></ion-input>
-      <ion-input [disabled]="edit==false" *ngIf="edit" type="number">{{finca.altitud}}</ion-input>
+      <ion-input [disabled]="edit==false" *ngIf="edit" type="number" [(ngModel)]="finca.altitud" name="ion-title">{{finca.altitud}}</ion-input>
     </ion-item>
-  
-
-    <ion-item *ngIf="edit">
+    <ion-item *ngIf="edit==false">
         <ion-label>Tipo de Clima:</ion-label>
-        <ion-select [(ngModel)]="finca.tipoClima.nombre">
-          <ion-option *ngFor="let tipoClima of tipoClimas" [value]="tipoClima.codigo" (click)="tipoClimaSeleccionado(tipoClima.codigo)">
+        <ion-select *ngFor="let tipoClima of tipoClimas" [(ngModel)]="finca.tipoClima">
+          <ion-option [value]="tipoClima" (click)="tipoClimaSeleccionado(tipoClima)">
             {{tipoClima.nombre}}</ion-option>
         </ion-select>
     </ion-item>
@@ -52,7 +53,7 @@
     <ion-item *ngIf="edit">
       <ion-label>Pais:</ion-label>
       <ion-select [(ngModel)]="finca.municipio.departamento.pais">
-        <ion-option *ngFor="let pais of paises" [value]="pais.codigo" (click)="paisSeleccionado(pais.codigo)">
+        <ion-option *ngFor="let pais of paises" [value]="pais" (click)="paisSeleccionado(pais)">
           {{pais.nombre}}</ion-option>
       </ion-select>
     </ion-item>
@@ -64,7 +65,7 @@
     <ion-item *ngIf="edit">
       <ion-label>Departamento</ion-label>
       <ion-select [(ngModel)]="finca.municipio.departamento">
-        <ion-option *ngFor="let departamento of departamentos" [value]="departamento.codigo" (click)="departamentoSeleccionado(departamento.codigo)">
+        <ion-option *ngFor="let departamento of departamentos" [value]="departamento" (click)="departamentoSeleccionado(departamento)">
           {{departamento.nombre}}</ion-option>
       </ion-select>
     </ion-item>
@@ -76,7 +77,7 @@
     <ion-item *ngIf="edit">
       <ion-label>Municipio</ion-label>
       <ion-select [(ngModel)]="finca.municipio">
-        <ion-option *ngFor="let municipio of municipio" [value]="municipio.codigo" (click)="municipioSeleccionado(municipio.codigo)">
+        <ion-option *ngFor="let municipio of municipio" [value]="municipio" (click)="municipioSeleccionado(municipio)">
           {{municipio.nombre}}</ion-option>
       </ion-select>
     </ion-item>
@@ -85,29 +86,7 @@
       <ion-label>Municipio:</ion-label>
       <ion-input [disabled]="edit==false" type="text">{{finca.municipio.nombre}}</ion-input>
     </ion-item>
-    <h3>Datos del dueño</h3>
-    <ion-item *ngIf="edit">
-      <ion-icon name="md-finger-print" item-start></ion-icon>
-      <ion-label>Tipo de documento:</ion-label>
-      <ion-select>
-        <ion-option value="0">Cédula de ciudadania</ion-option>
-        <ion-option value="1">Tarjeta de Identidad</ion-option>
-        <ion-option value="2">Cédula de extranjeria</ion-option>
-        <ion-option value="3">Registro Civil</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item *ngIf="edit==false">
-        <ion-icon name="cloudy" item-start></ion-icon>
-        <ion-label>Tipo de documento:</ion-label>
-        <ion-input [disabled]="edit==false" type="text">{{finca.usuario.tipoDocumento.nombre}}</ion-input>
-      </ion-item>
-    <ion-item>
-      <ion-icon name="contact" item-start></ion-icon>
-      <ion-label>Documento:</ion-label>
-      <ion-input [disabled]="edit==false" *ngIf="edit"  type="number"></ion-input>
-      <ion-input [disabled]="edit==false" *ngIf="edit==false"  type="number">{{finca.usuario.numeroDocumento}}</ion-input>      
-    </ion-item>
     <ion-row justify-content-center>
-      <button *ngIf="edit==false" ion-button color="secondary" outline (click)=save()>Guardar</button>
+      <button *ngIf="edit" ion-button color="secondary" outline (click)="save()">Guardar</button>
     </ion-row>
   </ion-content>
