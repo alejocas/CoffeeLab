@@ -22,7 +22,7 @@ import { TipoAbono } from "../entities/index";
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   
-  rootPage: any = RegisterPage; //default: LoginPage
+  rootPage: any = LoginPage; //RegisterPage; //default: LoginPage
 
   pages: Array<{title: string, component: any, icon: string}>;
 
@@ -46,7 +46,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      //this.createDataBase();
+      this.createDataBase();
       
       //this.createDataBase();
     });

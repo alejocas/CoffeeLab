@@ -51,7 +51,7 @@ export class RegisterPage {
       this.newUser = new Usuario();
       
     this.registerPag = formBuilder.group({
-      usuario: ['',Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
+      usuario: ['',Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z0-9]*'), Validators.required])],
       contrasena: ['',Validators.compose([Validators.maxLength(30),Validators.minLength(5), Validators.required])],
       nombre: ['',Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
       apellidos: ['',Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
