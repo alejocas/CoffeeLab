@@ -1,7 +1,7 @@
 export class TipoAbono {
-    private codigo:number;
-    private nombre:string;
-    private descripcion:string;
+    public codigo:number;
+    public nombre:string;
+    public descripcion:string;
 
     constructor(codigo:number, nombre:string, descripcion:string = ""){
         this.codigo = codigo;

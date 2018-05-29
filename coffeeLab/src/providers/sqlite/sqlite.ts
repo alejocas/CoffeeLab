@@ -1,6 +1,6 @@
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Injectable } from '@angular/core';
-import { TipoAbono, TipoClima, TipoDocumento, TipoUsuario, Pais, Departamento, Municipio, Usuario, Finca, RegistroAbono } from '../../entities/index';
+import { TipoAbono, TipoClima, TipoDocumento, TipoUsuario, Pais, Departamento, Municipio, Usuario, Finca, RegistroAbono, Abono, Lote, UsuarioxFinca } from '../../entities/index';
 
 
 @Injectable()
@@ -124,10 +124,20 @@ export class Sqlite {
                       console.log('Usuario: ',data);
                       this.db.executeSql(Finca.getSqlCreteTable(),{}).then(data=>{
                         console.log('Finca: ',data);
-                        this.db.executeSql(RegistroAbono.getSqlCreteTable(),{}).then(data=>{
-                          console.log('RegistroAbono: ',data);
-                          resolve(data);
+                        this.db.executeSql(Abono.getSqlCreteTable(),{}).then(data=>{
+                          console.log('Abono: ',data);
+                          this.db.executeSql(Lote.getSqlCreteTable(),{}).then(data=>{
+                            console.log('Lote: ',data);
+                            this.db.executeSql(RegistroAbono.getSqlCreteTable(),{}).then(data=>{
+                              console.log('RegistroAbono: ',data);
+                              this.db.executeSql(UsuarioxFinca.getSqlCreteTable(),{}).then(data=>{
+                                console.log('UsuarioxFinca: ',data);
+                                resolve(data);
+                              });
+                            });
+                          });
                         });
+                        
                       });
                     });
                   });
