@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { HomePage, RegisterPage, ResetPage } from '../index';
 import { MenuController } from 'ionic-angular';
-import { TipoAbono, TipoClima } from '../../entities/index'
+import { TipoAbono, TipoClima, Usuario } from '../../entities/index'
 import { Sqlite } from '../../providers/sqlite/sqlite';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 /**
@@ -23,12 +24,24 @@ export class LoginPage {
   private home:HomePage;
   private username:string;
   private password:string;
+  private loginPag:FormGroup;
+  private isPassword:boolean = true;
+  
 
-  constructor(public navCtrl: NavController, 
-    public navParams: NavParams, 
-    private menuCtrl:MenuController,
-    private db:Sqlite) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+              private menuCtrl:MenuController, private db:Sqlite,
+              private formBuilder:FormBuilder, private alertCtl: AlertController) {
+
       menuCtrl.enable(false, "menu");
+      this.loginPag = formBuilder.group({
+                      usuario: ['',Validators.compose([Validators.maxLength(30),
+                                                        Validators.minLength(5), 
+                                                        Validators.pattern('[a-zA-Z0-9]*'), 
+                                                        Validators.required])],
+                      contrasena: ['',Validators.compose([Validators.maxLength(30),
+                                                        Validators.minLength(5), 
+                                                        Validators.required])]
+      });
   }
 
   ionViewDidLoad() {
@@ -36,20 +49,30 @@ export class LoginPage {
   }
 
   login(){
-    /*TODO: hacer el servicio para login*/ 
-    //this.navCtrl.push(HomePage)
-    //this.myApp.rootPage = HomePage;
-    // let clima = new TipoClima(null,'templado','es un clima muy bueno');
-    // this.db.save(clima);
-
-    // //clima = new TipoClima(1,"asdf","Adsf",this.db);
-    // //clima.delete();
-    // this.db.findAll(TipoClima).then(data=>{
-    //   console.log('findAll:',data);
-    // });
+    if(this.loginPag.valid){
+      this.db.executeSQL(Usuario.loginQuery(this.username,this.password),{})
+      .then(data=>{
+        console.log(data);
+        if(data){
+          this.navCtrl.setRoot(HomePage);
+          this.menuCtrl.enable(true, "menu");
+        }
+        else{
+          this.showAlert('Error','Usuario y/o contraseña inválidos.')
+        }
+        
+      })
+      .catch(err=>{
+        console.error(err);
+        this.showAlert('Error','Problemas con la plataforma, por favor intentar mas tarde.')
+      });
+    }
+    else{
+      this.showAlert('Error','Los campos no pueden estar vacios.')
+    }
       
-    this.navCtrl.setRoot(HomePage);
-    this.menuCtrl.enable(true, "menu");
+    // this.navCtrl.setRoot(HomePage);
+    // this.menuCtrl.enable(true, "menu");
   }
 
   register(){
@@ -58,6 +81,19 @@ export class LoginPage {
 
   reset(){
     this.navCtrl.push(ResetPage);
+  }
+
+  passwordToogle(){
+    this.isPassword = !this.isPassword;
+  }
+
+  showAlert(title:string,messaje:string){
+    let alert = this.alertCtl.create({
+      title: title,
+      subTitle: messaje,
+      buttons: ['Aceptar']
+    });
+    alert.present();
   }
 
 }
