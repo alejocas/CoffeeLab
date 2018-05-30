@@ -5,6 +5,7 @@ import { MenuController } from 'ionic-angular';
 import { TipoAbono, TipoClima, Usuario } from '../../entities/index'
 import { Sqlite } from '../../providers/sqlite/sqlite';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { isArray } from 'ionic-angular/util/util';
 
 
 /**
@@ -53,7 +54,7 @@ export class LoginPage {
       this.db.executeSQL(Usuario.loginQuery(this.username,this.password),{})
       .then(data=>{
         console.log(data);
-        if(data){
+        if(isArray(data) && data.length == 1){
           this.navCtrl.setRoot(HomePage);
           this.menuCtrl.enable(true, "menu");
         }

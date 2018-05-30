@@ -22,8 +22,8 @@ import { Sqlite } from '../../providers/sqlite/sqlite';
 export class RegisterPage {
 
   @ViewChild('signupSlider') signupSlider: any;
-  registerPag: FormGroup;
-
+  
+  private registerPag: FormGroup;
   private newUser:Usuario;
   private isPassword:boolean = true;
   private tiposDocumento:Array<TipoDocumento>;
