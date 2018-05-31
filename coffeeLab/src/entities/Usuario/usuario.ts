@@ -60,6 +60,14 @@ export class Usuario {
         return `SELECT * FROM Usuario WHERE tipoDocumento = ${tipoDocumento.codigo} AND numeroDocumento = ${numeroDocumento};`;
     }
 
+    static loginQuery(usuario:string, contrasena:string){
+        usuario = usuario.replace('(','');
+        usuario = usuario.replace(')','');
+        usuario = usuario.replace('SELECT','');
+        usuario = usuario.replace('select','');
+        return `SELECT * FROM Usuario WHERE usuario = '${usuario}' AND contrasena = '${contrasena}';`;
+    }
+
 
     /* sentencia sql para crear la tabla de este modelo
     para crear una tabla hay que declarar la cadena en el 

@@ -15,20 +15,29 @@
 
 <ion-content padding>
 
-  
-    <ion-list>
+  <form [formGroup]="loginPag">
 
-      <ion-item>
-        <ion-label stacked>Nombre de Usuario</ion-label>
-        <ion-input type="text" [(ngModel)]="username"></ion-input>
-      </ion-item>
-    
-      <ion-item>
-        <ion-label stacked>Contraseña</ion-label>
-        <ion-input type="password" [(ngModel)]="password"></ion-input>
-      </ion-item>
+        <ion-item>
+            <ion-icon name="logo-octocat" item-start></ion-icon>
+            <ion-label>Usuario</ion-label>
+            <ion-input type="text" 
+              formControlName="usuario"
+              [(ngModel)]="username"></ion-input>
+          </ion-item>
       
-    </ion-list>
+          <ion-item>
+            <ion-icon name="key" item-start></ion-icon>
+            
+            <ion-label>Contraseña</ion-label>
+            <ion-input [type]="isPassword ? 'password' : 'text'" 
+              formControlName="contrasena"
+              [(ngModel)]="password">
+            </ion-input>
+            <button ion-button item-end clear icon-end (click)="passwordToogle()">
+                <ion-icon [name]="isPassword ? 'eye' : 'eye-off'"></ion-icon>
+              </button>
+            
+          </ion-item>
 
     <ion-grid>  
         <ion-row justify-content-center>
@@ -40,5 +49,6 @@
         </ion-row>
     </ion-grid>
 
+    </form>
 
 </ion-content>

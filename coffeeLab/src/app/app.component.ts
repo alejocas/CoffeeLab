@@ -22,7 +22,7 @@ import { TipoAbono } from "../entities/index";
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   
-  rootPage: any = LoginPage; //RegisterPage; //default: LoginPage
+  rootPage: any = HomePage; //RegisterPage; //default: LoginPage
 
   pages: Array<{title: string, component: any, icon: string}>;
 
