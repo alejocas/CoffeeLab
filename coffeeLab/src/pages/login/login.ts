@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { HomePage, RegisterPage, ResetPage } from '../index';
 import { MenuController } from 'ionic-angular';
-import { TipoAbono, TipoClima, Usuario, TipoDocumento, TipoUsuario } from '../../entities/index'
+import { TipoAbono, TipoClima, Usuario, TipoDocumento, TipoUsuario, UsuarioxFinca, Finca } from '../../entities/index'
 import { Sqlite, UsuarioProvider as UsuarioP } from '../../providers';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { isArray } from 'ionic-angular/util/util';
@@ -51,7 +51,7 @@ export class LoginPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
     this.menuCtrl.enable(false, "menu");
-    this.isUserLogin();
+    //this.isUserLogin();
   }
 
 
@@ -103,19 +103,19 @@ export class LoginPage {
     this.isPassword = !this.isPassword;
   }
 
-  isUserLogin(){
-      this.storage.get('currentUsuario')
-      .then(usuario => {
-        console.log('current usuario: ',usuario);
-        if(usuario != null && usuario.usuario){
-          this.navCtrl.setRoot(HomePage);
-          this.menuCtrl.enable(true, "menu");
-        }
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  }
+  // isUserLogin(){
+  //     this.storage.get('currentUsuario')
+  //     .then(usuario => {
+  //       console.log('current usuario: ',usuario);
+  //       if(usuario != null && usuario.usuario){
+  //         this.navCtrl.setRoot(HomePage);
+  //         this.menuCtrl.enable(true, "menu");
+  //       }
+  //     })
+  //     .catch(err => {
+  //       console.error(err);
+  //     });
+  // }
 
   showAlert(title:string,messaje:string){
     let alert = this.alertCtl.create({

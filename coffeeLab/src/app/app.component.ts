@@ -24,7 +24,7 @@ import { isArray } from 'util';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   
-  rootPage: any = ProfilePage; //RegisterPage; //default: LoginPage
+  rootPage: any = LoginPage; //RegisterPage; //default: LoginPage
 
   pages: Array<{title: string, component: any, icon: string}>;
 
@@ -48,10 +48,11 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      console.log('asdf')
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.createDataBase();
-      //this.createRegistersTables();
+      this.createRegistersTables();
       //this.createDataBase();
     });
   }
@@ -72,6 +73,7 @@ export class MyApp {
   }
 
   createDataBase(){
+    console.log('cranado la base de datos')
     this.sqlite.create({
       name: 'data.db',
       location: 'default' // the location field is required
