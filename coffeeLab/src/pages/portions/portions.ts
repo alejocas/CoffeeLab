@@ -31,7 +31,7 @@ export class PortionsPage {
           text: 'Riego',
           icon: 'water',
           handler: () => {
-            // this.openRiegoModal();
+            this.openRiegoModal()
           }
         }, {
           text: 'Suelo',
@@ -67,6 +67,32 @@ export class PortionsPage {
       ]
     });
     actionSheet.present();
+  }
+
+  openRiegoModal() {
+    const myModalS = this.modalCtrl.create('RiegoModalPage');
+    myModalS.present();
+  }
+
+  openSueloModal() {
+    const myModalS = this.modalCtrl.create('SueloModalPage');
+    myModalS.present();
+  }
+  openAbonoModal() {
+    const myModalA = this.modalCtrl.create('AbonoModalPage');
+    myModalA.present();
+  }
+  openFloracionModal() {
+    const myModalF = this.modalCtrl.create('FloracionModalPage');
+    myModalF.present();
+  }
+  openRecoleccionModal() {
+    const myModalR = this.modalCtrl.create('RecoleccionModalPage');
+    myModalR.present();
+  }
+  openPlagaModal() {
+    const myModalP = this.modalCtrl.create('PlagaModalPage');
+    myModalP.present();
   }
 
 }
