@@ -1,5 +1,5 @@
 import { Component, ViewChild, Input } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { /* paginas de inicio de sesion*/
@@ -24,13 +24,14 @@ import { isArray } from 'util';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   
-  rootPage: any = LoginPage; //RegisterPage; //default: LoginPage
+  rootPage: any = ProfilePage; //RegisterPage; //default: LoginPage
 
   pages: Array<{title: string, component: any, icon: string}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, 
       public splashScreen: SplashScreen, public sqlite:SQLite, public dbService:Sqlite,
       private storage:Storage) {
+
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -38,7 +39,7 @@ export class MyApp {
       { title: 'Perfil', component: ProfilePage, icon: "person" },
       { title: 'Mis Fincas', component: LandsPage, icon: "cube" },
       { title: 'Mis Lotes', component: PortionsPage, icon: "rose" },
-      { title: 'Configuración', component: ConfigPage, icon: "cog" },
+      { title: 'Configuración', component: ConfigPage, icon: "cog" }
     ];
 
   }
@@ -50,7 +51,6 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.createDataBase();
-      this.isUserLogin()
       //this.createRegistersTables();
       //this.createDataBase();
     });
@@ -60,6 +60,15 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.push(page.component);
+  }
+
+  cerrarSesion(){
+    this.storage.remove('currentUsuario')
+    .then(data=>{
+      console.log('usuario borrado');
+      this.nav.setRoot(LoginPage);
+     })
+    .catch(err=>console.error('no se pudo borrar el usuario: ',err))
   }
 
   createDataBase(){
@@ -79,6 +88,8 @@ export class MyApp {
       console.error(error);
     });
   }
+
+
 
   createRegistersTables(){
     this.dbService.findAll(TipoUsuario)
@@ -111,14 +122,5 @@ export class MyApp {
     
   }
 
-  isUserLogin(){
-    this.storage.get('currentUsuario')
-    .then(usuario => {
-      console.log('current usuario: ',usuario);
-      this.rootPage=HomePage;
-    })
-    .catch(err => {
-      console.error(err);
-    })
-  }
+  
 }

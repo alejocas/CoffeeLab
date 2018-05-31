@@ -36,22 +36,23 @@ export class LoginPage {
               private formBuilder:FormBuilder, private alertCtl: AlertController,
               private usuarioP: UsuarioP, private storage:Storage) {
 
-      menuCtrl.enable(false, "menu");
+      
       this.loginPag = formBuilder.group({
-                      usuario: ['',Validators.compose([Validators.maxLength(30),
-                                                        Validators.minLength(5), 
-                                                        Validators.pattern('[a-zA-Z0-9]*'), 
-                                                        Validators.required])],
-                      contrasena: ['',Validators.compose([Validators.maxLength(30),
-                                                        Validators.minLength(5), 
-                                                        Validators.required])]
+        usuario: ['',Validators.compose([Validators.maxLength(30),
+                    Validators.minLength(5), 
+                    Validators.pattern('[a-zA-Z0-9]*'), 
+                    Validators.required])],
+        contrasena: ['',Validators.compose([Validators.maxLength(30),
+                    Validators.minLength(5), 
+                    Validators.required])]
       });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+    this.menuCtrl.enable(false, "menu");
     this.isUserLogin();
-}
+  }
 
 
   login(){
@@ -103,15 +104,17 @@ export class LoginPage {
   }
 
   isUserLogin(){
-    this.storage.get('currentUsuario')
-    .then(usuario => {
-      console.log('current usuario: ',usuario);
-      this.navCtrl.setRoot(HomePage);
-      this.menuCtrl.enable(true, "menu");
-    })
-    .catch(err => {
-      console.error(err);
-    })
+      this.storage.get('currentUsuario')
+      .then(usuario => {
+        console.log('current usuario: ',usuario);
+        if(usuario != null && usuario.usuario){
+          this.navCtrl.setRoot(HomePage);
+          this.menuCtrl.enable(true, "menu");
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 
   showAlert(title:string,messaje:string){

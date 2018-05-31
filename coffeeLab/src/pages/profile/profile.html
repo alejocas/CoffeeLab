@@ -8,6 +8,11 @@
 
   <ion-navbar color="primary">
     <ion-title>Mi perfil</ion-title>
+    <ion-buttons end>
+            <button ion-button icon-only (click)="editProfile()">
+                <ion-icon name="create"></ion-icon>
+            </button>
+        </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -21,13 +26,13 @@
       <ion-col>
         <ion-item>
           <ion-label color="primary" stacked>Nombre:</ion-label>
-          <ion-input type="text" disabled [(ngModel)]="usuario.nombres"></ion-input>
+          <ion-input type="text" [disabled]="isEditable" [(ngModel)]="usuario.nombres"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item>
           <ion-label color="primary" stacked>Apellidos:</ion-label>
-          <ion-input type="text" disabled [(ngModel)]="usuario.apellidos"></ion-input>
+          <ion-input type="text" [disabled]="isEditable" [(ngModel)]="usuario.apellidos"></ion-input>
         </ion-item>
       </ion-col>
 
@@ -56,11 +61,11 @@
       <ion-col>
           <ion-item>
               <ion-label color="primary" stacked>Contraseña:</ion-label>
-              <ion-input type="password" disabled [(ngModel)]="usuario.contrasena"></ion-input>
+              <ion-input type="password" [disabled]="isEditable" [(ngModel)]="usuario.contrasena"></ion-input>
             </ion-item>
       </ion-col >
       <ion-col style="margin-left: 10px; margin-top: 10px;">
-        <button ion-button color="secondary">Cambiar</button>
+        <button ion-button color="secondary" (click)="editProfile()">Cambiar</button>
       </ion-col>
     </ion-row>
   </ion-grid>
