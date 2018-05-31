@@ -32,7 +32,7 @@ export class LandPage {
   private departamentos: Array<Departamento>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private db: Sqlite, private storage: Storage) {
+    private db: Sqlite) {
 
     this.edit = navParams.get('edit');
     this.finca = new Finca();
