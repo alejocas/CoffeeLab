@@ -39,12 +39,10 @@ export class LandPage {
     this.paises = new Array<Pais>();
     this.departamentos = new Array<Departamento>();
     this.municipios = new Array<Municipio>();
-    console.log(this.edit);
     if (this.edit == false) {
       this.finca = navParams.get('finca');
       console.log(this.finca);
     } else {
-
     }
   }
 
@@ -60,7 +58,7 @@ export class LandPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LandPage');
-    if (this.edit == true) {
+    /*if (this.edit == true) {
       let pais = [];
       for (let i = 0; i < 10; i++) {
         pais.push(new Pais(i, i.toString()));
@@ -71,7 +69,7 @@ export class LandPage {
         pais.push(new TipoClima(i, "frio", "something"));
       }
       this.tipoClimas = tipoClimatest;
-    }
+    }*/
   }
 
   paisSeleccionado(pais) {
@@ -94,13 +92,13 @@ export class LandPage {
   }
 
 getAllDepartamentos(){
-  this.db.findByPk(this.pais)
+  this.db.findByPk(new Departamento(null, null, this.pais))
     .then(data => this.departamentos = <Array<Departamento>>data)
     .catch(err => console.error(err))
 }
 
 getAllMunicipios(){
-  this.db.findByPk(this.departamento)
+  this.db.findByPk(new Municipio(null, null, this.departamento))
   .then(data => this.municipios = <Array<Municipio>>data)
   .catch(err => console.error(err))
 }
