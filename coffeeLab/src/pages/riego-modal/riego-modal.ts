@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, ViewController, NavParams } from 'ionic-angular';
 
 /**
  * Generated class for the RiegoModalPage page.
@@ -15,11 +15,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RiegoModalPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public view: ViewController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RiegoModalPage');
+  }
+  closeModal(){
+    this.view.dismiss();
   }
 
 }
