@@ -37,13 +37,13 @@ export class PortionsPage {
           text: 'Suelo',
           icon: 'globe',
           handler: () => {
-            // this.openSueloModal();
+            this.openSueloModal();
           }
         }, {
           text: 'Abono',
           icon: 'leaf',
           handler: () => {
-            // this.openAbonoModal();
+            this.openAbonoModal();
           }
         }, {
           text: 'Floración',
