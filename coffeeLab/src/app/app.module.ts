@@ -11,7 +11,7 @@ import {
   /* perfil */
   ProfilePage,
   /* fincas */
-  LandsPage, LandPage, AddlandPage, ViewlandPage,
+  LandsPage, LandPage, AddlandPage,
   /* lotes */
   PortionsPage
 } from '../pages/index';
@@ -33,7 +33,7 @@ import { Sqlite, UsuarioProvider } from '../providers';
     ProfilePage,
     LandsPage, LandPage,
     PortionsPage,
-    AddlandPage, ViewlandPage
+    AddlandPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +48,7 @@ import { Sqlite, UsuarioProvider } from '../providers';
     ProfilePage,
     LandsPage, LandPage,
     PortionsPage,
-    AddlandPage, ViewlandPage
+    AddlandPage
   ],
   providers: [
     StatusBar,

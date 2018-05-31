@@ -9,7 +9,7 @@ import { /* paginas de inicio de sesion*/
   /* perfil */
   ProfilePage,
   /* fincas */
-  LandsPage, LandPage, AddlandPage, ViewlandPage,
+  LandsPage, LandPage, AddlandPage,
   /* lotes */
   PortionsPage } from '../pages/index';
 import { Sqlite } from '../providers/sqlite/sqlite';
@@ -83,9 +83,9 @@ export class MyApp {
   createRegistersTables(){
     this.dbService.findAll(TipoUsuario)
     .then((data) => {
-      console.log(data)
-      data as Array<any>;
-      if(isArray(data) && data.length == 0){
+      console.log(data);
+      <Array<any>> data ;
+      if(isArray(data) && data[0]){
         let tipoUsuario = new TipoUsuario(null,"Dueño Finca");
         this.dbService.save(tipoUsuario);
         tipoUsuario = new TipoUsuario(null,"invitado");
@@ -98,7 +98,7 @@ export class MyApp {
     .then((data) => {
       console.log(data)      
       data as Array<any>;
-      if(isArray(data) && data.length == 0){
+      if(isArray(data) && data[0]){
         let tipoUsuario = new TipoDocumento(null,"Cédula de ciudadania");
         this.dbService.save(tipoUsuario);
         tipoUsuario = new TipoDocumento(null,"Tarjeta de Identidad");

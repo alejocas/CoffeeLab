@@ -8,4 +8,3 @@ export { PortionsPage } from "./portions/portions";
 export { ProfilePage } from "./profile/profile";
 export { ConfigPage } from "./config/config";
 export { AddlandPage } from "./addland/addland";
-export { ViewlandPage } from "./viewland/viewland";

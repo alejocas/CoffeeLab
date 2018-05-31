@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { Finca, Municipio, Departamento, Pais, TipoClima, Usuario, TipoDocumento, TipoUsuario } from '../../entities';
-import { AddlandPage, ViewlandPage } from '../index';
+import { AddlandPage, LandPage } from '../index';
 
 /**
  * Generated class for the LandsPage page.
@@ -43,7 +43,7 @@ export class LandsPage {
 
   addLand(){
     let edit: boolean = true;
-    this.navCtrl.push(ViewlandPage,{edit});;
+    this.navCtrl.push(LandPage,{edit});;
   };
 
 
@@ -53,13 +53,11 @@ export class LandsPage {
     this.fincas.splice(indice,1);
   };
 
-  viewLand(){};
-
   landSelected(land){
     //this.codeLand=codigoFinca;
     //en el push, falta mandar el codigo de la finca
     let edit: boolean = false;
-    this.navCtrl.push(ViewlandPage, {finca :land, edit});
+    this.navCtrl.push(LandPage, {finca :land, edit});
   };
 
 }
