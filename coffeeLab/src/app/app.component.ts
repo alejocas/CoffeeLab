@@ -14,6 +14,7 @@ import { /* paginas de inicio de sesion*/
   PortionsPage } from '../pages/index';
 import { Sqlite } from '../providers/sqlite/sqlite';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { Storage } from "@ionic/storage";
 import { TipoAbono, TipoUsuario, TipoDocumento } from "../entities/index";
 import { isArray } from 'util';
 
@@ -28,7 +29,8 @@ export class MyApp {
   pages: Array<{title: string, component: any, icon: string}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, 
-      public splashScreen: SplashScreen, public sqlite:SQLite, public dbService:Sqlite) {
+      public splashScreen: SplashScreen, public sqlite:SQLite, public dbService:Sqlite,
+      private storage:Storage) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -48,6 +50,7 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.createDataBase();
+      this.isUserLogin()
       //this.createRegistersTables();
       //this.createDataBase();
     });
@@ -91,7 +94,7 @@ export class MyApp {
     })
     .catch(err=>console.error('findAll TipoUsuario: ',err))
 
-    this.dbService.findAll(TipoUsuario)
+    this.dbService.findAll(TipoDocumento)
     .then((data) => {
       console.log(data)      
       data as Array<any>;
@@ -106,5 +109,16 @@ export class MyApp {
     })
     .catch(err=>console.error('findAll TipoDocumento: ',err))
     
+  }
+
+  isUserLogin(){
+    this.storage.get('currentUsuario')
+    .then(usuario => {
+      console.log('current usuario: ',usuario);
+      this.rootPage=HomePage;
+    })
+    .catch(err => {
+      console.error(err);
+    })
   }
 }

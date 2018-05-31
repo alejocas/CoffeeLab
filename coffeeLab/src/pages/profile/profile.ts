@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Storage} from '@ionic/storage'
+import { Usuario } from '../../entities';
 
 /**
  * Generated class for the ProfilePage page.
@@ -14,12 +16,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
+  private usuario:Usuario;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage:Storage) {
+    this.usuario = new Usuario();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+    this.storage.get('currentUsuario')
+    .then(usuario =>{
+      console.log(usuario);
+      this.usuario = usuario as Usuario; 
+    })
+    .catch(err => console.error('currentUsuario no encontrado:',err))
   }
 
   

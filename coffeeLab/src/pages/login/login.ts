@@ -6,6 +6,7 @@ import { TipoAbono, TipoClima, Usuario, TipoDocumento, TipoUsuario } from '../..
 import { Sqlite, UsuarioProvider as UsuarioP } from '../../providers';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { isArray } from 'ionic-angular/util/util';
+import { Storage } from "@ionic/storage";
 
 
 /**
@@ -33,7 +34,7 @@ export class LoginPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, 
               private menuCtrl:MenuController, private db:Sqlite,
               private formBuilder:FormBuilder, private alertCtl: AlertController,
-              private usuarioP: UsuarioP) {
+              private usuarioP: UsuarioP, private storage:Storage) {
 
       menuCtrl.enable(false, "menu");
       this.loginPag = formBuilder.group({
@@ -49,16 +50,7 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
-    let user = {
-                apellidos: "marin",
-                contrasena:"david",
-                correo:"jandro240@gmail.com",
-                nombres:"david",
-                numeroDocumento:1041325808,
-                tipoDocumento:1,
-                tipoUsuario:1,
-                usuario:"david"
-              }
+    this.isUserLogin();
 }
 
 
@@ -72,6 +64,7 @@ export class LoginPage {
 
           this.usuarioP.getUsuario(data[0])
           .then(usuario => {
+            this.storage.set('currentUsuario',usuario).then(data=>console.log(data)).catch(err=>console.error(err));
             this.navCtrl.setRoot(HomePage,{usuario: usuario});
             this.menuCtrl.enable(true, "menu");
           })
@@ -107,6 +100,18 @@ export class LoginPage {
 
   passwordToogle(){
     this.isPassword = !this.isPassword;
+  }
+
+  isUserLogin(){
+    this.storage.get('currentUsuario')
+    .then(usuario => {
+      console.log('current usuario: ',usuario);
+      this.navCtrl.setRoot(HomePage);
+      this.menuCtrl.enable(true, "menu");
+    })
+    .catch(err => {
+      console.error(err);
+    })
   }
 
   showAlert(title:string,messaje:string){
