@@ -14,7 +14,8 @@ import { /* paginas de inicio de sesion*/
   PortionsPage } from '../pages/index';
 import { Sqlite } from '../providers/sqlite/sqlite';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
-import { TipoAbono } from "../entities/index";
+import { TipoAbono, TipoUsuario, TipoDocumento } from "../entities/index";
+import { isArray } from 'util';
 
 @Component({
   templateUrl: 'app.html'
@@ -22,7 +23,7 @@ import { TipoAbono } from "../entities/index";
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   
-  rootPage: any = HomePage; //RegisterPage; //default: LoginPage
+  rootPage: any = LoginPage; //RegisterPage; //default: LoginPage
 
   pages: Array<{title: string, component: any, icon: string}>;
 
@@ -47,7 +48,7 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.createDataBase();
-      
+      //this.createRegistersTables();
       //this.createDataBase();
     });
   }
@@ -68,10 +69,42 @@ export class MyApp {
       return this.dbService.createTables()
       .then((data)=>{
         console.log('tablas creadas', data);
+        this.createRegistersTables();
       });
     })
     .catch(error =>{
       console.error(error);
     });
+  }
+
+  createRegistersTables(){
+    this.dbService.findAll(TipoUsuario)
+    .then((data) => {
+      console.log(data)
+      data as Array<any>;
+      if(isArray(data) && data.length == 0){
+        let tipoUsuario = new TipoUsuario(null,"Dueño Finca");
+        this.dbService.save(tipoUsuario);
+        tipoUsuario = new TipoUsuario(null,"invitado");
+        this.dbService.save(tipoUsuario);
+      }
+    })
+    .catch(err=>console.error('findAll TipoUsuario: ',err))
+
+    this.dbService.findAll(TipoUsuario)
+    .then((data) => {
+      console.log(data)      
+      data as Array<any>;
+      if(isArray(data) && data.length == 0){
+        let tipoUsuario = new TipoDocumento(null,"Cédula de ciudadania");
+        this.dbService.save(tipoUsuario);
+        tipoUsuario = new TipoDocumento(null,"Tarjeta de Identidad");
+        this.dbService.save(tipoUsuario);
+        tipoUsuario = new TipoDocumento(null,"Cédula extrangera");
+        this.dbService.save(tipoUsuario);
+      }
+    })
+    .catch(err=>console.error('findAll TipoDocumento: ',err))
+    
   }
 }
