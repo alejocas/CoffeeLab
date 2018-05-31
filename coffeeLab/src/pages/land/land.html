@@ -66,4 +66,8 @@
   <ion-row justify-content-center>
     <button *ngIf="edit" ion-button color="secondary" outline (click)="saveLand()">Guardar</button>
   </ion-row>
+
+  <ion-row justify-content-center>
+    <button *ngIf="!edit" ion-button color="secondary" outline (click)="setDefaultLand()">Establecer finca predeterminada</button>
+  </ion-row>
 </ion-content>
