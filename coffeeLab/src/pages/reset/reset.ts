@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { HttpProvider, PackageProvider, Sqlite } from '../../providers';
 
-/**
- * Generated class for the ResetPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -15,7 +11,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ResetPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  private username:string;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+      public http:HttpProvider, public httpPackage:PackageProvider, 
+      public alertCtl:AlertController, private db:Sqlite) {
   }
 
   ionViewDidLoad() {
@@ -23,7 +23,27 @@ export class ResetPage {
   }
 
   reset(){
+    this.db.executeSQL(`SELECT correo, usuario, contrasena 
+    FROM Usuario WHERE correo = '${this.username}' OR usuario = '${this.username}';`,{})
+    .then(body=>{
+
+      if(body.length == 1){
+        let pack = this.httpPackage.getResetPasswordPackage(body[0]);
+
+        this.http.http(pack)
+        .subscribe(result =>{
+
+          let alert = this.alertCtl.create({
+            title: 'Exitosos',
+            subTitle: 'Se envio un correo recordando la contraseña.',
+            buttons: ['Aceptar']
+          });
+          alert.present();
+        });
+      }
+
+    })
+    .catch(err=>console.log(err));
     
   }
-
 }

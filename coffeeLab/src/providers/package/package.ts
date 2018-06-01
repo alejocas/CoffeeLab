@@ -24,4 +24,43 @@ export class PackageProvider {
     }
   }
 
+  getTiposClimaPackage(){
+    return {
+      method: "GET",
+      url: 'service/tipoClima',
+      body: {}
+    }
+  }
+
+  getTiposAbonoPackage(){
+    return {
+      method: "GET",
+      url: 'service/tipoAbono',
+      body: {}
+    }
+  }
+
+  getTiposSemillaPackage(){
+    return {
+      method: "GET",
+      url: 'service/tipoSemilla',
+      body: {}
+    }
+  }
+
+  getAbonosPackage(){
+    return {
+      method: "GET",
+      url: 'service/abono',
+      body: {}
+    }
+  }
+
+  getResetPasswordPackage(body){
+    return {
+      method: "POST",
+      url: 'service/recordarContrasena',
+      body: body
+    }
+  }
 }
