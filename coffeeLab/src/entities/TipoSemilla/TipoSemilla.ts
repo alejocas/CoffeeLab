@@ -1,39 +1,39 @@
-export class TipoUsuario {
+export class TipoSemilla {
     public codigo:number;
     public nombre:string;
     public descripcion:string;
 
-    constructor(codigo:number = null, nombre:string = '', descripcion:string = ""){
+    constructor(codigo:number, nombre:string, descripcion:string = ""){
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
 
     deleteQuery(){
-        return `DELETE FROM TipoUsuario WHERE codigo = ${this.codigo};`;
+        return `DELETE FROM TiipoSemilla WHERE codigo = ${this.codigo};`;
     }
 
     insertQuery(){
-        return `INSERT INTO TipoUsuario (codigo,nombre,descripcion) 
+        return `INSERT INTO TiipoSemilla (codigo,nombre,descripcion) 
             VALUES (${this.codigo},'${this.nombre}','${this.descripcion}');`
     }
 
     updateQuery(){
-        return `UPDATE TipoUsuario SET nombre = '
+        return `UPDATE TiipoSemilla SET nombre = '
             ${this.nombre}', descripcion = '
             ${this.descripcion}' WHERE codigo = ${this.codigo};`
     }
 
     findByIdQuery(){
-        return `SELECT * FROM TipoUsuario WHERE codigo = ${this.codigo};`;
+        return `SELECT * FROM TiipoSemilla WHERE codigo = ${this.codigo};`;
     }
 
     static findAllQuery(){
-        return `SELECT * FROM TipoUsuario;`;
+        return `SELECT * FROM TiipoSemilla;`;
     }
 
     static findByIdQuery(codigo:number){
-        return `SELECT * FROM TipoUsuario WHERE codigo = ${codigo};`;
+        return `SELECT * FROM TiipoSemilla WHERE codigo = ${codigo};`;
     }
 
 
@@ -41,7 +41,7 @@ export class TipoUsuario {
     para crear una tabla hay que declarar la cadena en el 
     providers/sqlite.ts en la funcion createTables() */
     static getSqlCreteTable(){
-        return `CREATE TABLE IF NOT EXISTS TipoUsuario (
+        return `CREATE TABLE IF NOT EXISTS TiipoSemilla (
             codigo integer PRIMARY KEY AUTOINCREMENT,
             nombre text NOT NULL,
             descripcion text

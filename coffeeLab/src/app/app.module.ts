@@ -11,7 +11,7 @@ import {
   /* perfil */
   ProfilePage,
   /* fincas */
-  LandsPage, LandPage,
+  LandsPage, LandPage, AddlandPage,
   /* lotes */
   PortionsPage
 } from '../pages/index';
@@ -19,6 +19,11 @@ import {
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { SQLite } from '@ionic-native/sqlite';
+import { IonicStorageModule } from "@ionic/storage";
+
+import { Sqlite, UsuarioProvider, FincaProvider } from '../providers';
+import { UsuarioxfincaProvider } from '../providers/usuarioxfinca/usuarioxfinca';
 
 @NgModule({
   declarations: [
@@ -27,11 +32,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage, ConfigPage,
     ProfilePage,
     LandsPage, LandPage,
-    PortionsPage
+    PortionsPage,
+    AddlandPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -40,12 +47,18 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage, ConfigPage,
     ProfilePage,
     LandsPage, LandPage,
-    PortionsPage
+    PortionsPage,
+    AddlandPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Sqlite,
+    SQLite,
+    UsuarioProvider,
+    FincaProvider,
+    UsuarioxfincaProvider
   ]
 })
 export class AppModule {}

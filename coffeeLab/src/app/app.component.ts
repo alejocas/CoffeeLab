@@ -9,9 +9,14 @@ import { /* paginas de inicio de sesion*/
   /* perfil */
   ProfilePage,
   /* fincas */
-  LandsPage, LandPage,
+  LandsPage, LandPage, AddlandPage,
   /* lotes */
   PortionsPage } from '../pages/index';
+import { Sqlite } from '../providers/sqlite/sqlite';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { Storage } from "@ionic/storage";
+import { TipoAbono, TipoUsuario, TipoDocumento } from "../entities/index";
+import { isArray } from 'util';
 
 @Component({
   templateUrl: 'app.html'
@@ -19,11 +24,13 @@ import { /* paginas de inicio de sesion*/
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   
-  rootPage: any = LoginPage;
+  rootPage: any = LoginPage; //RegisterPage; //default: LoginPage
 
   pages: Array<{title: string, component: any, icon: string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, 
+      public splashScreen: SplashScreen, public sqlite:SQLite, public dbService:Sqlite,
+      private storage:Storage) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -42,6 +49,10 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.createDataBase();
+      this.isUserLogin()
+      //this.createRegistersTables();
+      //this.createDataBase();
     });
   }
 
@@ -49,5 +60,65 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.push(page.component);
+  }
+
+  createDataBase(){
+    this.sqlite.create({
+      name: 'data.db',
+      location: 'default' // the location field is required
+    })
+    .then((db) => {
+      this.dbService.setDatabase(db);
+      return this.dbService.createTables()
+      .then((data)=>{
+        console.log('tablas creadas', data);
+        this.createRegistersTables();
+      });
+    })
+    .catch(error =>{
+      console.error(error);
+    });
+  }
+
+  createRegistersTables(){
+    this.dbService.findAll(TipoUsuario)
+    .then((data) => {
+      console.log(data);
+      <Array<any>> data ;
+      if(isArray(data) && data[0]){
+        let tipoUsuario = new TipoUsuario(null,"Dueño Finca");
+        this.dbService.save(tipoUsuario);
+        tipoUsuario = new TipoUsuario(null,"invitado");
+        this.dbService.save(tipoUsuario);
+      }
+    })
+    .catch(err=>console.error('findAll TipoUsuario: ',err))
+
+    this.dbService.findAll(TipoDocumento)
+    .then((data) => {
+      console.log(data)      
+      data as Array<any>;
+      if(isArray(data) && data[0]){
+        let tipoUsuario = new TipoDocumento(null,"Cédula de ciudadania");
+        this.dbService.save(tipoUsuario);
+        tipoUsuario = new TipoDocumento(null,"Tarjeta de Identidad");
+        this.dbService.save(tipoUsuario);
+        tipoUsuario = new TipoDocumento(null,"Cédula extrangera");
+        this.dbService.save(tipoUsuario);
+      }
+    })
+    .catch(err=>console.error('findAll TipoDocumento: ',err))
+    
+  }
+
+  isUserLogin(){
+    this.storage.get('currentUsuario')
+    .then(usuario => {
+      console.log('current usuario: ',usuario);
+      this.rootPage=HomePage;
+    })
+    .catch(err => {
+      console.error(err);
+    })
   }
 }

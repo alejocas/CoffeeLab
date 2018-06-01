@@ -9,25 +9,42 @@ export class TipoAbono {
         this.descripcion = descripcion;
     }
 
-    save(){
-        let keys = Describer.describeClass(TipoAbono); 
-        let sql = `INSERT INTO ${TipoAbono.name} [(${keys.toString()})]  
-        VALUES (${this.codigo}, '${this.nombre}', '${this.descripcion}');`
-        console.log(sql);
+    deleteQuery(){
+        return `DELETE FROM TipoAbono WHERE codigo = ${this.codigo};`;
+    }
 
-        keys.forEach(key => {
-            console.log(this[key].typeOf);
-        });
+    insertQuery(){
+        return `INSERT INTO TipoAbono (codigo,nombre,descripcion) 
+            VALUES (${this.codigo},'${this.nombre}','${this.descripcion}');`
+    }
+
+    updateQuery(){
+        return `UPDATE TipoAbono SET nombre = '
+            ${this.nombre}', descripcion = '
+            ${this.descripcion}' WHERE codigo = ${this.codigo};`
+    }
+
+    findByIdQuery(){
+        return `SELECT * FROM TipoAbono WHERE codigo = ${this.codigo};`;
+    }
+
+    static findAllQuery(){
+        return `SELECT * FROM TipoAbono;`;
+    }
+
+    static findByIdQuery(codigo:number){
+        return `SELECT * FROM TipoAbono WHERE codigo = ${codigo};`;
+    }
+
+
+    /* sentencia sql para crear la tabla de este modelo
+    para crear una tabla hay que declarar la cadena en el 
+    providers/sqlite.ts en la funcion createTables() */
+    static getSqlCreteTable(){
+        return `CREATE TABLE IF NOT EXISTS TipoAbono (
+            codigo integer PRIMARY KEY AUTOINCREMENT,
+            nombre text NOT NULL,
+            descripcion text
+           );`;
     }
 }
-
-class Describer{
-
-    static describeClass( typeOfClass:any){
-        let a = new typeOfClass();
-        let array = Object.getOwnPropertyNames(a);
-        console.log(Object.getPrototypeOf(a))
-        return array;//you can apply any filter here
-    }
-}
-
