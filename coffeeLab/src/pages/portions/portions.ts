@@ -55,7 +55,7 @@ export class PortionsPage {
           text: 'Recolección',
           icon: 'nutrition',
           handler: () => {
-          //  this.openRecoleccionModal();
+           this.openRecoleccionModal();
           }
         }, {
           text: 'Plaga',
