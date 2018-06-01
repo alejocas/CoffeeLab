@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import {Storage} from '@ionic/storage'
+import {Storage} from '@ionic/storage';
 import { Usuario, TipoDocumento, TipoUsuario } from '../../entities';
 import { Sqlite } from '../../providers';
 
@@ -35,7 +35,9 @@ export class ProfilePage {
     this.storage.get('currentUsuario')
     .then(usuario =>{
       console.log(usuario);
-      this.usuario = usuario as Usuario; 
+      this.usuario = new Usuario(usuario.tipoDocumento, usuario.numeroDocumento, usuario.correo,
+        usuario.tipoUsuario, usuario.usuario, usuario.contrasena, usuario.nombres, usuario.apellidos);
+
     })
     .catch(err => console.error('currentUsuario no encontrado:',err))
   }
@@ -45,12 +47,15 @@ export class ProfilePage {
   }
 
   saveChanges(){
+    console.log(this.usuario);
     this.db.save(this.usuario)
     .then(data=>{
       this.showAlert('Exitoso','Los datos fueron guardados exitosamente');
       this.editProfile();
+      this.storage.set('currentUsuario',this.usuario);
     })
     .catch(err=>{
+      console.error(err);
       this.showAlert('Error','Los datos no fueron guardados exitosamente, intentelo mas tarde o contacte con el administrador del sistema');
     });
   }

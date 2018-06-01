@@ -26,7 +26,7 @@ export class Sqlite {
       this.findByPk(object)
       .then(data =>{
 
-        if(data){
+        if(data == []){
 
           this.insert(object)
           .then(data => resolve(data))

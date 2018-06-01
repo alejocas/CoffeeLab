@@ -1,5 +1,5 @@
 import { Component, ViewChild, Input } from '@angular/core';
-import { Nav, Platform, NavController } from 'ionic-angular';
+import { Nav, Platform, NavController, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { /* paginas de inicio de sesion*/
@@ -30,7 +30,7 @@ export class MyApp {
 
   constructor(public platform: Platform, public statusBar: StatusBar, 
       public splashScreen: SplashScreen, public sqlite:SQLite, public dbService:Sqlite,
-      private storage:Storage) {
+      private storage:Storage, private menuCtl:MenuController) {
 
     this.initializeApp();
 
@@ -39,7 +39,7 @@ export class MyApp {
       { title: 'Perfil', component: ProfilePage, icon: "person" },
       { title: 'Mis Fincas', component: LandsPage, icon: "cube" },
       { title: 'Mis Lotes', component: PortionsPage, icon: "rose" },
-      { title: 'Configuración', component: ConfigPage, icon: "cog" }
+      /*{ title: 'Configuración', component: ConfigPage, icon: "cog" }*/
     ];
 
   }
@@ -48,12 +48,11 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      console.log('asdf')
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.createDataBase();
-      this.createRegistersTables();
       //this.createDataBase();
+      this.isUserLogin()
     });
   }
 
@@ -123,6 +122,22 @@ export class MyApp {
     .catch(err=>console.error('findAll TipoDocumento: ',err))
     
   }
+
+
+  isUserLogin(){
+    this.storage.get('currentUsuario')
+    .then(usuario => {
+      console.log('current usuario: ',usuario);
+      if(usuario != null && usuario.usuario){
+        this.nav.setRoot(HomePage);
+        this.menuCtl.enable(true, "menu");
+      }
+    })
+    .catch(err => {
+      console.error(err);
+    });
+
+}
 
   
 }
