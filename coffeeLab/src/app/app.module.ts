@@ -23,6 +23,7 @@ import { SQLite } from '@ionic-native/sqlite';
 import { IonicStorageModule } from "@ionic/storage";
 
 import { Sqlite, UsuarioProvider, HttpProvider, PackageProvider } from '../providers';
+import { HttpModule } from '@angular/http';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { Sqlite, UsuarioProvider, HttpProvider, PackageProvider } from '../provi
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
@@ -56,6 +58,8 @@ import { Sqlite, UsuarioProvider, HttpProvider, PackageProvider } from '../provi
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Sqlite,
     SQLite,
+    HttpProvider,
+    PackageProvider,
     UsuarioProvider
   ]
 })

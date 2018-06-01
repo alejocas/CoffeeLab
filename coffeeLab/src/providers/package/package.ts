@@ -8,8 +8,20 @@ export class PackageProvider {
   constructor() {
   }
 
-  getFotosPackage(){
-    
+  getTiposUsuarioPackage(){
+    return {
+      method: "GET",
+      url: 'service/tipoUsuario',
+      body: {}
+    }
+  }
+
+  getTiposDocumentosPackage(){
+    return {
+      method: "GET",
+      url: 'service/tipoDocumento',
+      body: {}
+    }
   }
 
 }
