@@ -13,14 +13,6 @@
 <ion-content padding>
 
     <ion-item>
-      <ion-label>Finca:</ion-label>
-      <ion-select [(ngModel)]="lote.finca">
-        <ion-option *ngFor="let finca of fincas" [value]="finca" (click)="fincaSeleccionada(finca)">
-          {{finca.nombre}}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
       <ion-icon name="sunny" item-start></ion-icon>
       <ion-label>Área:</ion-label>
       <ion-input type="number" [(ngModel)]="lote.area" name="area"></ion-input>
