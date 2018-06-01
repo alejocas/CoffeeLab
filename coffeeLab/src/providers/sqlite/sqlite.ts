@@ -82,6 +82,15 @@ export class Sqlite {
     return promise;
   }
 
+  delete(object:any){
+    let promise = new Promise((resolve,reject)=>{
+      this.executeSQL(object.deleteQuery(),{})
+      .then(data=>resolve(data))
+      .catch(error=>reject(error));
+    });
+    return promise;
+  }
+
   executeSQL(sql:string, params:any){
     let promise = new Promise((resolve,reject)=>{
       this.sqlite.create({
