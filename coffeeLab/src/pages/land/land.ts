@@ -32,6 +32,15 @@ export class LandPage {
   private codigoMunicipioSeleccionado: number;
   private departamentos: Array<Departamento>;
 
+  /**
+   * Instancia las array de paises, departamentos, municipios y paises
+   * Adicionalmente define si el "land.html" trabajará como add o como view
+   * por medio de la variable booleana "edit" obtenida de "lands.ts"
+   * @param navCtrl 
+   * @param navParams 
+   * @param db 
+   * @param storage 
+   */
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private db: Sqlite, private storage: Storage) {
 
@@ -47,6 +56,9 @@ export class LandPage {
     }
   }
 
+  /**
+   * Guarda la finca en la base de datos con los datos ingresados 
+   */
   saveLand() {
     this.db.save(this.finca)
       .then(data => this.navCtrl.pop())
@@ -61,17 +73,34 @@ export class LandPage {
     console.log('ionViewDidLoad LandPage');
   }
 
+
+  /**
+   * Método getter para obtener el municipio seleccionado
+   * @param pais 
+   */
   paisSeleccionado(pais) {
     this.pais = pais;
   }
 
+  /**
+   * Método getter para obtener el departamento seleccionado
+   * @param departamento 
+   */
   departamentoSeleccionado(departamento) {
     this.departamento = departamento;
   }
 
+  /**
+   * Método getter para obtener el municipio seleccionado
+   * @param municipio 
+   */
   municipioSeleccionado(municipio) {
     this.municipio = municipio;
   }
+
+  /**
+   * Obtiene todos los paises existentes.
+   */
 
   getAllPaises() {
     this.db.findAll(Pais)
@@ -80,17 +109,30 @@ export class LandPage {
 
   }
 
+  /**
+   * Obtiene todos los departamentos existentes en la base de datos
+   * según el departamento seleccionado
+   */
+
   getAllDepartamentos() {
     this.db.findByPk(new Departamento(null, null, this.pais))
       .then(data => this.departamentos = <Array<Departamento>>data)
       .catch(err => console.error(err))
   }
 
+  /**
+   * Obtiene todos los municipios existentes en la base de datos
+   * según el departamento seleccionado
+   */
   getAllMunicipios() {
     this.db.findByPk(new Municipio(null, null, this.departamento))
       .then(data => this.municipios = <Array<Municipio>>data)
       .catch(err => console.error(err))
   }
+
+  /**
+   * Obtiene todos los tipos de clima existentes en la base de datos
+   */
 
   getAllTipoClimas() {
     this.db.findAll(TipoClima)
@@ -98,11 +140,15 @@ export class LandPage {
       .catch(err => console.error(err))
   }
 
+  /**
+   * Éste método establece una finca predeterminada. Con la finca predeterminada
+   * se puede llevar el registro de abono, floración, etc.
+   */
   setDefaultLand() {
     this.storage.set('currentFinca', this.finca)
       .then(data => console.log(data))
       .catch(err => console.error(err));
-      this.navCtrl.push(LandsPage);;
+    this.navCtrl.push(LandsPage);;
 
   }
 }
