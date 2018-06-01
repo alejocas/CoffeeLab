@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>SueloModal</ion-title>
+    <ion-title>Suelo</ion-title>
     <ion-buttons end>
         <button ion-button (click)="closeModal()">Cerrar</button>
       </ion-buttons>
@@ -15,7 +15,26 @@
 
 </ion-header>
 
-
 <ion-content padding>
-
-</ion-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label color="primary" stacked>Área (metros cuadrados):</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label color="primary" stacked>Pluviosidad (milí­metros/hora):</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      
+    </ion-grid>
+    <button ion-button (click)="closeModal()">Guardar</button>
+  
+  </ion-content>
