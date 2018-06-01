@@ -24,4 +24,28 @@ export class PackageProvider {
     }
   }
 
+  getTiposClimaPackage(){
+    return {
+      method: "GET",
+      url: 'service/tipoClima',
+      body: {}
+    }
+  }
+
+  getTiposAbonoPackage(){
+    return {
+      method: "GET",
+      url: 'service/tipoAbono',
+      body: {}
+    }
+  }
+
+  getTiposSemillaPackage(){
+    return {
+      method: "GET",
+      url: 'service/tipoSemilla',
+      body: {}
+    }
+  }
+
 }

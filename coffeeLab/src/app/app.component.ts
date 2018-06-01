@@ -15,7 +15,7 @@ import { /* paginas de inicio de sesion*/
 import { Sqlite, HttpProvider, PackageProvider } from '../providers/';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Storage } from "@ionic/storage";
-import { TipoAbono, TipoUsuario, TipoDocumento } from "../entities/index";
+import { TipoAbono, TipoUsuario, TipoDocumento, TipoClima, TipoSemilla } from "../entities/index";
 import { isArray } from 'util';
 
 @Component({
@@ -94,46 +94,95 @@ export class MyApp {
 
 
   createRegistersTables(){
+    /* TIPO USUARIO */
     this.dbService.findAll(TipoUsuario)
     .then((data) => {
-      console.log(data)
-      data as Array<any>;
-      if(isArray(data) && data.length == 0){
-        
-        this.http.http(this.httpPackage.getTiposUsuarioPackage()).subscribe(data=>{
-          console.log('------------',data);
-        })
 
-        let tipoUsuario = new TipoUsuario(null,"Dueño Finca");
-        this.dbService.save(tipoUsuario);
-        tipoUsuario = new TipoUsuario(null,"invitado");
-        this.dbService.save(tipoUsuario);
+      if(data.length == 0){
+        this.http.http(this.httpPackage.getTiposUsuarioPackage()).subscribe(data=>{
+          let tipos = JSON.parse(data['_body']) as Array<TipoUsuario>;
+
+          tipos.forEach(tipo => {
+            this.dbService.save(new TipoUsuario(tipo.codigo,tipo.nombre,tipo.descripcion));
+          });
+        });
+
       }
     })
     .catch(err=>console.error('findAll TipoUsuario: ',err))
 
+    /* TIPO DOCUMENTO */
     this.dbService.findAll(TipoDocumento)
     .then((data) => {
-      console.log(data)      
-      data as Array<any>;
+
       if(isArray(data) && data.length == 0){
 
         this.http.http(this.httpPackage.getTiposDocumentosPackage()).subscribe(data=>{
-          let tipos = JSON.parse(data['_body']) as Array<TipoUsuario>;
+          let tipos = JSON.parse(data['_body']) as Array<TipoDocumento>;
+
           tipos.forEach(tipo => {
-            this.dbService.save(tipo);
+            this.dbService.save(new TipoDocumento(tipo.codigo,tipo.nombre,tipo.descripcion));
           });
         });
 
-        /*let tipoUsuario = new TipoDocumento(null,"Cédula de ciudadania");
-        this.dbService.save(tipoUsuario);
-        tipoUsuario = new TipoDocumento(null,"Tarjeta de Identidad");
-        this.dbService.save(tipoUsuario);
-        tipoUsuario = new TipoDocumento(null,"Cédula extrangera");
-        this.dbService.save(tipoUsuario);*/
       }
     })
-    .catch(err=>console.error('findAll TipoDocumento: ',err))
+    .catch(err=>console.error('findAll TipoDocumento: ',err));
+
+    /* TIPO CLIMA */
+    this.dbService.findAll(TipoClima)
+    .then((data) => {
+
+      if(isArray(data) && data.length == 0){
+
+        this.http.http(this.httpPackage.getTiposClimaPackage()).subscribe(data=>{
+          let tipos = JSON.parse(data['_body']) as Array<TipoClima>;
+
+          tipos.forEach(tipo => {
+            this.dbService.save(new TipoClima(tipo.codigo,tipo.nombre,tipo.descripcion));
+          });
+        });
+
+      }
+    })
+    .catch(err=>console.error('findAll TipoAbono: ',err));
+
+    /* TIPO ABONO */
+    this.dbService.findAll(TipoAbono)
+    .then((data) => {
+
+      if(isArray(data) && data.length == 0){
+
+        this.http.http(this.httpPackage.getTiposAbonoPackage()).subscribe(data=>{
+          let tipos = JSON.parse(data['_body']) as Array<TipoAbono>;
+
+          tipos.forEach(tipo => {
+            this.dbService.save(new TipoAbono(tipo.codigo,tipo.nombre,tipo.descripcion));
+          });
+        });
+
+      }
+    })
+    .catch(err=>console.error('findAll TipoAbono: ',err));
+
+    /* TIPO SEMILL */
+    this.dbService.findAll(TipoSemilla)
+    .then((data) => {
+
+      if(isArray(data) && data.length == 0){
+
+        this.http.http(this.httpPackage.getTiposSemillaPackage()).subscribe(data=>{
+          let tipos = JSON.parse(data['_body']) as Array<TipoSemilla>;
+
+          // tipos.forEach(tipo => {
+          //   this.dbService.save(new TipoSemilla(tipo.codigo,tipo.nombre,tipo.descripcion));
+          // });
+        });
+
+      }
+    })
+    .catch(err=>console.error('findAll TipoSemilla: ',err));
+   
     
   }
 

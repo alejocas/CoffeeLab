@@ -1,7 +1,7 @@
 export class TipoClima {
-    private codigo:number;
-    private nombre:string;
-    private descripcion:string;
+    public codigo:number;
+    public nombre:string;
+    public descripcion:string;
 
     constructor(codigo:number=null, nombre:string='', descripcion:string =""){
         this.codigo = codigo;
