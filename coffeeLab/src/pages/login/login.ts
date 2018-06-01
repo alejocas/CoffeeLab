@@ -62,7 +62,7 @@ export class LoginPage {
       .then(data=>{
         console.log(data);
         
-        if(isArray(data) && data.length == 1){
+        if(data.length == 1){
 
           this.usuarioP.getUsuario(data[0])
           .then(usuario => {

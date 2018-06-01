@@ -15,7 +15,7 @@ import { /* paginas de inicio de sesion*/
 import { Sqlite, HttpProvider, PackageProvider } from '../providers/';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Storage } from "@ionic/storage";
-import { TipoAbono, TipoUsuario, TipoDocumento, TipoClima, TipoSemilla } from "../entities/index";
+import { TipoAbono, TipoUsuario, TipoDocumento, TipoClima, TipoSemilla, Abono } from "../entities/index";
 import { isArray } from 'util';
 
 @Component({
@@ -165,7 +165,7 @@ export class MyApp {
     })
     .catch(err=>console.error('findAll TipoAbono: ',err));
 
-    /* TIPO SEMILL */
+    /* TIPO SEMILLA */
     this.dbService.findAll(TipoSemilla)
     .then((data) => {
 
@@ -174,16 +174,33 @@ export class MyApp {
         this.http.http(this.httpPackage.getTiposSemillaPackage()).subscribe(data=>{
           let tipos = JSON.parse(data['_body']) as Array<TipoSemilla>;
 
-          // tipos.forEach(tipo => {
-          //   this.dbService.save(new TipoSemilla(tipo.codigo,tipo.nombre,tipo.descripcion));
-          // });
+          tipos.forEach(tipo => {
+            this.dbService.save(new TipoSemilla(tipo.codigo,tipo.nombre,tipo.descripcion));
+          });
         });
 
       }
     })
     .catch(err=>console.error('findAll TipoSemilla: ',err));
+
+    /* TIPO ABONO */
+    this.dbService.findAll(Abono)
+    .then((data) => {
+
+      if(data.length == 0){
+
+        this.http.http(this.httpPackage.getAbonosPackage()).subscribe(data=>{
+          let abonos = JSON.parse(data['_body']);
+
+          // abonos.forEach(abono => {
+          //   this.dbService.save(new Abono(abono.codigo,abono.nombre,abono.descripcion,new TipoAbono(abono.tipoAbono,"","")));
+          // });
+        });
+
+      }
+    })
+    .catch(err=>console.error('findAll Abono: ',err));
    
-    
   }
 
 

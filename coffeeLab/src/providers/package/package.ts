@@ -48,4 +48,19 @@ export class PackageProvider {
     }
   }
 
+  getAbonosPackage(){
+    return {
+      method: "GET",
+      url: 'service/abono',
+      body: {}
+    }
+  }
+
+  getResetPasswordPackage(body){
+    return {
+      method: "POST",
+      url: 'service/recordarContrasena',
+      body: body
+    }
+  }
 }
