@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Finca, Departamento, Pais, Municipio, TipoClima, Usuario, TipoDocumento, TipoUsuario } from '../../entities';
 import { Sqlite } from '../../providers';
+import { Storage } from "@ionic/storage";
 
 /**
  * Generated class for the LandPage page.
@@ -24,7 +25,7 @@ export class LandPage {
   private finca: Finca;
   private paises: Array<Pais>;
   private pais: Pais;
-  
+
   private departamento: Departamento;
   private municipio: Municipio;
   private codigoDepartamentoSeleccionado: number;
@@ -32,7 +33,7 @@ export class LandPage {
   private departamentos: Array<Departamento>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private db: Sqlite) {
+    private db: Sqlite, private storage: Storage) {
 
     this.edit = navParams.get('edit');
     this.finca = new Finca();
@@ -84,10 +85,6 @@ export class LandPage {
     this.municipio = municipio;
   }
 
-  setDefaultLand(){
-    
-  }
-
   getAllPaises() {
     this.db.findAll(Pais)
       .then(data => this.paises = <Array<Pais>>data)
@@ -95,22 +92,27 @@ export class LandPage {
 
   }
 
-getAllDepartamentos(){
-  this.db.findByPk(new Departamento(null, null, this.pais))
-    .then(data => this.departamentos = <Array<Departamento>>data)
-    .catch(err => console.error(err))
-}
+  getAllDepartamentos() {
+    this.db.findByPk(new Departamento(null, null, this.pais))
+      .then(data => this.departamentos = <Array<Departamento>>data)
+      .catch(err => console.error(err))
+  }
 
-getAllMunicipios(){
-  this.db.findByPk(new Municipio(null, null, this.departamento))
-  .then(data => this.municipios = <Array<Municipio>>data)
-  .catch(err => console.error(err))
-}
+  getAllMunicipios() {
+    this.db.findByPk(new Municipio(null, null, this.departamento))
+      .then(data => this.municipios = <Array<Municipio>>data)
+      .catch(err => console.error(err))
+  }
 
-getAllTipoClimas(){
-  this.db.findAll(TipoClima)
-  .then(data=> this.tipoClimas = <Array<TipoClima>>data)
-  .catch(err => console.error(err))
-}
+  getAllTipoClimas() {
+    this.db.findAll(TipoClima)
+      .then(data => this.tipoClimas = <Array<TipoClima>>data)
+      .catch(err => console.error(err))
+  }
 
+  setDefaultLand() {
+    this.storage.set('currentFinca', this.finca)
+      .then(data => console.log(data))
+      .catch(err => console.error(err));
+  }
 }

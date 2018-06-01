@@ -77,8 +77,11 @@ export class LandsPage {
 
   getAllFincasByUsuario() {
     this.storage.get('currentUsuario')
-      .then(data => {
-        this.usuarioActual = data;
+      .then(usuario => {
+       
+        this.usuarioActual = new Usuario(usuario.tipoDocumento, usuario.numeroDocumento, usuario.correo,
+            usuario.tipoUsuario, usuario.usuario, usuario.contrasena, usuario.nombres, usuario.apellidos);
+            
         this.db.executeSQL(UsuarioxFinca.findAllQuery(this.usuarioActual), {})
           .then(data => this.fincas = <Array<Finca>>data)
           .catch(error => console.error(error))
