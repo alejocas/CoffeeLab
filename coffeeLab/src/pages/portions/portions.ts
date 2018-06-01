@@ -49,7 +49,7 @@ export class PortionsPage {
           text: 'Floración',
           icon: 'flower',
           handler: () => {
-            // this.openFloracionModal();
+            this.openFloracionModal();
           }
         }, {
           text: 'Recolección',
