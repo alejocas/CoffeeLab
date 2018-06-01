@@ -50,7 +50,7 @@ export class LandsPage {
     this.navCtrl.push(LandPage, { edit });;
   }
 
-  getAllLands() {
+  /*getAllLands() {
     this.storage.get('currentUsuario')
       .then(data => {
         this.usuarioActual = data;
@@ -59,7 +59,7 @@ export class LandsPage {
           .catch(err => console.error(err))
       })
       .catch(err => console.error(err))
-  }
+  }*/
 
 
   delete(land) {
@@ -73,6 +73,16 @@ export class LandsPage {
     //en el push, falta mandar el codigo de la finca
     let edit: boolean = false;
     this.navCtrl.push(LandPage, { finca: land, edit });
-  };
+  }
+
+  getAllFincasByUsuario() {
+    this.storage.get('currentUsuario')
+      .then(data => {
+        this.usuarioActual = data;
+        this.db.executeSQL(UsuarioxFinca.findAllQuery(this.usuarioActual), {})
+          .then(data => this.fincas = <Array<Finca>>data)
+          .catch(error => console.error(error))
+      })
+  }
 
 }

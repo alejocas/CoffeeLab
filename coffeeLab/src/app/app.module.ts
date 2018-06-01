@@ -23,6 +23,7 @@ import { SQLite } from '@ionic-native/sqlite';
 import { IonicStorageModule } from "@ionic/storage";
 
 import { Sqlite, UsuarioProvider, FincaProvider } from '../providers';
+import { UsuarioxfincaProvider } from '../providers/usuarioxfinca/usuarioxfinca';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { Sqlite, UsuarioProvider, FincaProvider } from '../providers';
     Sqlite,
     SQLite,
     UsuarioProvider,
-    FincaProvider
+    FincaProvider,
+    UsuarioxfincaProvider
   ]
 })
 export class AppModule {}

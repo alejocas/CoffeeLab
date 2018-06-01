@@ -134,7 +134,7 @@ export class Sqlite {
                             console.log('Lote: ',data);
                             this.db.executeSql(RegistroAbono.getSqlCreteTable(),{}).then(data=>{
                               console.log('RegistroAbono: ',data);
-                              this.db.executeSql(UsuarioxFinca.getSqlCreteTable(),{}).then(data=>{
+                              this.db.executeSql(UsuarioxFinca.getSqlCreateTable(),{}).then(data=>{
                                 console.log('UsuarioxFinca: ',data);
                                 this.db.executeSql(TipoSemilla.getSqlCreteTable(),{}).then(data=>{
                                   console.log('TipoSemilla: ',data);

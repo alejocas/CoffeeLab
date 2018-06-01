@@ -84,6 +84,10 @@ export class LandPage {
     this.municipio = municipio;
   }
 
+  setDefaultLand(){
+    
+  }
+
   getAllPaises() {
     this.db.findAll(Pais)
       .then(data => this.paises = <Array<Pais>>data)
@@ -108,4 +112,5 @@ getAllTipoClimas(){
   .then(data=> this.tipoClimas = <Array<TipoClima>>data)
   .catch(err => console.error(err))
 }
+
 }
