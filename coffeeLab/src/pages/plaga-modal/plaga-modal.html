@@ -14,8 +14,35 @@
   </ion-navbar>
 
 </ion-header>
-
-
 <ion-content padding>
-
+    <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>Plaga:</ion-label>
+              <ion-select>
+                  <ion-option value="f">Broca</ion-option>
+                </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>Fecha:</ion-label>
+              <ion-input type="date"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label color="primary" stacked>Descripción:</ion-label>
+                <ion-input type="text"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+      </ion-grid>
+      <button ion-button (click)="closeModal()">Guardar</button>
 </ion-content>
+
