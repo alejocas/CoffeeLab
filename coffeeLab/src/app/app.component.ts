@@ -12,7 +12,7 @@ import { /* paginas de inicio de sesion*/
   LandsPage, LandPage, AddlandPage, ViewlandPage,
   /* lotes */
   PortionsPage } from '../pages/index';
-import { Sqlite } from '../providers/sqlite/sqlite';
+import { Sqlite, HttpProvider, PackageProvider } from '../providers/';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Storage } from "@ionic/storage";
 import { TipoAbono, TipoUsuario, TipoDocumento } from "../entities/index";
@@ -30,7 +30,7 @@ export class MyApp {
 
   constructor(public platform: Platform, public statusBar: StatusBar, 
       public splashScreen: SplashScreen, public sqlite:SQLite, public dbService:Sqlite,
-      private storage:Storage, private menuCtl:MenuController) {
+      private storage:Storage, private menuCtl:MenuController, private http:HttpProvider, private httpPackage:PackageProvider) {
 
     this.initializeApp();
 
@@ -52,7 +52,8 @@ export class MyApp {
       this.splashScreen.hide();
       this.createDataBase();
       //this.createDataBase();
-      this.isUserLogin()
+      this.isUserLogin();
+      
     });
   }
 
@@ -98,6 +99,11 @@ export class MyApp {
       console.log(data)
       data as Array<any>;
       if(isArray(data) && data.length == 0){
+        
+        this.http.http(this.httpPackage.getTiposUsuarioPackage()).subscribe(data=>{
+          console.log('------------',data);
+        })
+
         let tipoUsuario = new TipoUsuario(null,"Dueño Finca");
         this.dbService.save(tipoUsuario);
         tipoUsuario = new TipoUsuario(null,"invitado");
@@ -111,12 +117,20 @@ export class MyApp {
       console.log(data)      
       data as Array<any>;
       if(isArray(data) && data.length == 0){
-        let tipoUsuario = new TipoDocumento(null,"Cédula de ciudadania");
+
+        this.http.http(this.httpPackage.getTiposDocumentosPackage()).subscribe(data=>{
+          let tipos = JSON.parse(data['_body']) as Array<TipoUsuario>;
+          tipos.forEach(tipo => {
+            this.dbService.save(tipo);
+          });
+        });
+
+        /*let tipoUsuario = new TipoDocumento(null,"Cédula de ciudadania");
         this.dbService.save(tipoUsuario);
         tipoUsuario = new TipoDocumento(null,"Tarjeta de Identidad");
         this.dbService.save(tipoUsuario);
         tipoUsuario = new TipoDocumento(null,"Cédula extrangera");
-        this.dbService.save(tipoUsuario);
+        this.dbService.save(tipoUsuario);*/
       }
     })
     .catch(err=>console.error('findAll TipoDocumento: ',err))

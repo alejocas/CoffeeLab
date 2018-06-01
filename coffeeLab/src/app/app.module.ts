@@ -22,7 +22,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SQLite } from '@ionic-native/sqlite';
 import { IonicStorageModule } from "@ionic/storage";
 
-import { Sqlite, UsuarioProvider } from '../providers';
+import { Sqlite, UsuarioProvider, HttpProvider, PackageProvider } from '../providers';
+import { HttpModule } from '@angular/http';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { Sqlite, UsuarioProvider } from '../providers';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
@@ -56,6 +58,8 @@ import { Sqlite, UsuarioProvider } from '../providers';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Sqlite,
     SQLite,
+    HttpProvider,
+    PackageProvider,
     UsuarioProvider
   ]
 })
