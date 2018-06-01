@@ -9,9 +9,9 @@ import { /* paginas de inicio de sesion*/
   /* perfil */
   ProfilePage,
   /* fincas */
-  LandsPage, LandPage, AddlandPage, ViewlandPage,
+  LandsPage, LandPage, AddlandPage, ViewlandPage, 
   /* lotes */
-  PortionsPage } from '../pages/index';
+  PortionsPage, PortionPage } from '../pages/index';
 import { Sqlite, HttpProvider, PackageProvider } from '../providers/';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Storage } from "@ionic/storage";
@@ -24,7 +24,7 @@ import { isArray } from 'util';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   
-  rootPage: any = LoginPage; //RegisterPage; //default: LoginPage
+  rootPage: any = HomePage; //RegisterPage; //default: LoginPage
 
   pages: Array<{title: string, component: any, icon: string}>;
 
@@ -98,7 +98,7 @@ export class MyApp {
     .then((data) => {
       console.log(data)
       data as Array<any>;
-      if(isArray(data) && data.length == 0){
+      if(isArray(data) && data[0]){
         
         this.http.http(this.httpPackage.getTiposUsuarioPackage()).subscribe(data=>{
           console.log('------------',data);
@@ -116,7 +116,7 @@ export class MyApp {
     .then((data) => {
       console.log(data)      
       data as Array<any>;
-      if(isArray(data) && data.length == 0){
+      if(isArray(data) && data[0]){
 
         this.http.http(this.httpPackage.getTiposDocumentosPackage()).subscribe(data=>{
           let tipos = JSON.parse(data['_body']) as Array<TipoUsuario>;

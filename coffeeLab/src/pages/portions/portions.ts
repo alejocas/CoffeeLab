@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, ActionSheetController } from 'ionic-angular';
+import {PortionPage} from '../index';
 
 /**
  * Generated class for the PortionsPage page.
@@ -95,4 +96,7 @@ export class PortionsPage {
     myModalP.present();
   }
 
+  addPortion(){
+    this.navCtrl.push(PortionPage);
+  }
 }
