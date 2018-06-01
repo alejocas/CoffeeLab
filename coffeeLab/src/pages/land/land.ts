@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Finca, Departamento, Pais, Municipio, TipoClima, Usuario, TipoDocumento, TipoUsuario } from '../../entities';
 import { Sqlite } from '../../providers';
 import { Storage } from "@ionic/storage";
+import { LandsPage } from '..';
 
 /**
  * Generated class for the LandPage page.
@@ -21,7 +22,6 @@ export class LandPage {
   private municipios: Array<Municipio>;
   private tipoClimas: Array<TipoClima>;
   private edit: boolean;
-  //public finca:Finca = new Finca(null,'',0,0,new Municipio(null,'',new Departamento(null,'',new Pais(null,''))),new TipoClima(null,''));
   private finca: Finca;
   private paises: Array<Pais>;
   private pais: Pais;
@@ -59,18 +59,6 @@ export class LandPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LandPage');
-    /*if (this.edit == true) {
-      let pais = [];
-      for (let i = 0; i < 10; i++) {
-        pais.push(new Pais(i, i.toString()));
-      }
-      this.paises = pais;
-      let tipoClimatest = [];
-      for (let i = 0; i < 10; i++) {
-        pais.push(new TipoClima(i, "frio", "something"));
-      }
-      this.tipoClimas = tipoClimatest;
-    }*/
   }
 
   paisSeleccionado(pais) {
@@ -114,5 +102,7 @@ export class LandPage {
     this.storage.set('currentFinca', this.finca)
       .then(data => console.log(data))
       .catch(err => console.error(err));
+      this.navCtrl.push(LandsPage);;
+
   }
 }
