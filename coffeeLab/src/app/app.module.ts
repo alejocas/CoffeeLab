@@ -22,7 +22,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SQLite } from '@ionic-native/sqlite';
 import { IonicStorageModule } from "@ionic/storage";
 
-import { Sqlite, UsuarioProvider } from '../providers';
+import { Sqlite, UsuarioProvider, HttpProvider, PackageProvider } from '../providers';
 
 
 @NgModule({
