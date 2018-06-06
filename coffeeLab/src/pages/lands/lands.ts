@@ -26,6 +26,7 @@ export class LandsPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams, private menuCtrl: MenuController,
     private storage: Storage, private db: Sqlite) {
+      this.fincas = Array<Finca>();
 
   }
 

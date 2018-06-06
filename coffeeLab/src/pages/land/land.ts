@@ -23,8 +23,10 @@ export class LandPage {
   private tipoClimas: Array<TipoClima>;
   private edit: boolean;
   private finca: Finca;
+  private fincaPorDefecto: Finca;
   private paises: Array<Pais>;
   private pais: Pais;
+  private fincasTodas: Array<Finca>; 
 
   private departamento: Departamento;
   private municipio: Municipio;
@@ -44,6 +46,7 @@ export class LandPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private db: Sqlite, private storage: Storage) {
 
+    this.fincasTodas = Array<Finca>();  
     this.edit = navParams.get('edit');
     this.finca = new Finca();
     this.paises = new Array<Pais>();
@@ -54,6 +57,23 @@ export class LandPage {
       console.log(this.finca);
     } else {
     }
+    this.storage.get('currentFinca')
+    .catch(data => {
+      if(data == null){
+        this.db.findAll(Finca)
+        .then(fincas => {
+          this.fincasTodas = <Array<Finca>>fincas;
+          if(this.fincasTodas.length > 0){
+          this.fincaPorDefecto = this.fincasTodas[0];
+          this.storage.set('currentFinca', this.fincaPorDefecto);
+        } else {
+          console.log("No hay fincas del usuario en la base de datos"); 
+        }
+        })
+
+      }
+    })
+    
   }
 
   /**
