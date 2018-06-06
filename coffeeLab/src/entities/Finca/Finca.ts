@@ -21,7 +21,7 @@ export class Finca {
     }
 
     deleteQuery(){
-        return `DELETE FROM Finca WHERE tipoDocumento = ${this.codigo};`;
+        return `DELETE FROM Finca WHERE codigo = ${this.codigo};`;
     }
 
     insertQuery(){
@@ -38,11 +38,11 @@ export class Finca {
         altitud = ${this.altitud},
         municipio = ${this.municipio},
         tipoClima = ${this.tipoClima}
-        WHERE tipoDocumento = ${this.codigo};`
+        WHERE codigo = ${this.codigo};`
     }
 
     findByIdQuery(){
-        return `SELECT * FROM Finca WHERE tipoDocumento = ${this.codigo};`;
+        return `SELECT * FROM Finca WHERE codigo = ${this.codigo};`;
     }
 
     static findAllQuery(){
@@ -50,7 +50,7 @@ export class Finca {
     }
 
     static findByIdQuery(codigo:number){
-        return `SELECT * FROM Finca WHERE tipoDocumento = ${codigo};`;
+        return `SELECT * FROM Finca WHERE codigo = ${codigo};`;
     }
 
 

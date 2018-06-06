@@ -14,7 +14,7 @@ export class Lote {
     }
 
     deleteQuery(){
-        return `DELETE FROM Lote WHERE tipoDocumento = ${this.codigo};`;
+        return `DELETE FROM Lote WHERE codigo = ${this.codigo};`;
     }
 
     insertQuery(){
@@ -28,11 +28,11 @@ export class Lote {
         finca = '${this.finca.codigo}',
         area = ${this.area},
         pluviosidad = ${this.pluviosidad}
-        WHERE tipoDocumento = ${this.codigo};`
+        WHERE codigo = ${this.codigo};`
     }
 
     findByIdQuery(){
-        return `SELECT * FROM Lote WHERE tipoDocumento = ${this.codigo};`;
+        return `SELECT * FROM Lote WHERE codigo = ${this.codigo};`;
     }
 
     static findAllQuery(){
@@ -40,7 +40,7 @@ export class Lote {
     }
 
     static findByIdQuery(codigo:number){
-        return `SELECT * FROM Lote WHERE tipoDocumento = ${codigo};`;
+        return `SELECT * FROM Lote WHERE codigo = ${codigo};`;
     }
 
 

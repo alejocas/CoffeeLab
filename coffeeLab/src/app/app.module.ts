@@ -35,7 +35,7 @@ import { HttpModule } from '@angular/http';
     ProfilePage,
     LandsPage, LandPage,
     PortionsPage, PortionPage,
-    AddlandPage, ViewlandPage
+    AddlandPage
 
   ],
   imports: [
@@ -52,7 +52,7 @@ import { HttpModule } from '@angular/http';
     ProfilePage,
     LandsPage, LandPage,
     PortionsPage, PortionPage,
-    AddlandPage, ViewlandPage
+    AddlandPage
   ],
   providers: [
     StatusBar,
@@ -61,7 +61,7 @@ import { HttpModule } from '@angular/http';
     Sqlite,
     SQLite,
     FincaProvider,
-    UsuarioxfincaProvider
+    UsuarioxfincaProvider,
     HttpProvider,
     PackageProvider,
     UsuarioProvider

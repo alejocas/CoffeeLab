@@ -30,6 +30,10 @@ export class LandsPage {
 
   }
 
+  ionViewCanEnter(){
+    this.getAllFincasByUsuario();
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad LandsPage');
     /*let testFincas = [];

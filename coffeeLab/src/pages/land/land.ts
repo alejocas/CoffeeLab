@@ -86,7 +86,7 @@ export class LandPage {
   }
 
   ionViewCanEnter() {
-    this.finca = new Finca();
+    this.getAllPaises();
   }
 
   ionViewDidLoad() {
