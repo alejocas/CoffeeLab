@@ -30,8 +30,9 @@ export class LandsPage {
 
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
     console.log('ionViewDidLoad LandsPage');
+    this.getAllFincasByUsuario();
     /*let testFincas = [];
     for (let i = 0; i < 10; i++) {
       testFincas.push(new Finca(i, i.toString(), i, i, new Municipio(i, i.toString(),
