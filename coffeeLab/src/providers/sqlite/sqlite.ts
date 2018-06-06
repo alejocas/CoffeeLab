@@ -12,8 +12,6 @@ export class Sqlite {
 
   constructor(public sqlite:SQLite) {}
 
-  // public methods
-
   setDatabase(db: SQLiteObject){
     if(this.db === null){
       this.db = db;
@@ -21,12 +19,13 @@ export class Sqlite {
   }
 
   save(object:any){
-    let promise = new Promise((resolve,reject)=>{
+    let promise = new Promise<Array<any>>((resolve,reject)=>{
 
       this.findByPk(object)
       .then(data =>{
-
-        if(data){
+        console.log('para insertar',data);
+        
+        if(data.length == 0){
 
           this.insert(object)
           .then(data => resolve(data))
@@ -45,9 +44,8 @@ export class Sqlite {
     return promise;
   }
 
-
   findAll(entity:any){
-    let promise = new Promise((resolve,reject)=>{
+    let promise = new Promise<Array<any>>((resolve,reject)=>{
       this.executeSQL(entity.findAllQuery(),{})
       .then(data=>resolve(data))
       .catch(error=>reject(error));
@@ -56,7 +54,7 @@ export class Sqlite {
   }
 
   findByPk(object:any){
-    let promise = new Promise((resolve,reject)=>{
+    let promise = new Promise<Array<any>>((resolve,reject)=>{
       this.executeSQL(object.findByIdQuery(),{})
       .then(data=>resolve(data))
       .catch(error=>reject(error));
@@ -65,7 +63,7 @@ export class Sqlite {
   }
 
   insert(object:any){
-    let promise = new Promise((resolve,reject)=>{
+    let promise = new Promise<Array<any>>((resolve,reject)=>{
       this.executeSQL(object.insertQuery(),{})
       .then(data=>resolve(data))
       .catch(error=>reject(error));
@@ -73,8 +71,17 @@ export class Sqlite {
     return promise;
   }
 
+  delete(object:any){
+    let promise = new Promise<Array<any>>((resolve,reject)=>{
+      this.executeSQL(object.deleteQuery(),{})
+      .then(data=>resolve(data))
+      .catch(error=>reject(error));
+    });
+    return promise;
+  }
+
   update(object:any){
-    let promise = new Promise((resolve,reject)=>{
+    let promise = new Promise<Array<any>>((resolve,reject)=>{
       this.executeSQL(object.updateQuery(),{})
       .then(data=>resolve(data))
       .catch(error=>reject(error));
@@ -92,7 +99,7 @@ export class Sqlite {
   }
 
   executeSQL(sql:string, params:any){
-    let promise = new Promise((resolve,reject)=>{
+    let promise = new Promise<Array<any>>((resolve,reject)=>{
       this.sqlite.create({
         name: 'data.db',
         location: 'default' // the location field is required
@@ -118,7 +125,7 @@ export class Sqlite {
   }
 
   createTables(){
-    let promise = new Promise((resolve, reject)=>{
+    let promise = new Promise<Array<any>>((resolve, reject)=>{
       this.db.executeSql(TipoAbono.getSqlCreteTable(),{}).then(data=>{
         console.log('TipoAbono: ',data);
         this.db.executeSql(TipoClima.getSqlCreteTable(),{}).then(data=>{

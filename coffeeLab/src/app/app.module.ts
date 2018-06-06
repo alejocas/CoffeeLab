@@ -13,7 +13,7 @@ import {
   /* fincas */
   LandsPage, LandPage, AddlandPage,
   /* lotes */
-  PortionsPage
+  PortionsPage, PortionPage
 } from '../pages/index';
 
 
@@ -22,8 +22,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SQLite } from '@ionic-native/sqlite';
 import { IonicStorageModule } from "@ionic/storage";
 
-import { Sqlite, UsuarioProvider, FincaProvider } from '../providers';
 import { UsuarioxfincaProvider } from '../providers/usuarioxfinca/usuarioxfinca';
+import { Sqlite, UsuarioProvider, HttpProvider, PackageProvider, FincaProvider } from '../providers';
+import { HttpModule } from '@angular/http';
+
 
 @NgModule({
   declarations: [
@@ -32,11 +34,13 @@ import { UsuarioxfincaProvider } from '../providers/usuarioxfinca/usuarioxfinca'
     HomePage, ConfigPage,
     ProfilePage,
     LandsPage, LandPage,
-    PortionsPage,
-    AddlandPage
+    PortionsPage, PortionPage,
+    AddlandPage, ViewlandPage
+
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
@@ -47,8 +51,8 @@ import { UsuarioxfincaProvider } from '../providers/usuarioxfinca/usuarioxfinca'
     HomePage, ConfigPage,
     ProfilePage,
     LandsPage, LandPage,
-    PortionsPage,
-    AddlandPage
+    PortionsPage, PortionPage,
+    AddlandPage, ViewlandPage
   ],
   providers: [
     StatusBar,
@@ -56,9 +60,11 @@ import { UsuarioxfincaProvider } from '../providers/usuarioxfinca/usuarioxfinca'
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Sqlite,
     SQLite,
-    UsuarioProvider,
     FincaProvider,
     UsuarioxfincaProvider
+    HttpProvider,
+    PackageProvider,
+    UsuarioProvider
   ]
 })
 export class AppModule {}

@@ -5,7 +5,7 @@ export class UsuarioxFinca {
     private finca:Finca;
     
 
-    constructor(usuario:Usuario, finca:Finca){
+    constructor(usuario:Usuario = null, finca:Finca = null){
             this.usuario=usuario;
             this.finca=finca; 
     }

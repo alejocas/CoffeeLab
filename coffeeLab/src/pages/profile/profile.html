@@ -8,6 +8,11 @@
 
   <ion-navbar color="primary">
     <ion-title>Mi perfil</ion-title>
+    <ion-buttons end>
+            <button ion-button icon-only (click)="editProfile()">
+                <ion-icon name="create"></ion-icon>
+            </button>
+        </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -21,13 +26,13 @@
       <ion-col>
         <ion-item>
           <ion-label color="primary" stacked>Nombre:</ion-label>
-          <ion-input type="text" disabled [(ngModel)]="usuario.nombres"></ion-input>
+          <ion-input type="text" [disabled]="isEditable" [(ngModel)]="usuario.nombres"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item>
           <ion-label color="primary" stacked>Apellidos:</ion-label>
-          <ion-input type="text" disabled [(ngModel)]="usuario.apellidos"></ion-input>
+          <ion-input type="text" [disabled]="isEditable" [(ngModel)]="usuario.apellidos"></ion-input>
         </ion-item>
       </ion-col>
 
@@ -47,20 +52,28 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col>
-          <ion-item>
-              <ion-label color="primary" stacked>Usuario:</ion-label>
-              <ion-input type="text" disabled [(ngModel)]="usuario.usuario"></ion-input>
-            </ion-item>
-      </ion-col>
-      <ion-col>
-          <ion-item>
-              <ion-label color="primary" stacked>Contraseña:</ion-label>
-              <ion-input type="password" disabled [(ngModel)]="usuario.contrasena"></ion-input>
-            </ion-item>
-      </ion-col >
+    <ion-item>
+        <ion-label color="primary" stacked>Usuario:</ion-label>
+        <ion-input type="text" disabled [(ngModel)]="usuario.usuario"></ion-input>
+      </ion-item>
+    </ion-row>
+
+    <ion-row>
+        <ion-item>
+            <ion-label color="primary" stacked>Contraseña:</ion-label>
+            <ion-input [type]="isPassword ? 'password' : 'text'" 
+            [(ngModel)]="usuario.contrasena" [disabled]="isEditable">
+          </ion-input>
+          <button ion-button item-end clear icon-end (click)="passwordToogle()" [disabled]="isEditable">
+              <ion-icon [name]="isPassword ? 'eye' : 'eye-off'"></ion-icon>
+            </button>
+        </ion-item>
+    </ion-row>
+              
+    <ion-row>
       <ion-col style="margin-left: 10px; margin-top: 10px;">
-        <button ion-button color="secondary">Cambiar</button>
+        <button ion-button color="secondary" 
+          (click)="saveChanges()" [disabled]="isEditable">Guardar</button>
       </ion-col>
     </ion-row>
   </ion-grid>

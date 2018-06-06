@@ -1,13 +1,32 @@
-
 <ion-header>
 
   <ion-navbar color="primary">
     <ion-title>Lotes</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="addPortion()">
+            <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+          <button ion-button class="lotes" (click)="presentActionSheet()">Lote</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button class="lotes" (click)="presentActionSheet()">Lote</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button class="lotes" (click)="presentActionSheet()">Lote</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button class="lotes" (click)="presentActionSheet()">Lote</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
