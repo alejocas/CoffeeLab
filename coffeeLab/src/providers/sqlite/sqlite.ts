@@ -12,8 +12,6 @@ export class Sqlite {
 
   constructor(public sqlite:SQLite) {}
 
-  // public methods
-
   setDatabase(db: SQLiteObject){
     if(this.db === null){
       this.db = db;
@@ -67,6 +65,15 @@ export class Sqlite {
   insert(object:any){
     let promise = new Promise<Array<any>>((resolve,reject)=>{
       this.executeSQL(object.insertQuery(),{})
+      .then(data=>resolve(data))
+      .catch(error=>reject(error));
+    });
+    return promise;
+  }
+
+  delete(object:any){
+    let promise = new Promise<Array<any>>((resolve,reject)=>{
+      this.executeSQL(object.deleteQuery(),{})
       .then(data=>resolve(data))
       .catch(error=>reject(error));
     });
