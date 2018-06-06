@@ -1,5 +1,5 @@
 import { Component, ViewChild, Input } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, NavController, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { /* paginas de inicio de sesion*/
@@ -11,11 +11,11 @@ import { /* paginas de inicio de sesion*/
   /* fincas */
   LandsPage, LandPage, AddlandPage,
   /* lotes */
-  PortionsPage } from '../pages/index';
-import { Sqlite } from '../providers/sqlite/sqlite';
+  PortionsPage, PortionPage } from '../pages/index';
+import { Sqlite, HttpProvider, PackageProvider } from '../providers/';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Storage } from "@ionic/storage";
-import { TipoAbono, TipoUsuario, TipoDocumento } from "../entities/index";
+import { TipoAbono, TipoUsuario, TipoDocumento, TipoClima, TipoSemilla, Abono } from "../entities/index";
 import { isArray } from 'util';
 
 @Component({
@@ -24,13 +24,14 @@ import { isArray } from 'util';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   
-  rootPage: any = LoginPage; //RegisterPage; //default: LoginPage
+  rootPage: any = HomePage; //RegisterPage; //default: LoginPage
 
   pages: Array<{title: string, component: any, icon: string}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, 
       public splashScreen: SplashScreen, public sqlite:SQLite, public dbService:Sqlite,
-      private storage:Storage) {
+      private storage:Storage, private menuCtl:MenuController, private http:HttpProvider, private httpPackage:PackageProvider) {
+
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -38,7 +39,7 @@ export class MyApp {
       { title: 'Perfil', component: ProfilePage, icon: "person" },
       { title: 'Mis Fincas', component: LandsPage, icon: "cube" },
       { title: 'Mis Lotes', component: PortionsPage, icon: "rose" },
-      { title: 'Configuración', component: ConfigPage, icon: "cog" },
+      /*{ title: 'Configuración', component: ConfigPage, icon: "cog" }*/
     ];
 
   }
@@ -50,9 +51,9 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.createDataBase();
-      this.isUserLogin()
-      //this.createRegistersTables();
       //this.createDataBase();
+      this.isUserLogin();
+      
     });
   }
 
@@ -62,7 +63,17 @@ export class MyApp {
     this.nav.push(page.component);
   }
 
+  cerrarSesion(){
+    this.storage.remove('currentUsuario')
+    .then(data=>{
+      console.log('usuario borrado');
+      this.nav.setRoot(LoginPage);
+     })
+    .catch(err=>console.error('no se pudo borrar el usuario: ',err))
+  }
+
   createDataBase(){
+    console.log('cranado la base de datos')
     this.sqlite.create({
       name: 'data.db',
       location: 'default' // the location field is required
@@ -80,9 +91,13 @@ export class MyApp {
     });
   }
 
+
+
   createRegistersTables(){
+    /* TIPO USUARIO */
     this.dbService.findAll(TipoUsuario)
     .then((data) => {
+
       console.log(data);
       <Array<any>> data ;
       if(isArray(data) && data[0]){
@@ -90,12 +105,15 @@ export class MyApp {
         this.dbService.save(tipoUsuario);
         tipoUsuario = new TipoUsuario(null,"invitado");
         this.dbService.save(tipoUsuario);
+
       }
     })
     .catch(err=>console.error('findAll TipoUsuario: ',err))
 
+    /* TIPO DOCUMENTO */
     this.dbService.findAll(TipoDocumento)
     .then((data) => {
+
       console.log(data)      
       data as Array<any>;
       if(isArray(data) && data[0]){
@@ -105,20 +123,28 @@ export class MyApp {
         this.dbService.save(tipoUsuario);
         tipoUsuario = new TipoDocumento(null,"Cédula extrangera");
         this.dbService.save(tipoUsuario);
+
       }
     })
-    .catch(err=>console.error('findAll TipoDocumento: ',err))
-    
+    .catch(err=>console.error('findAll Abono: ',err));
+   
   }
+
 
   isUserLogin(){
     this.storage.get('currentUsuario')
     .then(usuario => {
       console.log('current usuario: ',usuario);
-      this.rootPage=HomePage;
+      if(usuario != null && usuario.usuario){
+        this.nav.setRoot(HomePage);
+        this.menuCtl.enable(true, "menu");
+      }
     })
     .catch(err => {
       console.error(err);
-    })
-  }
+    });
+
+}
+
+  
 }

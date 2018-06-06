@@ -24,7 +24,7 @@ export class RegistroControlPlaga{
     }
 
     upstringQuery(){
-        return `UPstring RegistroControlPlaga SET 
+        return `UPDATE RegistroControlPlaga SET 
             lote = ${this.siembra.lote.codigo},
             fecha = ${this.fecha}, 
             plaga = '${this.plaga}',

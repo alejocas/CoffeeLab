@@ -5,7 +5,8 @@ export class Lote {
     public area:number;
     public pluviosidad:number;
 
-    constructor(codigo:number,finca:Finca,area:number,pluviosidad:number){
+    constructor(codigo:number= null,finca:Finca = null,area:number = null,
+        pluviosidad:number = null){
         this.codigo=codigo;
         this.finca=finca;
         this.area=area;
