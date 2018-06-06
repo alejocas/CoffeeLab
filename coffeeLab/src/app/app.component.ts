@@ -9,7 +9,7 @@ import { /* paginas de inicio de sesion*/
   /* perfil */
   ProfilePage,
   /* fincas */
-  LandsPage, LandPage, AddlandPage, ViewlandPage, 
+  LandsPage, LandPage, AddlandPage,
   /* lotes */
   PortionsPage, PortionPage } from '../pages/index';
 import { Sqlite, HttpProvider, PackageProvider } from '../providers/';
@@ -97,14 +97,14 @@ export class MyApp {
     /* TIPO USUARIO */
     this.dbService.findAll(TipoUsuario)
     .then((data) => {
-      if(data.length == 0){
-        this.http.http(this.httpPackage.getTiposUsuarioPackage()).subscribe(data=>{
-          let tipos = JSON.parse(data['_body']) as Array<TipoUsuario>;
 
-          tipos.forEach(tipo => {
-            this.dbService.save(new TipoUsuario(tipo.codigo,tipo.nombre,tipo.descripcion));
-          });
-        });
+      console.log(data);
+      <Array<any>> data ;
+      if(isArray(data) && data[0]){
+        let tipoUsuario = new TipoUsuario(null,"Dueño Finca");
+        this.dbService.save(tipoUsuario);
+        tipoUsuario = new TipoUsuario(null,"invitado");
+        this.dbService.save(tipoUsuario);
 
       }
     })
@@ -114,87 +114,15 @@ export class MyApp {
     this.dbService.findAll(TipoDocumento)
     .then((data) => {
 
-      if(isArray(data) && data.length == 0){
-
-        this.http.http(this.httpPackage.getTiposDocumentosPackage()).subscribe(data=>{
-          let tipos = JSON.parse(data['_body']) as Array<TipoDocumento>;
-
-          tipos.forEach(tipo => {
-            this.dbService.save(new TipoDocumento(tipo.codigo,tipo.nombre,tipo.descripcion));
-          });
-        });
-
-      }
-    })
-    .catch(err=>console.error('findAll TipoDocumento: ',err));
-
-    /* TIPO CLIMA */
-    this.dbService.findAll(TipoClima)
-    .then((data) => {
-
-      if(isArray(data) && data.length == 0){
-
-        this.http.http(this.httpPackage.getTiposClimaPackage()).subscribe(data=>{
-          let tipos = JSON.parse(data['_body']) as Array<TipoClima>;
-
-          tipos.forEach(tipo => {
-            this.dbService.save(new TipoClima(tipo.codigo,tipo.nombre,tipo.descripcion));
-          });
-        });
-
-      }
-    })
-    .catch(err=>console.error('findAll TipoAbono: ',err));
-
-    /* TIPO ABONO */
-    this.dbService.findAll(TipoAbono)
-    .then((data) => {
-
-      if(isArray(data) && data.length == 0){
-
-        this.http.http(this.httpPackage.getTiposAbonoPackage()).subscribe(data=>{
-          let tipos = JSON.parse(data['_body']) as Array<TipoAbono>;
-
-          tipos.forEach(tipo => {
-            this.dbService.save(new TipoAbono(tipo.codigo,tipo.nombre,tipo.descripcion));
-          });
-        });
-
-      }
-    })
-    .catch(err=>console.error('findAll TipoAbono: ',err));
-
-    /* TIPO SEMILLA */
-    this.dbService.findAll(TipoSemilla)
-    .then((data) => {
-
-      if(isArray(data) && data.length == 0){
-
-        this.http.http(this.httpPackage.getTiposSemillaPackage()).subscribe(data=>{
-          let tipos = JSON.parse(data['_body']) as Array<TipoSemilla>;
-
-          tipos.forEach(tipo => {
-            this.dbService.save(new TipoSemilla(tipo.codigo,tipo.nombre,tipo.descripcion));
-          });
-        });
-
-      }
-    })
-    .catch(err=>console.error('findAll TipoSemilla: ',err));
-
-    /* TIPO ABONO */
-    this.dbService.findAll(Abono)
-    .then((data) => {
-
-      if(data.length == 0){
-
-        this.http.http(this.httpPackage.getAbonosPackage()).subscribe(data=>{
-          let abonos = JSON.parse(data['_body']);
-
-          // abonos.forEach(abono => {
-          //   this.dbService.save(new Abono(abono.codigo,abono.nombre,abono.descripcion,new TipoAbono(abono.tipoAbono,"","")));
-          // });
-        });
+      console.log(data)      
+      data as Array<any>;
+      if(isArray(data) && data[0]){
+        let tipoUsuario = new TipoDocumento(null,"Cédula de ciudadania");
+        this.dbService.save(tipoUsuario);
+        tipoUsuario = new TipoDocumento(null,"Tarjeta de Identidad");
+        this.dbService.save(tipoUsuario);
+        tipoUsuario = new TipoDocumento(null,"Cédula extrangera");
+        this.dbService.save(tipoUsuario);
 
       }
     })

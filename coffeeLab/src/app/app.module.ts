@@ -11,7 +11,7 @@ import {
   /* perfil */
   ProfilePage,
   /* fincas */
-  LandsPage, LandPage, AddlandPage, ViewlandPage,
+  LandsPage, LandPage, AddlandPage,
   /* lotes */
   PortionsPage, PortionPage
 } from '../pages/index';
@@ -22,7 +22,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SQLite } from '@ionic-native/sqlite';
 import { IonicStorageModule } from "@ionic/storage";
 
-import { Sqlite, UsuarioProvider, HttpProvider, PackageProvider } from '../providers';
+import { UsuarioxfincaProvider } from '../providers/usuarioxfinca/usuarioxfinca';
+import { Sqlite, UsuarioProvider, HttpProvider, PackageProvider, FincaProvider } from '../providers';
 import { HttpModule } from '@angular/http';
 
 
@@ -35,6 +36,7 @@ import { HttpModule } from '@angular/http';
     LandsPage, LandPage,
     PortionsPage, PortionPage,
     AddlandPage, ViewlandPage
+
   ],
   imports: [
     BrowserModule,
@@ -58,6 +60,8 @@ import { HttpModule } from '@angular/http';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Sqlite,
     SQLite,
+    FincaProvider,
+    UsuarioxfincaProvider
     HttpProvider,
     PackageProvider,
     UsuarioProvider

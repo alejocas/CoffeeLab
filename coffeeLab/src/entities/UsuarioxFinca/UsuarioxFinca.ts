@@ -36,8 +36,12 @@ export class UsuarioxFinca {
             OR finca = ${this.finca.codigo};`;
     }
 
-    static findAllQuery(){
-        return `SELECT * FROM UsuarioxFinca;`;
+    static findAllQuery(user:Usuario){
+        return `SELECT codigo, nombre, tempPromedio,
+        altitud, municipio, tipoClima 
+	FROM UsuarioxFinca, Finca
+	WHERE numeroDocumento = ${user.numeroDocumento} 
+	AND tipoDocumento= ${user.tipoDocumento};`;
     }
 
     static findByIdQuery(usuario:Usuario,finca:Finca){
@@ -50,10 +54,13 @@ export class UsuarioxFinca {
     /* sentencia sql para crear la tabla de este modelo
     para crear una tabla hay que declarar la cadena en el 
     providers/sqlite.ts en la funcion createTables() */
-    static getSqlCreteTable(){
+    static getSqlCreateTable(){
         return `CREATE TABLE IF NOT EXISTS UsuarioxFinca (
-            codigo integer PRIMARY KEY AUTOINCREMENT,
-            nombre text NOT NULL
+            tipoDocumento integer NOT NULL ,
+            numeroDocumento integer NOT NULL,
+            finca integer NOT NULL,
+            FOREIGN KEY(tipoDocumento, numeroDocumento) REFERENCES (Usuario),
+            PRIMARY KEY(tipoDocumento, numeroDocumento, finca)
            );`;
     }
 }

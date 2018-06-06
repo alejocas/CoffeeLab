@@ -89,6 +89,15 @@ export class Sqlite {
     return promise;
   }
 
+  delete(object:any){
+    let promise = new Promise((resolve,reject)=>{
+      this.executeSQL(object.deleteQuery(),{})
+      .then(data=>resolve(data))
+      .catch(error=>reject(error));
+    });
+    return promise;
+  }
+
   executeSQL(sql:string, params:any){
     let promise = new Promise<Array<any>>((resolve,reject)=>{
       this.sqlite.create({
@@ -141,7 +150,7 @@ export class Sqlite {
                             console.log('Lote: ',data);
                             this.db.executeSql(RegistroAbono.getSqlCreteTable(),{}).then(data=>{
                               console.log('RegistroAbono: ',data);
-                              this.db.executeSql(UsuarioxFinca.getSqlCreteTable(),{}).then(data=>{
+                              this.db.executeSql(UsuarioxFinca.getSqlCreateTable(),{}).then(data=>{
                                 console.log('UsuarioxFinca: ',data);
                                 this.db.executeSql(TipoSemilla.getSqlCreteTable(),{}).then(data=>{
                                   console.log('TipoSemilla: ',data);
