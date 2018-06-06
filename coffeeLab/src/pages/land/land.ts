@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Finca, Departamento, Pais, Municipio, TipoClima, Usuario, TipoDocumento, TipoUsuario } from '../../entities';
 import { Sqlite } from '../../providers';
 import { Storage } from "@ionic/storage";
-import { LandsPage } from '..';
+import { LandsPage } from '../index';
 
 /**
  * Generated class for the LandPage page.
