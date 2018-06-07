@@ -81,7 +81,10 @@ export class LandPage {
    */
   saveLand() {
     this.db.save(this.finca)
-      .then(data => this.navCtrl.pop())
+      .then(data => {
+        console.log(data)
+        this.navCtrl.pop()
+      })
       .catch(err => console.error(err))
   }
 
