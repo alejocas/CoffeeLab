@@ -28,7 +28,8 @@ export class PortionsPage {
     private storage: Storage, private db:Sqlite) {
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
+    this.portions = new Array<Lote>();
     console.log('ionViewDidLoad PortionsPage');
     this.storage.get('currentFinca')
     .then(finca=>{
@@ -47,7 +48,8 @@ export class PortionsPage {
 
 
 
-  presentActionSheet() {
+  presentActionSheet(portion) {
+    console.log(portion);
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Acciones para el lote',
       buttons: [

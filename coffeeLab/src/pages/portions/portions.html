@@ -14,10 +14,18 @@
 
 <ion-content padding>
   <ion-grid>
-    <ion-row>
-      <ion-col>
-          <button ion-button class="lotes" (click)="presentActionSheet()">Lote</button>
-      </ion-col>
+    
+        <ion-row *ngFor="let portion of portions; let i = index">
+            <ion-col col-6 *ngIf="portions[i] && i%2 == 0">
+              <button ion-button class="lotes" (click)="presentActionSheet(portions[i])">Lote {{portions[i].codigo}}</button>
+            </ion-col>
+            <ion-col col-6 *ngIf="portions[i+1] && i%2 == 0">
+              <button ion-button class="lotes" (click)="presentActionSheet(portions[i+1])">Lote {{portions[i+1].codigo}}</button>   
+            </ion-col>
+          </ion-row>
+      
+          
+      <!-- </ion-col>
       <ion-col>
         <button ion-button class="lotes" (click)="presentActionSheet()">Lote</button>
       </ion-col>
@@ -26,7 +34,7 @@
       </ion-col>
       <ion-col>
         <button ion-button class="lotes" (click)="presentActionSheet()">Lote</button>
-      </ion-col>
-    </ion-row>
+      </ion-col> -->
+    
   </ion-grid>
 </ion-content>
