@@ -27,7 +27,7 @@ export class Finca {
     insertQuery(){
         return `INSERT INTO Finca (codigo,nombre,tempPromedio,altitud,municipio,tipoClima) 
             VALUES (${this.codigo},'${this.nombre}',${this.tempPromedio},${this.altitud},
-            ${this.municipio},${this.tipoClima});`
+            ${this.municipio.codigo},${this.tipoClima.codigo});`
     }
 
     updateQuery(){
@@ -36,8 +36,8 @@ export class Finca {
         nombre = '${this.nombre}',
         tempPromedio = ${this.tempPromedio},
         altitud = ${this.altitud},
-        municipio = ${this.municipio},
-        tipoClima = ${this.tipoClima}
+        municipio = ${this.municipio.codigo},
+        tipoClima = ${this.tipoClima.codigo}
         WHERE codigo = ${this.codigo};`
     }
 

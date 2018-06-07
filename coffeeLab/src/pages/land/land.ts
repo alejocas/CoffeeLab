@@ -19,6 +19,10 @@ import { LandsPage } from '..';
 })
 export class LandPage {
 
+  private MunicipioTest: Array<Municipio>;
+  private DepartamentoTest: Array<Departamento>;
+  private TipoClimasTest: Array<TipoClima>;
+  private paisesTest: Array<Pais>;
   private municipios: Array<Municipio>;
   private tipoClimas: Array<TipoClima>;
   private edit: boolean;
@@ -26,12 +30,10 @@ export class LandPage {
   private fincaPorDefecto: Finca;
   private paises: Array<Pais>;
   private pais: Pais;
-  private fincasTodas: Array<Finca>; 
+  private fincasTodas: Array<Finca>;
 
   private departamento: Departamento;
   private municipio: Municipio;
-  private codigoDepartamentoSeleccionado: number;
-  private codigoMunicipioSeleccionado: number;
   private departamentos: Array<Departamento>;
 
   /**
@@ -46,34 +48,50 @@ export class LandPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private db: Sqlite, private storage: Storage) {
 
-    this.fincasTodas = Array<Finca>();  
+    this.fincasTodas = Array<Finca>();
     this.edit = navParams.get('edit');
     this.finca = new Finca();
     this.paises = new Array<Pais>();
     this.departamentos = new Array<Departamento>();
     this.municipios = new Array<Municipio>();
+
+    this.paisesTest = new Array<Pais>();
+    this.TipoClimasTest = new Array<TipoClima>();
+    this.DepartamentoTest = new Array<Departamento>();
+    this.MunicipioTest = new Array<Municipio>();
+
+    this.paisesTest.push(new Pais(1, "Argentina"));
+    this.paisesTest.push(new Pais(2, "Colombia"));
+    this.paisesTest.push(new Pais(3, "Chile"));
+
+    this.TipoClimasTest.push(new TipoUsuario(1, "Calido"));
+    this.TipoClimasTest.push(new TipoUsuario(2, "Frio"));
+
+    this.DepartamentoTest.push(new Departamento(1, "Antioquia", this.paisesTest[1]));
+    this.MunicipioTest.push(new Municipio(1, "Medellin", this.DepartamentoTest[0]));
+
     if (this.edit == false) {
       this.finca = navParams.get('finca');
       console.log(this.finca);
     } else {
     }
     this.storage.get('currentFinca')
-    .catch(data => {
-      if(data == null){
-        this.db.findAll(Finca)
-        .then(fincas => {
-          this.fincasTodas = <Array<Finca>>fincas;
-          if(this.fincasTodas.length > 0){
-          this.fincaPorDefecto = this.fincasTodas[0];
-          this.storage.set('currentFinca', this.fincaPorDefecto);
-        } else {
-          console.log("No hay fincas del usuario en la base de datos"); 
-        }
-        })
+      .catch(data => {
+        if (data == null) {
+          this.db.findAll(Finca)
+            .then(fincas => {
+              this.fincasTodas = <Array<Finca>>fincas;
+              if (this.fincasTodas.length > 0) {
+                this.fincaPorDefecto = this.fincasTodas[0];
+                this.storage.set('currentFinca', this.fincaPorDefecto);
+              } else {
+                console.log("No hay fincas del usuario en la base de datos");
+              }
+            })
 
-      }
-    })
-    
+        }
+      })
+
   }
 
   /**
@@ -83,7 +101,7 @@ export class LandPage {
     this.db.save(this.finca)
       .then(data => {
         console.log(data)
-        this.navCtrl.pop()
+        //this.navCtrl.push(HomePage)
       })
       .catch(err => console.error(err))
   }
@@ -171,7 +189,7 @@ export class LandPage {
     this.storage.set('currentFinca', this.finca)
       .then(data => console.log(data))
       .catch(err => console.error(err));
-    this.navCtrl.push(LandsPage);;
+    this.navCtrl.push(LandsPage);
 
   }
 }

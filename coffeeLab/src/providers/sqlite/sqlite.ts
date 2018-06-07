@@ -99,6 +99,7 @@ export class Sqlite {
   }*/
 
   executeSQL(sql:string, params:any){
+    console.log('SQL: ',sql);
     let promise = new Promise<Array<any>>((resolve,reject)=>{
       this.sqlite.create({
         name: 'data.db',

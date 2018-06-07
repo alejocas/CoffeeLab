@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
-import { Finca, Municipio, Departamento, Pais, TipoClima, Usuario, TipoDocumento, TipoUsuario, UsuarioxFinca } from '../../entities';
+import { Finca, Municipio, Departamento, Pais, TipoClima, Usuario, UsuarioxFinca } from '../../entities';
 import { AddlandPage, LandPage } from '../index';
 import { Storage } from '@ionic/storage';
 import { Sqlite } from '../../providers';
@@ -20,34 +20,23 @@ import { Sqlite } from '../../providers';
 export class LandsPage {
 
   private codeLand: number;
-  public fincas: Array<Finca>;
-  private usuarioActual: Usuario;
+  private allFincas: Array<Finca>;
+  //private usuarioActual: Usuario;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams, private menuCtrl: MenuController,
     private storage: Storage, private db: Sqlite) {
-      this.fincas = Array<Finca>();
+      this.allFincas = Array<Finca>();
 
   }
 
   ionViewCanEnter(){
+    this.allFincas = new Array<Finca>();
     this.getAllFincasByUsuario();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LandsPage');
-    /*let testFincas = [];
-    for (let i = 0; i < 10; i++) {
-      testFincas.push(new Finca(i, i.toString(), i, i, new Municipio(i, i.toString(),
-        new Departamento(i, i.toString(), new Pais(i, i.toString()))), new TipoClima(i, i.toString(),
-          i.toString())));
-    }
-    console.log(testFincas);
-    this.fincas = testFincas;*/
-    //testFincas.push(new Finca("El platanal", 30, 1200, 
-    //new Municipio(1,"Copacabana", new Departamento(1,"Antioquia",new Pais(1,"Colombia"))), 
-    //new TipoClima(1,"Caliente","")));
-    //this.fincas = testFincas;
   }
 
   /**
@@ -70,9 +59,6 @@ export class LandsPage {
     this.db.delete(land)
     .then(data => this.navCtrl.pop())
     .catch(err => console.error(err))
-    /*let indice: number;
-    indice = this.fincas.findIndex(x => x === land);
-    this.fincas.splice(indice, 1);*/
   };
 
   /**
@@ -101,9 +87,14 @@ export class LandsPage {
   }*/
 
   getAllFincasByUsuario() {
+    let i = 0;
     this.db.findAll(Finca)
-    .then(todasLasFincas => this.fincas = <Array<Finca>>todasLasFincas)
-    .catch(error => console.error(error));
-  }
+    .then(fincas => {
+     fincas.forEach(f=>{
+      let fincaAux = new Finca(f.codigo,f.nombre,f.tempPromedio,f.altitud,f.Municipio,);
+      this.allFincas.push(fincaAux);
+     })})
+    .catch(error => console.error(error))
+}
 
 }

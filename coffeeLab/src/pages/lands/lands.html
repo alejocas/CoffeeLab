@@ -12,11 +12,11 @@
 </ion-header>
 <ion-content padding>
     <ion-list>
-        <ion-item-sliding *ngFor="let finca of fincas">
+        <ion-item-sliding *ngFor="let finca of allFincas">
             <ion-item >
                 <button ion-item (click)="landSelected(finca)">
                     <h2>{{finca.nombre}}</h2>
-                    <p>{{finca.municipio.nombre}} • {{finca.municipio.departamento.nombre}}</p></button>
+                    <!--p>{{finca.municipio.nombre.Text}} • {{finca.municipio.departamento.nombre.Text}}</p></button-->
             </ion-item>
             <ion-item-options>
                 <button ion-button expandable name="trash" (click)="delete(finca)">Eliminar</button>                
