@@ -24,7 +24,7 @@ import { isArray } from 'util';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   
-  rootPage: any = HomePage; //RegisterPage; //default: LoginPage
+  rootPage: any = LoginPage; //RegisterPage; //default: LoginPage
 
   pages: Array<{title: string, component: any, icon: string}>;
 
