@@ -15,7 +15,7 @@ import { /* paginas de inicio de sesion*/
 import { Sqlite, HttpProvider, PackageProvider } from '../providers/';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Storage } from "@ionic/storage";
-import { TipoAbono, TipoUsuario, TipoDocumento, TipoClima, TipoSemilla, Abono, Pais, Departamento, Municipio } from "../entities/index";
+import { TipoAbono, TipoUsuario, TipoDocumento, TipoClima, TipoSemilla, Abono, Pais, Departamento, Municipio, Finca } from "../entities/index";
 import { isArray } from 'util';
 
 @Component({
@@ -92,6 +92,13 @@ export class MyApp {
   }
 
   createRegistersTables(){
+
+    let finca = new Finca(1,'LA AURORA',19,1900,new Municipio(1),new TipoClima(1));
+
+    this.dbService.save(finca);
+
+    this.storage.set('currentFinca',finca);
+
     /* TIPO USUARIO */
     this.dbService.findAll(TipoUsuario)
     .then((data) => {
@@ -189,9 +196,9 @@ export class MyApp {
         this.http.http(this.httpPackage.getAbonosPackage()).subscribe(data=>{
           let abonos = JSON.parse(data['_body']);
 
-          // abonos.forEach(abono => {
-          //   this.dbService.save(new Abono(abono.codigo,abono.nombre,abono.descripcion,new TipoAbono(abono.tipoAbono,"","")));
-          // });
+           abonos.forEach(abono => {
+             this.dbService.save(new Abono(abono.codigo,abono.nombre,abono.descripcion,new TipoAbono(abono.tipoAbono,"","")));
+           });
         });
 
       }
@@ -227,7 +234,7 @@ export class MyApp {
  
             departamentos.forEach(departamento => {
 
-              this.dbService.save(new Departamento(departamento.codigo,departamento.nombre,new Pais(departamento.pais)));
+              this.dbService.save(new Departamento(departamento.codigo,departamento.nombre,new Pais(departamento.codigoPais)));
             });
          });
  
@@ -238,6 +245,7 @@ export class MyApp {
      /* MUNICIPIOS */
      this.dbService.findAll(Municipio)
      .then((data) => {
+       console.log(data);
  
        if(data.length == 0){
  
@@ -245,7 +253,7 @@ export class MyApp {
            let municipios = JSON.parse(data['_body']);
  
            municipios.forEach(municipio => {
-              this.dbService.save(new Departamento(municipio.codigo,municipio.nombre,new Departamento(municipios.departamento)));
+              this.dbService.save(new Municipio(municipio.codigo,municipio.nombre,new Departamento(municipio.codigoDepartamento)));
             });
          });
  

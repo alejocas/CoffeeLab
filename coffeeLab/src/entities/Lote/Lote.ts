@@ -35,6 +35,10 @@ export class Lote {
         return `SELECT * FROM Lote WHERE codigo = ${this.codigo};`;
     }
 
+    static findAllByFinca(finca:Finca){
+        return `SELECT * FROM Lote WHERE finca = ${finca.codigo};`;
+    }
+
     static findAllQuery(){
         return `SELECT * FROM Lote;`;
     }

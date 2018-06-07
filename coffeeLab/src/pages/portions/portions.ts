@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, ActionSheetController } from 'ionic-angular';
 import {PortionPage} from '../index';
+import { Lote, Finca } from '../../entities';
+import { Storage } from '@ionic/storage';
+import { Sqlite } from '../../providers';
 
 /**
  * Generated class for the PortionsPage page.
@@ -16,13 +19,33 @@ import {PortionPage} from '../index';
 })
 export class PortionsPage {
 
+  private portions:Array<Lote>;
+  private currentLand:Finca;
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams, 
-    public modalCtrl: ModalController, public actionSheetCtrl: ActionSheetController) {
+    public modalCtrl: ModalController, public actionSheetCtrl: ActionSheetController,
+    private storage: Storage, private db:Sqlite) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PortionsPage');
+    this.storage.get('currentFinca')
+    .then(finca=>{
+      this.currentLand=finca as Finca;
+      this.db.executeSQL(Lote.findAllByFinca(finca),{})
+      .then(lotes=>{
+        lotes.forEach(lote => {
+          this.portions.push(new Lote(lote.codigo, finca, lote.area, lote.pluviosidad));
+        });
+        //console.log(lotes, finca);
+      })
+      .catch(err=>console.error(err));
+    })
+    .catch(err=>console.error(err))
   }
+
+
 
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({

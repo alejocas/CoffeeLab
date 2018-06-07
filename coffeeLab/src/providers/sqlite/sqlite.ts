@@ -23,7 +23,7 @@ export class Sqlite {
 
       this.findByPk(object)
       .then(data =>{
-        console.log('para insertar',data);
+        //console.log('para insertar',data);
         
         if(data.length == 0){
 
@@ -107,7 +107,7 @@ export class Sqlite {
       .then((db) => {
         this.db.executeSql(sql, params).then(data=>{
           let tasks = [];
-          console.log(data,sql);
+         // console.log(data,sql);
           for (let index = 0; index < data.rows.length; index++) {
             tasks.push( data.rows.item(index) );
           }

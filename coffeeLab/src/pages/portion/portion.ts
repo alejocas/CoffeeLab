@@ -32,8 +32,10 @@ export class PortionPage {
    */
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private db: Sqlite, private storage: Storage) {
+      this.lote = new Lote();
     this.storage.get('currentFinca')
       .then(finca => {
+        console.log(finca)
         this.fincaPredeterminada = new Finca(finca.codigo, finca.nombre, finca.tempPromedio,
           finca.altitud, finca.municipio, finca.tipoClima);
       })
@@ -54,6 +56,7 @@ export class PortionPage {
    * Almacena el lote en la finca predeterminada elegida previamente
    */
   savePortion() {
+    this.lote.finca = this.fincaPredeterminada;
     this.db.save(this.lote);
     this.navCtrl.pop();
   }
