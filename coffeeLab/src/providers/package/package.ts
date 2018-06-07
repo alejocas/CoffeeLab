@@ -59,7 +59,7 @@ export class PackageProvider {
   getPaisesPackage(){
     return {
       method: "GET",
-      url: 'service/paises',
+      url: 'service/copaises',
       body: {}
     }
   }
@@ -67,7 +67,7 @@ export class PackageProvider {
   getDepartaentosPackage(){
     return {
       method: "GET",
-      url: 'service/departamentos',
+      url: 'service/codepartamentos',
       body: {}
     }
   }
@@ -75,7 +75,7 @@ export class PackageProvider {
   getMunicipiosPackage(){
     return {
       method: "GET",
-      url: 'service/municipios',
+      url: 'service/comunicipios',
       body: {}
     }
   }

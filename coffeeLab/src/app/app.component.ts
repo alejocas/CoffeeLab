@@ -15,7 +15,7 @@ import { /* paginas de inicio de sesion*/
 import { Sqlite, HttpProvider, PackageProvider } from '../providers/';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Storage } from "@ionic/storage";
-import { TipoAbono, TipoUsuario, TipoDocumento, TipoClima, TipoSemilla, Abono } from "../entities/index";
+import { TipoAbono, TipoUsuario, TipoDocumento, TipoClima, TipoSemilla, Abono, Pais, Departamento, Municipio } from "../entities/index";
 import { isArray } from 'util';
 
 @Component({
@@ -197,6 +197,61 @@ export class MyApp {
       }
     })
     .catch(err=>console.error('findAll Abono: ',err));
+
+     /* PAISES */
+     this.dbService.findAll(Pais)
+     .then((data) => {
+ 
+       if(data.length == 0){
+ 
+         this.http.http(this.httpPackage.getPaisesPackage()).subscribe(data=>{
+           let paises = JSON.parse(data['_body']);
+ 
+            paises.forEach(pais => {
+              this.dbService.save(new Pais(pais.codigo,pais.nombre));
+            });
+         });
+ 
+       }
+     })
+     .catch(err=>console.error('findAll paises: ',err));
+
+     /* DEPARTAMENTOS */
+     this.dbService.findAll(Departamento)
+     .then((data) => {
+ 
+       if(data.length == 0){
+ 
+         this.http.http(this.httpPackage.getDepartaentosPackage()).subscribe(data=>{
+           let departamentos = JSON.parse(data['_body']);
+ 
+            departamentos.forEach(departamento => {
+
+              this.dbService.save(new Departamento(departamento.codigo,departamento.nombre,new Pais(departamento.pais)));
+            });
+         });
+ 
+       }
+     })
+     .catch(err=>console.error('findAll departamentos: ',err));
+
+     /* MUNICIPIOS */
+     this.dbService.findAll(Municipio)
+     .then((data) => {
+ 
+       if(data.length == 0){
+ 
+         this.http.http(this.httpPackage.getMunicipiosPackage()).subscribe(data=>{
+           let municipios = JSON.parse(data['_body']);
+ 
+           municipios.forEach(municipio => {
+              this.dbService.save(new Departamento(municipio.codigo,municipio.nombre,new Departamento(municipios.departamento)));
+            });
+         });
+ 
+       }
+     })
+     .catch(err=>console.error('findAll municipios: ',err));
    
   }
 
