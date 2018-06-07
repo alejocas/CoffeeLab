@@ -14,7 +14,7 @@ export class Abono {
     }
 
     deleteQuery(){
-        return `DELETE FROM Abono WHERE tipoDocumento = ${this.codigo};`;
+        return `DELETE FROM Abono WHERE codigo = ${this.codigo};`;
     }
 
     insertQuery(){
@@ -28,11 +28,11 @@ export class Abono {
         nombre = '${this.nombre}',
         descripcion = ${this.descripcion},
         tipoAbono = ${this.tipoAbono}
-        WHERE tipoDocumento = ${this.codigo};`
+        WHERE codigo = ${this.codigo};`
     }
 
     findByIdQuery(){
-        return `SELECT * FROM Abono WHERE tipoDocumento = ${this.codigo};`;
+        return `SELECT * FROM Abono WHERE codigo = ${this.codigo};`;
     }
 
     static findAllQuery(){
@@ -40,7 +40,7 @@ export class Abono {
     }
 
     static findByIdQuery(codigo:number){
-        return `SELECT * FROM Abono WHERE tipoDocumento = ${codigo};`;
+        return `SELECT * FROM Abono WHERE codigo = ${codigo};`;
     }
 
 
