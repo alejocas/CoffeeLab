@@ -15,7 +15,7 @@ import { /* paginas de inicio de sesion*/
 import { Sqlite, HttpProvider, PackageProvider } from '../providers/';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Storage } from "@ionic/storage";
-import { TipoAbono, TipoUsuario, TipoDocumento, TipoClima, TipoSemilla, Abono } from "../entities/index";
+import { TipoAbono, TipoUsuario, TipoDocumento, TipoClima, TipoSemilla, Abono, Pais, Departamento, Municipio, Finca } from "../entities/index";
 import { isArray } from 'util';
 
 @Component({
@@ -91,20 +91,25 @@ export class MyApp {
     });
   }
 
-
-
   createRegistersTables(){
+
+    let finca = new Finca(1,'LA AURORA',19,1900,new Municipio(1),new TipoClima(1));
+
+    this.dbService.save(finca);
+
+    this.storage.set('currentFinca',finca);
+
     /* TIPO USUARIO */
     this.dbService.findAll(TipoUsuario)
     .then((data) => {
+      if(data.length == 0){
+        this.http.http(this.httpPackage.getTiposUsuarioPackage()).subscribe(data=>{
+          let tipos = JSON.parse(data['_body']) as Array<TipoUsuario>;
 
-      console.log(data);
-      <Array<any>> data ;
-      if(isArray(data) && data[0]){
-        let tipoUsuario = new TipoUsuario(null,"Dueño Finca");
-        this.dbService.save(tipoUsuario);
-        tipoUsuario = new TipoUsuario(null,"invitado");
-        this.dbService.save(tipoUsuario);
+          tipos.forEach(tipo => {
+            this.dbService.save(new TipoUsuario(tipo.codigo,tipo.nombre,tipo.descripcion));
+          });
+        });
 
       }
     })
@@ -114,19 +119,147 @@ export class MyApp {
     this.dbService.findAll(TipoDocumento)
     .then((data) => {
 
-      console.log(data)      
-      data as Array<any>;
-      if(isArray(data) && data[0]){
-        let tipoUsuario = new TipoDocumento(null,"Cédula de ciudadania");
-        this.dbService.save(tipoUsuario);
-        tipoUsuario = new TipoDocumento(null,"Tarjeta de Identidad");
-        this.dbService.save(tipoUsuario);
-        tipoUsuario = new TipoDocumento(null,"Cédula extrangera");
-        this.dbService.save(tipoUsuario);
+      if(isArray(data) && data.length == 0){
+
+        this.http.http(this.httpPackage.getTiposDocumentosPackage()).subscribe(data=>{
+          let tipos = JSON.parse(data['_body']) as Array<TipoDocumento>;
+
+          tipos.forEach(tipo => {
+            this.dbService.save(new TipoDocumento(tipo.codigo,tipo.nombre,tipo.descripcion));
+          });
+        });
+
+      }
+    })
+    .catch(err=>console.error('findAll TipoDocumento: ',err));
+
+    /* TIPO CLIMA */
+    this.dbService.findAll(TipoClima)
+    .then((data) => {
+
+      if(isArray(data) && data.length == 0){
+
+        this.http.http(this.httpPackage.getTiposClimaPackage()).subscribe(data=>{
+          let tipos = JSON.parse(data['_body']) as Array<TipoClima>;
+
+          tipos.forEach(tipo => {
+            this.dbService.save(new TipoClima(tipo.codigo,tipo.nombre,tipo.descripcion));
+          });
+        });
+
+      }
+    })
+    .catch(err=>console.error('findAll TipoAbono: ',err));
+
+    /* TIPO ABONO */
+    this.dbService.findAll(TipoAbono)
+    .then((data) => {
+
+      if(isArray(data) && data.length == 0){
+
+        this.http.http(this.httpPackage.getTiposAbonoPackage()).subscribe(data=>{
+          let tipos = JSON.parse(data['_body']) as Array<TipoAbono>;
+
+          tipos.forEach(tipo => {
+            this.dbService.save(new TipoAbono(tipo.codigo,tipo.nombre,tipo.descripcion));
+          });
+        });
+
+      }
+    })
+    .catch(err=>console.error('findAll TipoAbono: ',err));
+
+    /* TIPO SEMILLA */
+    this.dbService.findAll(TipoSemilla)
+    .then((data) => {
+
+      if(isArray(data) && data.length == 0){
+
+        this.http.http(this.httpPackage.getTiposSemillaPackage()).subscribe(data=>{
+          let tipos = JSON.parse(data['_body']) as Array<TipoSemilla>;
+
+          tipos.forEach(tipo => {
+            this.dbService.save(new TipoSemilla(tipo.codigo,tipo.nombre,tipo.descripcion));
+          });
+        });
+
+      }
+    })
+    .catch(err=>console.error('findAll TipoSemilla: ',err));
+
+    /* ABONO */
+    this.dbService.findAll(Abono)
+    .then((data) => {
+
+      if(data.length == 0){
+
+        this.http.http(this.httpPackage.getAbonosPackage()).subscribe(data=>{
+          let abonos = JSON.parse(data['_body']);
+
+           abonos.forEach(abono => {
+             this.dbService.save(new Abono(abono.codigo,abono.nombre,abono.descripcion,new TipoAbono(abono.tipoAbono,"","")));
+           });
+        });
 
       }
     })
     .catch(err=>console.error('findAll Abono: ',err));
+
+     /* PAISES */
+     this.dbService.findAll(Pais)
+     .then((data) => {
+ 
+       if(data.length == 0){
+ 
+         this.http.http(this.httpPackage.getPaisesPackage()).subscribe(data=>{
+           let paises = JSON.parse(data['_body']);
+ 
+            paises.forEach(pais => {
+              this.dbService.save(new Pais(pais.codigo,pais.nombre));
+            });
+         });
+ 
+       }
+     })
+     .catch(err=>console.error('findAll paises: ',err));
+
+     /* DEPARTAMENTOS */
+     this.dbService.findAll(Departamento)
+     .then((data) => {
+ 
+       if(data.length == 0){
+ 
+         this.http.http(this.httpPackage.getDepartaentosPackage()).subscribe(data=>{
+           let departamentos = JSON.parse(data['_body']);
+ 
+            departamentos.forEach(departamento => {
+
+              this.dbService.save(new Departamento(departamento.codigo,departamento.nombre,new Pais(departamento.codigoPais)));
+            });
+         });
+ 
+       }
+     })
+     .catch(err=>console.error('findAll departamentos: ',err));
+
+     /* MUNICIPIOS */
+     this.dbService.findAll(Municipio)
+     .then((data) => {
+       console.log(data);
+ 
+       if(data.length == 0){
+ 
+         this.http.http(this.httpPackage.getMunicipiosPackage()).subscribe(data=>{
+           let municipios = JSON.parse(data['_body']);
+ 
+           municipios.forEach(municipio => {
+              this.dbService.save(new Municipio(municipio.codigo,municipio.nombre,new Departamento(municipio.codigoDepartamento)));
+            });
+         });
+ 
+       }
+     })
+     .catch(err=>console.error('findAll municipios: ',err));
    
   }
 

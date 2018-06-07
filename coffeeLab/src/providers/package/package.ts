@@ -56,6 +56,30 @@ export class PackageProvider {
     }
   }
 
+  getPaisesPackage(){
+    return {
+      method: "GET",
+      url: 'service/copaises',
+      body: {}
+    }
+  }
+
+  getDepartaentosPackage(){
+    return {
+      method: "GET",
+      url: 'service/codepartamentos',
+      body: {}
+    }
+  }
+
+  getMunicipiosPackage(){
+    return {
+      method: "GET",
+      url: 'service/comunicipios',
+      body: {}
+    }
+  }
+
   getResetPasswordPackage(body){
     return {
       method: "POST",

@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class HttpProvider {
 
-  private api:string = "http://alejandromarin.ddns.net:5000/";
+  private api:string = "http://alejandromarin.ddns.net:8080/";
   private headers:any;
 
   constructor(public httpS: Http) {
