@@ -88,7 +88,7 @@ export class LandsPage {
   /**
    * Obtiene todas las fincas de el usuario logeado 
    */
-  getAllFincasByUsuario() {
+  /*getAllFincasByUsuario() {
     this.storage.get('currentUsuario')
       .then(usuario => {
 
@@ -98,6 +98,12 @@ export class LandsPage {
           .then(data => this.fincas = <Array<Finca>>data)
           .catch(error => console.error(error))
       })
+  }*/
+
+  getAllFincasByUsuario() {
+    this.db.findAll(Finca)
+    .then(todasLasFincas => this.fincas = <Array<Finca>>todasLasFincas)
+    .catch(error => console.error(error));
   }
 
 }
