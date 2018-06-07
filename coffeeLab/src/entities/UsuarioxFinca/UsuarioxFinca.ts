@@ -55,11 +55,11 @@ export class UsuarioxFinca {
     para crear una tabla hay que declarar la cadena en el 
     providers/sqlite.ts en la funcion createTables() */
     static getSqlCreateTable(){
-        return `CREATE TABLE IF NOT EXISTS UsuarioxFinca (
+        return `CREATE TABLE IF NOT EXISTS UsuarioxFinca(
             tipoDocumento integer NOT NULL ,
             numeroDocumento integer NOT NULL,
             finca integer NOT NULL,
-            FOREIGN KEY(tipoDocumento, numeroDocumento) REFERENCES (Usuario),
+            FOREIGN KEY(tipoDocumento, numeroDocumento) REFERENCES Usuario,
             PRIMARY KEY(tipoDocumento, numeroDocumento, finca)
            );`;
     }
