@@ -34,7 +34,7 @@
     <ion-item>
       <ion-label>Tipo de Clima:</ion-label>
       <ion-select [disabled]="!edit" [(ngModel)]="finca.tipoClima">
-        <ion-option *ngFor="let tipoClima of TipoClimasTest" [value]="tipoClima" (click)="tipoClimaSeleccionado(tipoClima)">
+        <ion-option *ngFor="let tipoClima of tipoClimas" [value]="tipoClima" (click)="tipoClimaSeleccionado(tipoClima)">
           {{tipoClima.nombre}}</ion-option>
       </ion-select>
     </ion-item>
@@ -42,23 +42,23 @@
     <ion-item>
       <ion-label>Pais:</ion-label>
       <ion-select [disabled]="!edit" [(ngModel)]="finca.municipio.departamento.pais">
-        <ion-option *ngFor="let pais of paisesTest" [value]="pais" (click)="paisSeleccionado(pais)">
+        <ion-option *ngFor="let pais of paises" [value]="pais" (ionChange)="paisSeleccionado(pais)">
           {{pais.nombre}}</ion-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label>Departamento</ion-label>
-      <ion-select [disabled]="!edit" [(ngModel)]="departamento">
-        <ion-option *ngFor="let departamento of DepartamentoTest" [value]="departamento" (click)="departamentoSeleccionado(departamento)">
+      <ion-select [disabled]="!edit && departamentos.length == 0" [(ngModel)]="departamento">
+        <ion-option *ngFor="let departamento of departamentos" [value]="departamento" (click)="departamentoSeleccionado(departamento)">
           {{departamento.nombre}}</ion-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label>Municipio</ion-label>
-      <ion-select [disabled]="!edit" [(ngModel)]="finca.municipio">
-        <ion-option *ngFor="let municipio of MunicipioTest" [value]="municipio" (click)="municipioSeleccionado(municipio)">
+      <ion-select [disabled]="!edit && municipios.length == 0" [(ngModel)]="finca.municipio">
+        <ion-option *ngFor="let municipio of municipios" [value]="municipio" (click)="municipioSeleccionado(municipio)">
           {{municipio.nombre}}</ion-option>
       </ion-select>
     </ion-item>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HomePage} from '../index';
 import { Finca, Departamento, Pais, Municipio, TipoClima, Usuario, TipoDocumento, TipoUsuario } from '../../entities';
 import { Sqlite } from '../../providers';
 import { Storage } from "@ionic/storage";
@@ -101,17 +102,20 @@ export class LandPage {
     this.db.save(this.finca)
       .then(data => {
         console.log(data)
-        //this.navCtrl.push(HomePage)
+        this.navCtrl.push(HomePage)
       })
       .catch(err => console.error(err))
   }
 
   ionViewCanEnter() {
+    this.getAllTipoClimas();
     this.getAllPaises();
+    
+    
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LandPage');
+    //console.log('ionViewDidLoad LandPage');
   }
 
 
@@ -121,6 +125,8 @@ export class LandPage {
    */
   paisSeleccionado(pais) {
     this.pais = pais;
+    console.log('1 pais buscado:',pais)
+    this.getAllDepartamentos(pais);
   }
 
   /**
@@ -129,6 +135,7 @@ export class LandPage {
    */
   departamentoSeleccionado(departamento) {
     this.departamento = departamento;
+    this.getAllMunicipios(departamento);
   }
 
   /**
@@ -145,9 +152,10 @@ export class LandPage {
 
   getAllPaises() {
     this.db.findAll(Pais)
-      .then(data => this.paises = <Array<Pais>>data)
+      .then(data => {
+        this.paises = <Array<Pais>>data;
+      })
       .catch(err => console.error(err))
-
   }
 
   /**
@@ -155,8 +163,9 @@ export class LandPage {
    * según el departamento seleccionado
    */
 
-  getAllDepartamentos() {
-    this.db.findByPk(new Departamento(null, null, this.pais))
+  getAllDepartamentos(pais:Pais) {
+    console.log('pais buscado:',pais);
+    this.db.findByPk(new Departamento(null, null, pais))
       .then(data => this.departamentos = <Array<Departamento>>data)
       .catch(err => console.error(err))
   }
@@ -165,8 +174,8 @@ export class LandPage {
    * Obtiene todos los municipios existentes en la base de datos
    * según el departamento seleccionado
    */
-  getAllMunicipios() {
-    this.db.findByPk(new Municipio(null, null, this.departamento))
+  getAllMunicipios(departamento:Departamento) {
+    this.db.findByPk(new Municipio(null, null, departamento))
       .then(data => this.municipios = <Array<Municipio>>data)
       .catch(err => console.error(err))
   }
@@ -187,7 +196,7 @@ export class LandPage {
    */
   setDefaultLand() {
     this.storage.set('currentFinca', this.finca)
-      .then(data => console.log(data))
+      .then(data => console.log('default finca', data))
       .catch(err => console.error(err));
     this.navCtrl.push(LandsPage);
 

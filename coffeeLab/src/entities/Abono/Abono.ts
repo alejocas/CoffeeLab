@@ -26,7 +26,7 @@ export class Abono {
         return `UPDATE Abono SET 
         codigo = ${this.codigo},
         nombre = '${this.nombre}',
-        descripcion = ${this.descripcion},
+        descripcion = '${this.descripcion}',
         tipoAbono = ${this.tipoAbono}
         WHERE codigo = ${this.codigo};`
     }

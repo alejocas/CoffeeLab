@@ -1,19 +1,19 @@
-import { Component, ViewChild, Input } from '@angular/core';
-import { Nav, Platform, NavController, MenuController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Nav, Platform, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { /* paginas de inicio de sesion*/
-  LoginPage, RegisterPage, ResetPage,  
+  LoginPage,
   /* pagina principal y configuracion*/
-  HomePage, ConfigPage,
+  HomePage,
   /* perfil */
   ProfilePage,
   /* fincas */
-  LandsPage, LandPage, AddlandPage,
+  LandsPage,
   /* lotes */
-  PortionsPage, PortionPage } from '../pages/index';
+  PortionsPage } from '../pages/index';
 import { Sqlite, HttpProvider, PackageProvider } from '../providers/';
-import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { SQLite } from '@ionic-native/sqlite';
 import { Storage } from "@ionic/storage";
 import { TipoAbono, TipoUsuario, TipoDocumento, TipoClima, TipoSemilla, Abono, Pais, Departamento, Municipio, Finca } from "../entities/index";
 import { isArray } from 'util';
@@ -208,12 +208,9 @@ export class MyApp {
      /* PAISES */
      this.dbService.findAll(Pais)
      .then((data) => {
- 
        if(data.length == 0){
- 
          this.http.http(this.httpPackage.getPaisesPackage()).subscribe(data=>{
            let paises = JSON.parse(data['_body']);
- 
             paises.forEach(pais => {
               this.dbService.save(new Pais(pais.codigo,pais.nombre));
             });
