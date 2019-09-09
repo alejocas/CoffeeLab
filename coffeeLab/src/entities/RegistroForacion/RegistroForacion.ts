@@ -1,4 +1,4 @@
-import { Lote, Abono, Siembra } from "../index";
+import { Siembra } from "../index";
 export class RegistroForacion{
     public siembra:Siembra;
     public fechaInicio:Date;

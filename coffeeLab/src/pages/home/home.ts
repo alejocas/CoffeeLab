@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { ProfilePage, LoginPage, ResetPage } from '../index';
 
 @Component({
   selector: 'page-home',

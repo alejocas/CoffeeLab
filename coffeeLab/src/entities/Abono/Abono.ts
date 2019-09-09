@@ -19,7 +19,7 @@ export class Abono {
 
     insertQuery(){
         return `INSERT INTO Abono (codigo,nombre,descripcion,tipoAbono) 
-            VALUES (${this.codigo},'${this.nombre}',${this.descripcion},${this.tipoAbono.codigo});`
+            VALUES (${this.codigo},'${this.nombre}','${this.descripcion}',${this.tipoAbono.codigo});`
     }
 
     updateQuery(){

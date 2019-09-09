@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { HomePage, RegisterPage, ResetPage } from '../index';
 import { MenuController } from 'ionic-angular';
-import { TipoAbono, TipoClima, Usuario, TipoDocumento, TipoUsuario, UsuarioxFinca, Finca } from '../../entities/index'
+import { Usuario } from '../../entities/index'
 import { Sqlite, UsuarioProvider as UsuarioP } from '../../providers';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { isArray } from 'ionic-angular/util/util';
 import {Storage} from '@ionic/storage';
 
 
@@ -23,12 +22,10 @@ import {Storage} from '@ionic/storage';
 })
 export class LoginPage {
 
-  private home:HomePage;
   private username:string;
   private password:string;
   private loginPag:FormGroup;
   private isPassword:boolean = true;
-  private user:Usuario;
   
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 

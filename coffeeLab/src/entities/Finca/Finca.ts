@@ -1,4 +1,4 @@
-import { Municipio, TipoClima, Usuario } from '../index';
+import { Municipio, TipoClima } from '../index';
 
 export class Finca {
     

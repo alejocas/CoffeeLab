@@ -15,7 +15,7 @@ import { /* paginas de inicio de sesion*/
 import { Sqlite, HttpProvider, PackageProvider } from '../providers/';
 import { SQLite } from '@ionic-native/sqlite';
 import { Storage } from "@ionic/storage";
-import { TipoAbono, TipoUsuario, TipoDocumento, TipoClima, TipoSemilla, Abono, Pais, Departamento, Municipio, Finca } from "../entities/index";
+import { TipoAbono, TipoUsuario, TipoDocumento, TipoClima, TipoSemilla, Abono, Pais, Departamento, Municipio, Finca, Usuario } from "../entities/index";
 import { isArray } from 'util';
 
 @Component({
@@ -24,7 +24,7 @@ import { isArray } from 'util';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   
-  rootPage: any = LoginPage; //RegisterPage; //default: LoginPage
+  rootPage: any = LandsPage; //RegisterPage; //default: LoginPage
 
   pages: Array<{title: string, component: any, icon: string}>;
 
@@ -223,41 +223,37 @@ export class MyApp {
      /* DEPARTAMENTOS */
      this.dbService.findAll(Departamento)
      .then((data) => {
- 
        if(data.length == 0){
- 
          this.http.http(this.httpPackage.getDepartaentosPackage()).subscribe(data=>{
            let departamentos = JSON.parse(data['_body']);
  
             departamentos.forEach(departamento => {
-
-              this.dbService.save(new Departamento(departamento.codigo,departamento.nombre,new Pais(departamento.codigoPais)));
+              this.dbService.save(new Departamento(departamento.codigo,departamento.nombre,new Pais(departamento.pais)));
             });
          });
  
        }
      })
      .catch(err=>console.error('findAll departamentos: ',err));
-
+    
      /* MUNICIPIOS */
      this.dbService.findAll(Municipio)
      .then((data) => {
        console.log(data);
- 
        if(data.length == 0){
- 
+        console.log(data);
          this.http.http(this.httpPackage.getMunicipiosPackage()).subscribe(data=>{
            let municipios = JSON.parse(data['_body']);
- 
            municipios.forEach(municipio => {
-              this.dbService.save(new Municipio(municipio.codigo,municipio.nombre,new Departamento(municipio.codigoDepartamento)));
+              this.dbService.save(new Municipio(municipio.codigo,municipio.nombre,new Departamento(municipio.departamento)))
             });
          });
  
        }
      })
      .catch(err=>console.error('findAll municipios: ',err));
-   
+
+     this.dbService.save(new Usuario(new TipoUsuario(1),1041325808,'jandro240@gmail.com',new TipoDocumento(1),'david','123456','David Alejandro','Marin Alzate'))
   }
 
 

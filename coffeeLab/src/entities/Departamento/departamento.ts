@@ -31,6 +31,12 @@ export class Departamento {
         return `SELECT * FROM Departamento WHERE codigo = ${this.codigo};`;
     }
 
+    queryCustom(index){
+        let querys = [];
+        querys.push(`SELECT * FROM Departamento WHERE pais = ${this.pais.codigo};`);
+        return querys[index];
+    }
+
     static findAllQuery(){
         return `SELECT * FROM Departamento;`;
     }
@@ -45,9 +51,9 @@ export class Departamento {
     providers/sqlite.ts en la funcion createTables() */
     static getSqlCreteTable(){
         return `CREATE TABLE IF NOT EXISTS Departamento (
-            codigo integer PRIMARY KEY AUTOINCREMENT,
+            codigo integer PRIMARY KEY,
             nombre text NOT NULL,
-            pais integer NOT NULL REFERENCES Pais
+            pais integer NOT NULL
            );`;
     }
 }

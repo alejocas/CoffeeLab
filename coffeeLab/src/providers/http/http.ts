@@ -1,7 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { Http, Headers, URLSearchParams } from '@angular/http';
-import { map } from 'rxjs/operators';
+import { Http, URLSearchParams } from '@angular/http';
 /*
   Generated class for the HttpProvider provider.
 
@@ -20,7 +19,6 @@ export class HttpProvider {
 
   http(Package:any){
     let url = this.api + Package.url;
-    var response;
     
     if(Package.method == "POST"){
       return this.httpS.post(url,Package.body,{headers: this.headers});

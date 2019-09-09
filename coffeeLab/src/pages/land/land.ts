@@ -71,7 +71,7 @@ export class LandPage {
     this.DepartamentoTest.push(new Departamento(1, "Antioquia", this.paisesTest[1]));
     this.MunicipioTest.push(new Municipio(1, "Medellin", this.DepartamentoTest[0]));
 
-    if (this.edit == false) {
+    if (this.edit != true) {
       this.finca = navParams.get('finca');
       console.log(this.finca);
     } else {
@@ -110,8 +110,6 @@ export class LandPage {
   ionViewCanEnter() {
     this.getAllTipoClimas();
     this.getAllPaises();
-    
-    
   }
 
   ionViewDidLoad() {
@@ -123,27 +121,26 @@ export class LandPage {
    * Método getter para obtener el municipio seleccionado
    * @param pais 
    */
-  paisSeleccionado(pais) {
-    this.pais = pais;
-    console.log('1 pais buscado:',pais)
-    this.getAllDepartamentos(pais);
+  paisSeleccionado() {
+    this.getAllDepartamentos(this.pais);
   }
 
   /**
    * Método getter para obtener el departamento seleccionado
    * @param departamento 
    */
-  departamentoSeleccionado(departamento) {
-    this.departamento = departamento;
-    this.getAllMunicipios(departamento);
+  departamentoSeleccionado() {
+    this.departamento.pais = this.pais;
+    this.getAllMunicipios(this.departamento);
   }
 
   /**
-   * Método getter para obtener el municipio seleccionado
-   * @param municipio 
+   * Método getter para obtener el departamento seleccionado
+   * @param departamento 
    */
-  municipioSeleccionado(municipio) {
-    this.municipio = municipio;
+  municipioSeleccionado() {
+    this.municipio.departamento = this.departamento;
+    this.finca.municipio = this.municipio;
   }
 
   /**
@@ -155,7 +152,10 @@ export class LandPage {
       .then(data => {
         this.paises = <Array<Pais>>data;
       })
-      .catch(err => console.error(err))
+      .catch(err => {
+        console.error(err);
+        this.paises = this.paisesTest;
+      })
   }
 
   /**
@@ -164,9 +164,8 @@ export class LandPage {
    */
 
   getAllDepartamentos(pais:Pais) {
-    console.log('pais buscado:',pais);
-    this.db.findByPk(new Departamento(null, null, pais))
-      .then(data => this.departamentos = <Array<Departamento>>data)
+    this.db.queryCustom(new Departamento(null, null, pais),0)
+      .then(data => {this.departamentos = <Array<Departamento>>data; console.log(data)})
       .catch(err => console.error(err))
   }
 
@@ -175,8 +174,8 @@ export class LandPage {
    * según el departamento seleccionado
    */
   getAllMunicipios(departamento:Departamento) {
-    this.db.findByPk(new Municipio(null, null, departamento))
-      .then(data => this.municipios = <Array<Municipio>>data)
+    this.db.queryCustom(new Municipio(null, null, departamento),0)
+      .then(data => {this.municipios = <Array<Municipio>>data; console.log(data)})
       .catch(err => console.error(err))
   }
 

@@ -19,10 +19,6 @@ export class AddlandPage {
   public edit:boolean;
   private finca:Finca;
   private paises: Array<Pais>;
-  private codigoPaisSeleccionado:number;
-  private codigoDepartamentoSeleccionado:number;
-  private codigoMunicipioSeleccionado: number;
-  private departamentos: Array<Departamento>;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.finca = new Finca(1,'asdf',12,1900,new Municipio(1, 'medellin', new Departamento
     (1,"antioquia",new Pais(1,"colombia"))), new TipoClima(1,"templado",""));

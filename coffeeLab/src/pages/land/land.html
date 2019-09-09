@@ -41,24 +41,24 @@
 
     <ion-item>
       <ion-label>Pais:</ion-label>
-      <ion-select [disabled]="!edit" [(ngModel)]="finca.municipio.departamento.pais">
-        <ion-option *ngFor="let pais of paises" [value]="pais" (ionChange)="paisSeleccionado(pais)">
+      <ion-select [disabled]="!edit" (ionChange)="paisSeleccionado()" [(ngModel)]="pais">
+        <ion-option *ngFor="let pais of paises" [value]="pais">
           {{pais.nombre}}</ion-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label>Departamento</ion-label>
-      <ion-select [disabled]="!edit && departamentos.length == 0" [(ngModel)]="departamento">
-        <ion-option *ngFor="let departamento of departamentos" [value]="departamento" (click)="departamentoSeleccionado(departamento)">
+      <ion-select [disabled]="!edit && departamentos.length == 0" (ionChange)="departamentoSeleccionado()" [(ngModel)]="departamento">
+        <ion-option *ngFor="let departamento of departamentos" [value]="departamento">
           {{departamento.nombre}}</ion-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label>Municipio</ion-label>
-      <ion-select [disabled]="!edit && municipios.length == 0" [(ngModel)]="finca.municipio">
-        <ion-option *ngFor="let municipio of municipios" [value]="municipio" (click)="municipioSeleccionado(municipio)">
+      <ion-select [disabled]="!edit && municipios.length == 0" [(ngModel)]="municipio">
+        <ion-option *ngFor="let municipio of municipios" [value]="municipio">
           {{municipio.nombre}}</ion-option>
       </ion-select>
     </ion-item>

@@ -8,7 +8,7 @@ export class Municipio {
     constructor(codigo:number = null, nombre:string = '', departamento:Departamento = new Departamento()){
         this.codigo = codigo;
         this.nombre = nombre;
-        this. departamento = departamento;
+        this.departamento = departamento;
     }
 
     deleteQuery(){
@@ -17,7 +17,7 @@ export class Municipio {
 
     insertQuery(){
         return `INSERT INTO Municipio (codigo,nombre,departamento) 
-            VALUES (${this.codigo},'${this.nombre}','${this.departamento.codigo}');`
+            VALUES (${this.codigo},'${this.nombre}',${this.departamento.codigo});`
     }
 
     updateQuery(){
@@ -29,6 +29,12 @@ export class Municipio {
 
     findByIdQuery(){
         return `SELECT * FROM Municipio WHERE codigo = ${this.codigo};`;
+    }
+
+    queryCustom(index){
+        let querys = [];
+        querys.push(`SELECT * FROM Municipio WHERE departamento = ${this.departamento.codigo};`);
+        return querys[index];
     }
 
     static findAllQuery(){
@@ -45,9 +51,9 @@ export class Municipio {
     providers/sqlite.ts en la funcion createTables() */
     static getSqlCreteTable(){
         return `CREATE TABLE IF NOT EXISTS Municipio (
-            codigo integer PRIMARY KEY AUTOINCREMENT,
+            codigo integer PRIMARY KEY,
             nombre text NOT NULL,
-            departamento integer NOT NULL REFERENCES Departamento
+            departamento integer NOT NULL
            );`;
     }
 }

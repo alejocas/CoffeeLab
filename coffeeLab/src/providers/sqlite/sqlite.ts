@@ -62,6 +62,15 @@ export class Sqlite {
     return promise;
   }
 
+  queryCustom(object:any,index:number){
+    let promise = new Promise<Array<any>>((resolve,reject)=>{
+      this.executeSQL(object.queryCustom(index),{})
+      .then(data=>resolve(data))
+      .catch(error=>reject(error));
+    });
+    return promise;
+  }
+
   insert(object:any){
     let promise = new Promise<Array<any>>((resolve,reject)=>{
       this.executeSQL(object.insertQuery(),{})

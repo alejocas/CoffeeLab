@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { TipoAbono, TipoClima } from '../../entities/index'
+import { TipoClima } from '../../entities/index'
 import { Sqlite } from '../../providers/sqlite/sqlite';
 /**
  * Generated class for the ConfigPage page.
