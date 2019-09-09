@@ -102,7 +102,7 @@ export class LandPage {
     this.db.save(this.finca)
       .then(data => {
         console.log(data)
-        this.navCtrl.push(HomePage)
+        this.navCtrl.pop()
       })
       .catch(err => console.error(err))
   }
@@ -197,7 +197,7 @@ export class LandPage {
     this.storage.set('currentFinca', this.finca)
       .then(data => console.log('default finca', data))
       .catch(err => console.error(err));
-    this.navCtrl.push(LandsPage);
+    this.navCtrl.pop();
 
   }
 }

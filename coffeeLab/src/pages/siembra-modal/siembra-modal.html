@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Siembra</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="closeModal()">Cerrar</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-grid>
+        <ion-row>
+          <ion-col>
+              <ion-item>
+                  <ion-label>Tipo de semilla:</ion-label>
+                  <ion-select [(ngModel)]="siembra.tipoSemilla">
+                    <ion-option *ngFor="let tipoClima of tiposSemilla" [value]="tipoClima">
+                      {{tipoClima.nombre}}</ion-option>
+                  </ion-select>
+                </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+              <ion-item>
+                  <ion-label>Cantidad de semilla:</ion-label>
+                  <ion-input type="number" [(ngModel)]="siembra.numeroSemilla" name="tempPromedio"></ion-input>
+                </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <button ion-button (click)="closeModal()">Guardar</button>
+
+</ion-content>

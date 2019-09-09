@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, ActionSheetController } from 'ionic-angular';
 import {PortionPage} from '../index';
-import { Lote, Finca } from '../../entities';
+import { Lote, Finca, Siembra } from '../../entities';
 import { Storage } from '@ionic/storage';
 import { Sqlite } from '../../providers';
 
@@ -49,6 +49,18 @@ export class PortionsPage {
 
 
   presentActionSheet(portion) {
+    this.db.findByPk(new Siembra(portion,null,null,'2019-09-10'))
+    .then(data => {
+      console.log(data);
+      if(data.length > 0){
+        this.createModalsToControl(portion,data[0]);
+      } else {
+        this.createModalSiembra(portion);
+      }
+    })
+  }
+
+  createModalsToControl(portion,siembra){
     console.log(portion);
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Acciones para el lote',
@@ -57,37 +69,37 @@ export class PortionsPage {
           text: 'Riego',
           icon: 'water',
           handler: () => {
-            this.openRiegoModal()
+            this.openRiegoModal(portion,siembra)
           }
         }, {
           text: 'Suelo',
           icon: 'globe',
           handler: () => {
-            this.openSueloModal();
+            this.openSueloModal(portion);
           }
         }, {
           text: 'Abono',
           icon: 'leaf',
           handler: () => {
-            this.openAbonoModal();
+            this.openAbonoModal(portion);
           }
         }, {
           text: 'Floración',
           icon: 'flower',
           handler: () => {
-            this.openFloracionModal();
+            this.openFloracionModal(portion);
           }
         }, {
           text: 'Recolección',
           icon: 'nutrition',
           handler: () => {
-           this.openRecoleccionModal();
+           this.openRecoleccionModal(portion);
           }
         }, {
           text: 'Plaga',
           icon: 'bug',
           handler: () => {
-            this.openPlagaModal();
+            this.openPlagaModal(portion);
           }
         }
       ]
@@ -95,33 +107,55 @@ export class PortionsPage {
     actionSheet.present();
   }
 
-  openRiegoModal() {
-    const myModalS = this.modalCtrl.create('RiegoModalPage');
+  createModalSiembra(portion){
+    console.log(portion);
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Acciones para el lote',
+      buttons: [
+        {
+          text: 'Siembra',
+          icon: 'water',
+          handler: () => {
+            this.openSiembraModal(portion)
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  openRiegoModal(portion, siembra) {
+    const myModalS = this.modalCtrl.create('RiegoModalPage',{portion: portion, siembra: siembra});
     myModalS.present();
   }
 
-  openSueloModal() {
+  openSueloModal(portion) {
     const myModalS = this.modalCtrl.create('SueloModalPage');
     myModalS.present();
   }
-  openAbonoModal() {
+  openAbonoModal(portion) {
     const myModalA = this.modalCtrl.create('AbonoModalPage');
     myModalA.present();
   }
-  openFloracionModal() {
+  openFloracionModal(portion) {
     const myModalF = this.modalCtrl.create('FloracionModalPage');
     myModalF.present();
   }
-  openRecoleccionModal() {
+  openRecoleccionModal(portion) {
     const myModalR = this.modalCtrl.create('RecoleccionModalPage');
     myModalR.present();
   }
-  openPlagaModal() {
+  openPlagaModal(portion) {
     const myModalP = this.modalCtrl.create('PlagaModalPage');
+    myModalP.present();
+  }
+  openSiembraModal(portion){
+    const myModalP = this.modalCtrl.create('SiembraModalPage',{portion: portion});
     myModalP.present();
   }
 
   addPortion(){
     this.navCtrl.push(PortionPage);
   }
+
 }

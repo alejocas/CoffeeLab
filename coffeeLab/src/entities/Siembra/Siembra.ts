@@ -6,7 +6,7 @@ export class Siembra {
     public numeroSemilla:number;
     public fecha:string;
 
-    constructor(lote:Lote,tipoSemilla:TipoSemilla,numeroSemilla:number,fecha:string){
+    constructor(lote?:Lote,tipoSemilla?:TipoSemilla,numeroSemilla?:number,fecha?:string){
         this.lote = lote;
         this.tipoSemilla = tipoSemilla;
         this.numeroSemilla = numeroSemilla;
@@ -32,7 +32,7 @@ export class Siembra {
     }
 
     findByIdQuery(){
-        return `SELECT * FROM Siembra WHERE lote = ${this.lote.codigo} AND fecha = ${this.fecha};`;
+        return `SELECT * FROM Siembra WHERE lote = ${this.lote.codigo}`;
     }
 
     static findAllQuery(){
@@ -40,7 +40,7 @@ export class Siembra {
     }
 
     static findByIdQuery(lote:Lote,fecha:Date){
-        return `SELECT * FROM Siembra WHERE lote = ${lote.codigo} AND fecha = ${fecha};`;
+        return `SELECT * FROM Siembra WHERE lote = ${lote.codigo} AND fecha <= ${fecha};`;
     }
 
 

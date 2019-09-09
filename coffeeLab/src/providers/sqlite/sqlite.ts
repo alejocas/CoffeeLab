@@ -23,7 +23,7 @@ export class Sqlite {
 
       this.findByPk(object)
       .then(data =>{
-        //console.log('para insertar',data);
+        ////console.log('para insertar',data);
         
         if(data.length == 0){
 
@@ -47,7 +47,9 @@ export class Sqlite {
   findAll(entity:any){
     let promise = new Promise<Array<any>>((resolve,reject)=>{
       this.executeSQL(entity.findAllQuery(),{})
-      .then(data=>resolve(data))
+      .then(data=>{
+        resolve(data)
+      })
       .catch(error=>reject(error));
     });
     return promise;
@@ -137,41 +139,41 @@ export class Sqlite {
   createTables(){
     let promise = new Promise<Array<any>>((resolve, reject)=>{
       this.db.executeSql(TipoAbono.getSqlCreteTable(),{}).then(data=>{
-        console.log('TipoAbono: ',data);
+        //console.log('TipoAbono: ',data);
         this.db.executeSql(TipoClima.getSqlCreteTable(),{}).then(data=>{
-          console.log('TipoClima: ',data);
+          //console.log('TipoClima: ',data);
           this.db.executeSql(TipoDocumento.getSqlCreteTable(),{}).then(data=>{
-            console.log('TipoDocumento: ',data);
+            //console.log('TipoDocumento: ',data);
             this.db.executeSql(TipoUsuario.getSqlCreteTable(),{}).then(data=>{
-              console.log('TipoUsuario: ',data);
+              //console.log('TipoUsuario: ',data);
               this.db.executeSql(Pais.getSqlCreteTable(),{}).then(data=>{
-                console.log('Pais: ',data);
+                //console.log('Pais: ',data);
                 this.db.executeSql(Departamento.getSqlCreteTable(),{}).then(data=>{
-                  console.log('Departamento: ',data);
+                  //console.log('Departamento: ',data);
                   this.db.executeSql(Municipio.getSqlCreteTable(),{}).then(data=>{
-                    console.log('Municipio: ',data);
+                    //console.log('Municipio: ',data);
                     this.db.executeSql(Usuario.getSqlCreteTable(),{}).then(data=>{
-                      console.log('Usuario: ',data);
+                      //console.log('Usuario: ',data);
                       this.db.executeSql(Finca.getSqlCreteTable(),{}).then(data=>{
-                        console.log('Finca: ',data);
+                        //console.log('Finca: ',data);
                         this.db.executeSql(Abono.getSqlCreteTable(),{}).then(data=>{
-                          console.log('Abono: ',data);
+                          //console.log('Abono: ',data);
                           this.db.executeSql(Lote.getSqlCreteTable(),{}).then(data=>{
-                            console.log('Lote: ',data);
+                            //console.log('Lote: ',data);
                             this.db.executeSql(RegistroAbono.getSqlCreteTable(),{}).then(data=>{
-                              console.log('RegistroAbono: ',data);
+                              //console.log('RegistroAbono: ',data);
                               this.db.executeSql(UsuarioxFinca.getSqlCreateTable(),{}).then(data=>{
-                                console.log('UsuarioxFinca: ',data);
+                                //console.log('UsuarioxFinca: ',data);
                                 this.db.executeSql(TipoSemilla.getSqlCreteTable(),{}).then(data=>{
-                                  console.log('TipoSemilla: ',data);
+                                  //console.log('TipoSemilla: ',data);
                                   this.db.executeSql(Siembra.getSqlCreteTable(),{}).then(data=>{
-                                    console.log('Siembra: ',data);
+                                    //console.log('Siembra: ',data);
                                     this.db.executeSql(RegistroForacion.getSqlCreteTable(),{}).then(data=>{
-                                      console.log('RegistroForacion: ',data);
+                                      //console.log('RegistroForacion: ',data);
                                       this.db.executeSql(RegistroControlPlaga.getSqlCreteTable(),{}).then(data=>{
-                                        console.log('RegistroControlPlaga: ',data);
+                                        //console.log('RegistroControlPlaga: ',data);
                                         this.db.executeSql(RegistroRiego.getSqlCreteTable(),{}).then(data=>{
-                                          console.log('RegistroRiego: ',data);
+                                          //console.log('RegistroRiego: ',data);
                                           resolve(data);
                                         });
                                       });

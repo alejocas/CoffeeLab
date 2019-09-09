@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, ViewController, NavParams } from 'ionic-angular';
+import { RegistroControlPlaga } from '../../entities';
 
 /**
  * Generated class for the PlagaModalPage page.
@@ -14,6 +15,8 @@ import { IonicPage, ViewController, NavParams } from 'ionic-angular';
   templateUrl: 'plaga-modal.html',
 })
 export class PlagaModalPage {
+
+  registroPlaga:RegistroControlPlaga;
 
   constructor(public view: ViewController, public navParams: NavParams) {
   }

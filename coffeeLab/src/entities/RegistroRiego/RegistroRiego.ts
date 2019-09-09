@@ -1,11 +1,11 @@
 import { Siembra } from "../index";
 export class RegistroRiego{
     public siembra:Siembra;
-    public fecha:Date;
+    public fecha:string;
     public tipoRiego:string;
     public listroAgua:number;
 
-    constructor(siembra:Siembra,fecha:Date,tipoRiego:string,listroAgua:number) {
+    constructor(siembra?:Siembra,fecha?:string,tipoRiego?:string,listroAgua?:number) {
         this.siembra = siembra;
         this.fecha = fecha;
         this.tipoRiego = tipoRiego;
@@ -45,7 +45,7 @@ export class RegistroRiego{
         return `SELECT * FROM RegistroRiego;`;
     }
 
-    static findByIdQuery(siembra:Siembra, fecha:Date){
+    static findByIdQuery(siembra:Siembra, fecha:string){
         return `SELECT * FROM RegistroRiego 
         WHERE lote = ${siembra.lote.codigo} 
             AND fechaSiembra = ${siembra.fecha} 

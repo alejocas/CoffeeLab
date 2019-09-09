@@ -57,7 +57,7 @@
 
     <ion-item>
       <ion-label>Municipio</ion-label>
-      <ion-select [disabled]="!edit && municipios.length == 0" [(ngModel)]="municipio">
+      <ion-select [disabled]="!edit && municipios.length == 0" (ionChange)="municipioSeleccionado()"[(ngModel)]="municipio">
         <ion-option *ngFor="let municipio of municipios" [value]="municipio">
           {{municipio.nombre}}</ion-option>
       </ion-select>
