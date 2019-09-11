@@ -110,6 +110,7 @@ export class LandPage {
   ionViewCanEnter() {
     this.getAllTipoClimas();
     this.getAllPaises();
+    this.storage.remove('royas').then(data=>console.log('borrado ', data));
   }
 
   ionViewDidLoad() {

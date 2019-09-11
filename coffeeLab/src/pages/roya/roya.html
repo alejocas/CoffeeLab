@@ -1,0 +1,32 @@
+<!--
+  Generated template for the RoyaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Roya</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card>
+
+        <ion-item>
+          <h2>{{roya.plaga.tittle}} en el lote {{roya.portion.codigo}}</h2>
+          <p>{{roya.portion.finca.nombre}}</p>
+        </ion-item>
+      
+        <img src="{{roya.plaga.image}}">
+      
+        <ion-card-content>
+          <b><p>{{roya.plaga.message}}</p></b>
+          <p>{{roya.plaga.nota}}</p>
+          <img src="{{roya.plaga.acciones}}">
+        </ion-card-content>
+      </ion-card>
+</ion-content>

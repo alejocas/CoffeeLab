@@ -9,4 +9,4 @@ export { ProfilePage } from "./profile/profile";
 export { ConfigPage } from "./config/config";
 export { AddlandPage } from "./addland/addland";
 export { PortionPage } from "./portion/portion";
-
+export { RoyaPage } from "./roya/roya";

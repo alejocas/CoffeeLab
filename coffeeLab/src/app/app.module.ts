@@ -13,7 +13,8 @@ import {
   /* fincas */
   LandsPage, LandPage, AddlandPage,
   /* lotes */
-  PortionsPage, PortionPage
+  PortionsPage, PortionPage,
+  RoyaPage
 } from '../pages/index';
 
 
@@ -35,7 +36,7 @@ import { HttpModule } from '@angular/http';
     ProfilePage,
     LandsPage, LandPage,
     PortionsPage, PortionPage,
-    AddlandPage
+    AddlandPage,RoyaPage
 
   ],
   imports: [
@@ -52,7 +53,7 @@ import { HttpModule } from '@angular/http';
     ProfilePage,
     LandsPage, LandPage,
     PortionsPage, PortionPage,
-    AddlandPage
+    AddlandPage, RoyaPage
   ],
   providers: [
     StatusBar,

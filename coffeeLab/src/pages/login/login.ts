@@ -49,6 +49,7 @@ export class LoginPage {
   ionViewDidEnter() {
     console.log('ionViewDidLoad LoginPage');
     this.menuCtrl.enable(false, "menu");
+    this.storage.remove('royas');
     //this.isUserLogin();
   }
 

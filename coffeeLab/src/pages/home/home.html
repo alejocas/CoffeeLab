@@ -8,29 +8,27 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-card *ngIf="currentLand" (click)="goToPortions()">
-        <img src="https://www.turismoquindio.com/wp-content/uploads/2017/11/finca-cafetera-el-ocaso25.jpg"/>
-        <ion-card-content>
-          <ion-card-title>
-              {{currentLand.nombre}}
-            </ion-card-title>
-          <p>
-              Temperatura: {{currentLand.tempPromedio}}
-              Altitud: {{currentLand.altitud}}
-              <br>
-              Finca por defecto
-          </p>
-        </ion-card-content>
-      </ion-card>
-<!--   <ion-card >
-    <ion-card-header>
-      <ion-card-subtitle>Finca por defecto</ion-card-subtitle>
-      <ion-card-title>{{currentLand.nombre}}</ion-card-title>
+  <ion-card *ngFor="let roya of royas" (click)="clickRoya(roya)">
+    <ion-card-header [ngClass]="(color) ? 'red-notification' : 'black-notification'">
+      Alerta!!
     </ion-card-header>
-  
     <ion-card-content>
-      Temperatura: {{currentLand.tempPromedio}}
-      Altitud: {{currentLand.altitud}}
+      Presencia de roya en el lote {{roya.portion.codigo}}
     </ion-card-content>
-  </ion-card> -->
+  </ion-card>
+
+  <ion-card *ngIf="currentLand" (click)="goToPortions()">
+    <img src="https://www.turismoquindio.com/wp-content/uploads/2017/11/finca-cafetera-el-ocaso25.jpg" />
+    <ion-card-content>
+      <ion-card-title>
+        {{currentLand.nombre}}
+      </ion-card-title>
+      <p>
+        Temperatura: {{currentLand.tempPromedio}}
+        Altitud: {{currentLand.altitud}}
+        <br>
+        Finca por defecto
+      </p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -146,7 +146,7 @@ export class PortionsPage {
     myModalR.present();
   }
   openPlagaModal(portion) {
-    const myModalP = this.modalCtrl.create('PlagaModalPage');
+    const myModalP = this.modalCtrl.create('PlagaModalPage', {'portion': portion});
     myModalP.present();
   }
   openSiembraModal(portion){
